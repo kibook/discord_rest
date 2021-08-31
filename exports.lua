@@ -24,6 +24,7 @@ exports("executeWebhook", function(url, data)
 end)
 
 --- Get channel information.
+-- @function exports.discord_rest:getChannel
 -- @param channelId The ID of the channel.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
@@ -54,6 +55,7 @@ exports("getUser", function(userId, botToken)
 end)
 
 --- Update a channel's settings.
+-- @function exports.discord_rest:modifyChannel
 -- @param channelId The ID of the channel.
 -- @param channel The new channel settings.
 -- @param botToken Bot token to use for authorization.
