@@ -8,6 +8,7 @@ local discordRest = DiscordRest:new()
 -- @param messageId The ID of the message.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
+-- @usage exports.discord_rest:deleteMessage("[channel ID]", "[message ID]", "[bot token]")
 exports("deleteMessage", function(channelId, messageId, botToken)
 	return discordRest:deleteMessage(channelId, messageId, botToken)
 end)
@@ -26,7 +27,7 @@ end)
 -- @param channelId The ID of the channel.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
--- @usage exports.discord_rest:getChannel("https://discord.com/api/channels/[channel ID]", "[bot token]"):next(function(channel) ... end)
+-- @usage exports.discord_rest:getChannel("[channel ID]", "[bot token]"):next(function(channel) ... end)
 exports("getChannel", function(channelId, botToken)
 	return discordRest:getChannel(channelId, botToken)
 end)
@@ -37,6 +38,7 @@ end)
 -- @param options Options to tailor the query.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
+-- @usage exports.discord_rest:getChannelMessages("[channel ID]", {limit = 1}, "[bot token]"):next(function(messages) ... end)
 exports("getChannelMessages", function(channelId, options, botToken)
 	return discordRest:getChannelMessages(channelId, options, botToken)
 end)
@@ -46,6 +48,7 @@ end)
 -- @param userId The ID of the user.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
+-- @usage exports.discord_rest:getUser("[user ID]", "[bot token]"):next(function(user) ... end)
 exports("getUser", function(userId, botToken)
 	return discordRest:getUser(userId, botToken)
 end)
