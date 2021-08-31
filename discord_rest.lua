@@ -139,10 +139,23 @@ function DiscordRest:performHttpRequest(url, callback, method, data, headers)
 	end)
 end
 
--- Perform a simple request to the REST API with authorization
-function DiscordRest:performAuthorizedRequest(url, method, botToken)
+-- Perform an authorized request to the REST API
+function DiscordRest:performAuthorizedRequest(url, method, data, botToken)
 	local p = promise.new()
-	self:performHttpRequest(url, createSimplePromiseCallback(p), method, "", {["Authorization"] = self:getAuthorization(botToken)})
+
+	local authorization = self:getAuthorization(botToken)
+
+	if data then
+		self:performHttpRequest(url, createSimplePromiseCallback(p), method, json.encode(data), {
+			["Authorization"] = authorization,
+			["Content-Type"] = "application/json"
+		})
+	else
+		self:performHttpRequest(url, createSimplePromiseCallback(p), method, "", {
+			["Authorization"] = authorization
+		})
+	end
+
 	return p
 end
 
@@ -154,7 +167,7 @@ end
 -- @usage discord:deleteMessage("[channel ID]", "[message ID]")
 function DiscordRest:deleteMessage(channelId, messageId, botToken)
 	local url = discordApi .. "/channels/" .. channelId .. "/messages/" .. messageId
-	return self:performAuthorizedRequest(url, "DELETE", botToken)
+	return self:performAuthorizedRequest(url, "DELETE", nil, botToken)
 end
 
 --- Execute a Discord webhook
@@ -175,7 +188,7 @@ end
 -- @usage discord:getChannel("[channel ID]"):next(function(channel) ... end)
 function DiscordRest:getChannel(channelId, botToken)
 	local url = discordApi .. "/channels/" .. channelId
-	return self:performAuthorizedRequest(url, "GET", botToken)
+	return self:performAuthorizedRequest(url, "GET", nil, botToken)
 end
 
 --- Get a list of messages from a channels
@@ -186,7 +199,7 @@ end
 -- @usage discord:getChannelMessage("[channel ID]", {limit = 1}):next(function(messages) ... end)
 function DiscordRest:getChannelMessages(channelId, options, botToken)
 	local url = discordApi .. "/channels/" .. channelId .. "/messages" .. createQueryString(options)
-	return self:performAuthorizedRequest(url, "GET", botToken)
+	return self:performAuthorizedRequest(url, "GET", nil, botToken)
 end
 
 --- Get user information.
@@ -196,5 +209,16 @@ end
 -- @usage discord:getUser("[user ID]"):next(function(user) ... end)
 function DiscordRest:getUser(userId, botToken)
 	local url = discordApi .. "/users/" .. userId
-	return self:performAuthorizedRequest(url, "GET", botToken)
+	return self:performAuthorizedRequest(url, "GET", nil, botToken)
+end
+
+--- Update a channel's settings.
+-- @param channelId The ID of the channel.
+-- @param channel The new channel settings.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:modifyChannel("[channel ID]", {name = "new-name"})
+function DiscordRest:modifyChannel(channelId, channel, botToken)
+	local url = discordApi .. "/channels/" .. channelId
+	return self:performAuthorizedRequest(url, "PATCH", channel, botToken)
 end

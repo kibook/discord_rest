@@ -53,6 +53,16 @@ exports("getUser", function(userId, botToken)
 	return discordRest:getUser(userId, botToken)
 end)
 
+--- Update a channel's settings.
+-- @param channelId The ID of the channel.
+-- @param channel The new channel settings.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:modifyChannel("[channel ID]", {name = "new-name"}, "[bot token]")
+exports("modifyChannel", function(channelId, channel, botToken)
+	return discordRest:modifyChannel(channelId, channel, botToken)
+end)
+
 --- Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.
 -- @function exports.discord_rest:performHttpRequest
 -- @param url The endpoint of the API to request.
