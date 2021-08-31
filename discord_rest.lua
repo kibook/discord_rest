@@ -128,7 +128,7 @@ end
 -- @param method The HTTP method of the request.
 -- @param data Data to send in the body of the request.
 -- @param headers The HTTP headers of the request.
--- @usage discord:performHttpRequest("https://discord.com/channels/[channel ID]/messages/[message ID]", nil, "DELETE", "", {["Authorization"] = "Bot [bot token]"})
+-- @usage discord:performHttpRequest("https://discord.com/api/channels/[channel ID]/messages/[message ID]", nil, "DELETE", "", {["Authorization"] = "Bot [bot token]"})
 function DiscordRest:performHttpRequest(url, callback, method, data, headers)
 	self:enqueue(function()
 		PerformHttpRequest(url,
