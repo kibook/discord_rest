@@ -1,4 +1,4 @@
 .PHONY: docs
 
-docs: *.lua
-	ldoc -d $@ $+
+docs:
+	ldoc -d $@ .
