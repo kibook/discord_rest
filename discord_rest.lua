@@ -8,7 +8,7 @@ local discordApi = "https://discord.com/api"
 DiscordRest = {}
 
 --- Create a new Discord REST API interface
--- @param Optional bot token to use for authorization
+-- @param botToken Optional bot token to use for authorization
 -- @return A new Discord REST API interface object
 -- @usage local discord = DiscordRest:new("[bot token]")
 function DiscordRest:new(botToken)
