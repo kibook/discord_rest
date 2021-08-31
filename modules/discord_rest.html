@@ -67,6 +67,18 @@
 	<td class="summary">Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:createMessage">DiscordRest:createMessage (channelId, message, botToken)</a></td>
+	<td class="summary">Post a message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:createReaction">DiscordRest:createReaction (channelId, messageId, emoji, botToken)</a></td>
+	<td class="summary">Create a reaction for a message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteChannel">DiscordRest:deleteChannel (channelId, botToken)</a></td>
+	<td class="summary">Delete a channel.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:deleteMessage">DiscordRest:deleteMessage (channelId, messageId, botToken)</a></td>
 	<td class="summary">Delete a message from a channel.</td>
 	</tr>
@@ -77,6 +89,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getChannel">DiscordRest:getChannel (channelId, botToken)</a></td>
 	<td class="summary">Get channel information.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getChannelMessage">DiscordRest:getChannelMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Get a specific message from a channel.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getChannelMessages">DiscordRest:getChannelMessages (channelId, options, botToken)</a></td>
@@ -164,6 +180,111 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:performHttpRequest(<span class="string">"https://discord.com/api/channels/[channel ID]/messages/[message ID]"</span>, <span class="keyword">nil</span>, <span class="string">"DELETE"</span>, <span class="string">""</span>, {[<span class="string">"Authorization"</span>] = <span class="string">"Bot [bot token]"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:createMessage"></a>
+    <strong>DiscordRest:createMessage (channelId, message, botToken)</strong>
+    </dt>
+    <dd>
+    Post a message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to post in.
+        </li>
+        <li><span class="parameter">message</span>
+         The message parameters.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved when the message is posted.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:createMessage(<span class="string">"[channel ID]"</span>, {content = <span class="string">"Hello, world!"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:createReaction"></a>
+    <strong>DiscordRest:createReaction (channelId, messageId, emoji, botToken)</strong>
+    </dt>
+    <dd>
+    Create a reaction for a message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to add a reaction to.
+        </li>
+        <li><span class="parameter">emoji</span>
+         The name of the emoji to react with.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved when the reaction is added to the message.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:createReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"[emoji]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:deleteChannel"></a>
+    <strong>DiscordRest:deleteChannel (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteChannel(<span class="string">"[channel ID]"</span>)</pre>
     </ul>
 
 </dd>
@@ -263,6 +384,41 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:getChannel(<span class="string">"[channel ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getChannelMessage"></a>
+    <strong>DiscordRest:getChannelMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a specific message from a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getChannelMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[messageId]"</span>)</pre>
     </ul>
 
 </dd>
@@ -375,7 +531,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-08-31 20:50:35 </i>
+<i style="float:right;">Last updated 2021-08-31 23:35:25 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
