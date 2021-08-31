@@ -22,6 +22,15 @@ exports("executeWebhook", function(url, data)
 	return discordRest:executeWebhook(url, data)
 end)
 
+--- Get channel information.
+-- @param channelId The ID of the channel.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:getChannel("https://discord.com/api/channels/[channel ID]", "[bot token]"):next(function(channel) ... end)
+exports("getChannel", function(channelId, botToken)
+	return discordRest:getChannel(channelId, botToken)
+end)
+
 --- Get messages from a channel.
 -- @function exports.discord_rest:getChannelMessages
 -- @param channelId The ID of the channel.

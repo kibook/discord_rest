@@ -3,6 +3,44 @@
 -- Discord API base URL
 local discordApi = "https://discord.com/api"
 
+-- Check if an HTTP status code indicates an error
+local function isResponseError(status)
+	return status < 200 or status > 299
+end
+
+-- Check if an HTTP status code indicates success
+local function isResponseSuccess(status)
+	return not isResponseError(status)
+end
+
+-- Create a simple PerformHttpRequest callback that resolves or rejects a promise
+function createSimplePromiseCallback(p)
+	return function(status, data, headers)
+		if isResponseSuccess(status) then
+			p:resolve(json.decode(data))
+		else
+			p:reject(status)
+		end
+	end
+end
+
+-- Combine options into query string
+function createQueryString(options)
+	local params = {}
+
+	if options then
+		for k, v in pairs(options) do
+			table.insert(params, ("%s=%s"):format(k, v))
+		end
+	end
+
+	if #params > 0 then
+		return "?" .. table.concat(params, "&")
+	else
+		return ""
+	end
+end
+
 --- Discord REST API interface
 -- @type DiscordRest
 DiscordRest = {}
@@ -52,19 +90,9 @@ function DiscordRest:processQueue()
 	end
 end
 
--- Check if an HTTP status code indicates an error
-function DiscordRest:isResponseError(status)
-	return status < 200 or status > 299
-end
-
--- Check if an HTTP status code indicates success
-function DiscordRest:isResponseSuccess(status)
-	return not self:isResponseError(status)
-end
-
 -- Handle HTTP responses from the Discord REST API
 function DiscordRest:handleResponse(status, text, headers, callback)
-	if self:isResponseError(status) then
+	if isResponseError(status) then
 		if status == 429 then
 			self.rateLimitRemaining = 0
 			self.rateLimitReset = os.time() + 5
@@ -86,34 +114,6 @@ function DiscordRest:handleResponse(status, text, headers, callback)
 
 	if callback then
 		callback(status, text, headers)
-	end
-end
-
--- Combine options into query string
-function DiscordRest:createQueryString(options)
-	local params = {}
-
-	if options then
-		for k, v in pairs(options) do
-			table.insert(params, ("%s=%s"):format(k, v))
-		end
-	end
-
-	if #params > 0 then
-		return "?" .. table.concat(params, "&")
-	else
-		return ""
-	end
-end
-
--- Create a simple performHttpRequest callback that resolves or rejects a promise
-function DiscordRest:createSimplePromiseCallback(p)
-	return function(status, data, headers)
-		if self:isResponseSuccess(status) then
-			p:resolve(json.decode(data))
-		else
-			p:reject(status)
-		end
 	end
 end
 
@@ -139,27 +139,10 @@ function DiscordRest:performHttpRequest(url, callback, method, data, headers)
 	end)
 end
 
---- Execute a Discord webhook
--- @param url The webhook URL.
--- @param data The data to send.
--- @return A new promise.
--- @usage discord:executeWebhook("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
-function DiscordRest:executeWebhook(url, data)
+-- Perform a simple request to the REST API with authorization
+function DiscordRest:performAuthorizedRequest(url, method, botToken)
 	local p = promise.new()
-	self:performHttpRequest(url, self:createSimplePromiseCallback(p), "POST", json.encode(data), {["Content-Type"] = "application/json"})
-	return p
-end
-
---- Get a list of messages from a channels
--- @param channelId The ID of the channel.
--- @param options Options to tailor the query.
--- @param botToken Optional bot token to use for authorization.
--- @return A new promise.
--- @usage discord:getChannelMessage("[channel ID]", {limit = 1}):next(function(messages) ... end)
-function DiscordRest:getChannelMessages(channelId, options, botToken)
-	local url = discordApi .. "/channels/" .. channelId .. "/messages" .. self:createQueryString(options)
-	local p = promise.new()
-	self:performHttpRequest(url, self:createSimplePromiseCallback(p), "GET", "", {["Authorization"] = self:getAuthorization(botToken)})
+	self:performHttpRequest(url, createSimplePromiseCallback(p), method, "", {["Authorization"] = self:getAuthorization(botToken)})
 	return p
 end
 
@@ -171,9 +154,39 @@ end
 -- @usage discord:deleteMessage("[channel ID]", "[message ID]")
 function DiscordRest:deleteMessage(channelId, messageId, botToken)
 	local url = discordApi .. "/channels/" .. channelId .. "/messages/" .. messageId
+	return self:performAuthorizedRequest(url, "DELETE", botToken)
+end
+
+--- Execute a Discord webhook
+-- @param url The webhook URL.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage discord:executeWebhook("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
+function DiscordRest:executeWebhook(url, data)
 	local p = promise.new()
-	self:performHttpRequest(url, self:createSimplePromiseCallback(p), "DELETE", "", {["Authorization"] = self:getAuthorization(botToken)})
+	self:performHttpRequest(url, createSimplePromiseCallback(p), "POST", json.encode(data), {["Content-Type"] = "application/json"})
 	return p
+end
+
+--- Get channel information.
+-- @param channelId The ID of the channel.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:getChannel("[channel ID]"):next(function(channel) ... end)
+function DiscordRest:getChannel(channelId, botToken)
+	local url = discordApi .. "/channels/" .. channelId
+	return self:performAuthorizedRequest(url, "GET", botToken)
+end
+
+--- Get a list of messages from a channels
+-- @param channelId The ID of the channel.
+-- @param options Options to tailor the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:getChannelMessage("[channel ID]", {limit = 1}):next(function(messages) ... end)
+function DiscordRest:getChannelMessages(channelId, options, botToken)
+	local url = discordApi .. "/channels/" .. channelId .. "/messages" .. createQueryString(options)
+	return self:performAuthorizedRequest(url, "GET", botToken)
 end
 
 --- Get user information.
@@ -183,7 +196,5 @@ end
 -- @usage discord:getUser("[user ID]"):next(function(user) ... end)
 function DiscordRest:getUser(userId, botToken)
 	local url = discordApi .. "/users/" .. userId
-	local p = promise.new()
-	self:performHttpRequest(url, self:createSimplePromiseCallback(p), "GET", "", {["Authorization"] = self:getAuthorization(botToken)})
-	return p
+	return self:performAuthorizedRequest(url, "GET", botToken)
 end
