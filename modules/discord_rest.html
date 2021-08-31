@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>discord_rest</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Class_DiscordRest">Class DiscordRest </a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><strong>discord_rest</strong></li>
+  <li><a href="../modules/exports.html">exports</a></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/custom.lua.html">custom.lua</a></li>
+  <li><a href="../examples/exports.lua.html">exports.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>discord_rest</code></h1>
+<p>Discord REST API interface</p>
+<p></p>
+
+
+<h2><a href="#Class_DiscordRest">Class DiscordRest </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:new">DiscordRest:new (Optional)</a></td>
+	<td class="summary">Create a new Discord REST API interface</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:performHttpRequest">DiscordRest:performHttpRequest (url, callback, method, data, headers)</a></td>
+	<td class="summary">Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:executeWebhook">DiscordRest:executeWebhook (url, data)</a></td>
+	<td class="summary">Execute a Discord webhook</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getChannelMessages">DiscordRest:getChannelMessages (channelId, options, botToken)</a></td>
+	<td class="summary">Get a list of messages from a channels</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteMessage">DiscordRest:deleteMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Delete a message from a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getUser">DiscordRest:getUser (userId, botToken)</a></td>
+	<td class="summary">Get user information.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header has-description"><a name="Class_DiscordRest"></a>Class DiscordRest </h2>
+
+          <div class="section-description">
+          Discord REST API interface
+          </div>
+    <dl class="function">
+    <dt>
+    <a name = "DiscordRest:new"></a>
+    <strong>DiscordRest:new (Optional)</strong>
+    </dt>
+    <dd>
+    Create a new Discord REST API interface
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">Optional</span>
+         bot token to use for authorization
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new Discord REST API interface object
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> discord = DiscordRest:new(<span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:performHttpRequest"></a>
+    <strong>DiscordRest:performHttpRequest (url, callback, method, data, headers)</strong>
+    </dt>
+    <dd>
+    Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The endpoint of the API to request.
+        </li>
+        <li><span class="parameter">callback</span>
+         An optional callback function to execute when the response is received.
+        </li>
+        <li><span class="parameter">method</span>
+         The HTTP method of the request.
+        </li>
+        <li><span class="parameter">data</span>
+         Data to send in the body of the request.
+        </li>
+        <li><span class="parameter">headers</span>
+         The HTTP headers of the request.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:performHttpRequest(<span class="string">"https://discord.com/channels/[channel ID]/messages/[message ID]"</span>, <span class="keyword">nil</span>, <span class="string">"DELETE"</span>, <span class="string">""</span>, {[<span class="string">"Authorization"</span>] = <span class="string">"Bot [bot token]"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:executeWebhook"></a>
+    <strong>DiscordRest:executeWebhook (url, data)</strong>
+    </dt>
+    <dd>
+    Execute a Discord webhook
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The webhook URL.
+        </li>
+        <li><span class="parameter">data</span>
+         The data to send.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:executeWebhook(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>, {content = <span class="string">"Hello, world!"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getChannelMessages"></a>
+    <strong>DiscordRest:getChannelMessages (channelId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of messages from a channels
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">options</span>
+         Options to tailor the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getChannelMessage(<span class="string">"[channel ID]"</span>, {limit = <span class="number">1</span>}):<span class="global">next</span>(<span class="keyword">function</span>(messages) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:deleteMessage"></a>
+    <strong>DiscordRest:deleteMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete a message from a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getUser"></a>
+    <strong>DiscordRest:getUser (userId, botToken)</strong>
+    </dt>
+    <dd>
+    Get user information.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">userId</span>
+         The ID of the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getUser(<span class="string">"[user ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-08-31 19:23:01 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

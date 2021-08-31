@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>discord_rest</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Functions">Functions</a></li>
+</ul>
+
+
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/discord_rest.html">discord_rest</a></li>
+  <li><strong>exports</strong></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/custom.lua.html">custom.lua</a></li>
+  <li><a href="../examples/exports.lua.html">exports.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>exports</code></h1>
+<p>Discord REST API export functions</p>
+<p></p>
+
+
+<h2><a href="#Functions">Functions</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#exports.discord_rest:executeWebhook">exports.discord_rest:executeWebhook (url, data)</a></td>
+	<td class="summary">Execute a webhook.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#exports.discord_rest:getChannelMessages">exports.discord_rest:getChannelMessages (channelId, options, botToken)</a></td>
+	<td class="summary">Get messages from a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#exports.discord_rest:deleteMessage">exports.discord_rest:deleteMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Delete a message from a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#exports.discord_rest:getUser">exports.discord_rest:getUser (userId, botToken)</a></td>
+	<td class="summary">Get user information.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "exports.discord_rest:executeWebhook"></a>
+    <strong>exports.discord_rest:executeWebhook (url, data)</strong>
+    </dt>
+    <dd>
+    Execute a webhook.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The webhook URL.
+        </li>
+        <li><span class="parameter">data</span>
+         The data to send.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:executeWebhook(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>, {content = <span class="string">"Hello, world!"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "exports.discord_rest:getChannelMessages"></a>
+    <strong>exports.discord_rest:getChannelMessages (channelId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Get messages from a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">options</span>
+         Options to tailor the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "exports.discord_rest:deleteMessage"></a>
+    <strong>exports.discord_rest:deleteMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete a message from a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "exports.discord_rest:getUser"></a>
+    <strong>exports.discord_rest:getUser (userId, botToken)</strong>
+    </dt>
+    <dd>
+    Get user information.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">userId</span>
+         The ID of the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-08-31 19:23:01 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
