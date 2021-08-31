@@ -33,7 +33,6 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Functions">Functions</a></li>
-<li><a href="#Fields">Fields</a></li>
 </ul>
 
 
@@ -68,6 +67,10 @@
 	<td class="summary">Execute a webhook.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#exports.discord_rest:getChannel">exports.discord_rest:getChannel (channelId, botToken)</a></td>
+	<td class="summary">Get channel information.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#exports.discord_rest:getChannelMessages">exports.discord_rest:getChannelMessages (channelId, options, botToken)</a></td>
 	<td class="summary">Get messages from a channel.</td>
 	</tr>
@@ -76,19 +79,12 @@
 	<td class="summary">Get user information.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#exports.discord_rest:modifyChannel">exports.discord_rest:modifyChannel (channelId, channel, botToken)</a></td>
+	<td class="summary">Update a channel's settings.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#exports.discord_rest:performHttpRequest">exports.discord_rest:performHttpRequest (url, callback, method, data, headers)</a></td>
 	<td class="summary">Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.</td>
-	</tr>
-</table>
-<h2><a href="#Fields">Fields</a></h2>
-<table class="function_list">
-	<tr>
-	<td class="name" nowrap><a href="#channelId">channelId</a></td>
-	<td class="summary">Get channel information.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#channelId">channelId</a></td>
-	<td class="summary">Update a channel's settings.</td>
 	</tr>
 </table>
 
@@ -167,6 +163,38 @@
 
 </dd>
     <dt>
+    <a name = "exports.discord_rest:getChannel"></a>
+    <strong>exports.discord_rest:getChannel (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Get channel information.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getChannel(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "exports.discord_rest:getChannelMessages"></a>
     <strong>exports.discord_rest:getChannelMessages (channelId, options, botToken)</strong>
     </dt>
@@ -234,6 +262,41 @@
 
 </dd>
     <dt>
+    <a name = "exports.discord_rest:modifyChannel"></a>
+    <strong>exports.discord_rest:modifyChannel (channelId, channel, botToken)</strong>
+    </dt>
+    <dd>
+    Update a channel's settings.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">channel</span>
+         The new channel settings.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:modifyChannel(<span class="string">"[channel ID]"</span>, {name = <span class="string">"new-name"</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "exports.discord_rest:performHttpRequest"></a>
     <strong>exports.discord_rest:performHttpRequest (url, callback, method, data, headers)</strong>
     </dt>
@@ -270,72 +333,13 @@
 
 </dd>
 </dl>
-    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
-
-    <dl class="function">
-    <dt>
-    <a name = "channelId"></a>
-    <strong>channelId</strong>
-    </dt>
-    <dd>
-    Get channel information.
-
-
-    <ul>
-        <li><span class="parameter">channelId</span>
-         The ID of the channel.
-        </li>
-        <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">exports.discord_rest:getChannel(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "channelId"></a>
-    <strong>channelId</strong>
-    </dt>
-    <dd>
-    Update a channel's settings.
-
-
-    <ul>
-        <li><span class="parameter">channelId</span>
-         The ID of the channel.
-        </li>
-        <li><span class="parameter">channel</span>
-         The new channel settings.
-        </li>
-        <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
-        </li>
-    </ul>
-
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">exports.discord_rest:modifyChannel(<span class="string">"[channel ID]"</span>, {name = <span class="string">"new-name"</span>}, <span class="string">"[bot token]"</span>)</pre>
-    </ul>
-
-</dd>
-</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-08-31 20:47:42 </i>
+<i style="float:right;">Last updated 2021-08-31 20:50:35 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
