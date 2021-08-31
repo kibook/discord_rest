@@ -145,18 +145,57 @@ function DiscordRest:performAuthorizedRequest(url, method, data, botToken)
 
 	local authorization = self:getAuthorization(botToken)
 
+	local headers = {
+		["Authorization"] = authorization
+	}
+
 	if data then
-		self:performHttpRequest(url, createSimplePromiseCallback(p), method, json.encode(data), {
-			["Authorization"] = authorization,
-			["Content-Type"] = "application/json"
-		})
+		headers["Content-Type"] = "application/json"
+
+		if type(data) ~= "string" then
+			data = json.encode(data)
+		end
 	else
-		self:performHttpRequest(url, createSimplePromiseCallback(p), method, "", {
-			["Authorization"] = authorization
-		})
+		headers["Content-Length"] = "0"
+		data = ""
 	end
 
+	self:performHttpRequest(url, createSimplePromiseCallback(p), method, data, headers)
+
 	return p
+end
+
+--- Post a message.
+-- @param channelId The ID of the channel to post in.
+-- @param message The message parameters.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved when the message is posted.
+-- @usage discord:createMessage("[channel ID]", {content = "Hello, world!"})
+function DiscordRest:createMessage(channelId, message, botToken)
+	local url = discordApi .. "/channels/" .. channelId .. "/messages"
+	return self:performAuthorizedRequest(url, "POST", message, botToken)
+end
+
+--- Create a reaction for a message.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to add a reaction to.
+-- @param emoji The name of the emoji to react with.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved when the reaction is added to the message.
+-- @usage discord:createReaction("[channel ID]", "[message ID]", "[emoji]")
+function DiscordRest:createReaction(channelId, messageId, emoji, botToken)
+	local url = discordApi .. "/channels/" .. channelId .. "/messages/" .. messageId .. "/reactions/" .. emoji .. "/@me"
+	return self:performAuthorizedRequest(url, "PUT", nil, botToken)
+end
+
+--- Delete a channel.
+-- @param channelId The ID of the channel.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteChannel("[channel ID]")
+function DiscordRest:deleteChannel(channelId, botToken)
+	local url = discordApi .. "/channels/" .. channelId
+	return self:performAuthorizedRequest(url, "DELETE", nil, botToken)
 end
 
 --- Delete a message from a channel.
@@ -188,6 +227,17 @@ end
 -- @usage discord:getChannel("[channel ID]"):next(function(channel) ... end)
 function DiscordRest:getChannel(channelId, botToken)
 	local url = discordApi .. "/channels/" .. channelId
+	return self:performAuthorizedRequest(url, "GET", nil, botToken)
+end
+
+--- Get a specific message from a channel.
+-- @param channelId The ID of the channel.
+-- @param messageId The ID of the message.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:getChannelMessage("[channel ID]", "[messageId]")
+function DiscordRest:getChannelMessage(channelId, messageId, botToken)
+	local url = discordApi .. "/channels/" .. channelId .. "/messages/" .. messageId
 	return self:performAuthorizedRequest(url, "GET", nil, botToken)
 end
 

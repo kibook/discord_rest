@@ -2,6 +2,37 @@
 
 local discordRest = DiscordRest:new()
 
+--- Post a message.
+-- @param channelId The ID of the channel to post in.
+-- @param message The message parameters.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved when the message is posted.
+-- @usage exports.discord_rest:createMessage("[channel ID]", {content = "Hello, world!"}, "[bot token]")
+exports("createMessage", function(channelId, message, botToken)
+	return discordRest:createMessage(channelId, message, botToken)
+end)
+
+--- Create a reaction for a message.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to add a reaction to.
+-- @param emoji The name of the emoji to react with.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved when the reaction is added to the message.
+-- @usage discord:createReaction("[channel ID]", "[message ID]", "[emoji]")
+exports("createReaction", function(channelId, messageId, emoji, botToken)
+	return discordRest:createReaction(channelId, messageId, emoji, botToken)
+end)
+
+--- Delete a channel.
+-- @function exports.discord_rest:deleteChannel
+-- @param channelId The ID of the channel.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteChannel("[channel ID]", "[bot token]")
+exports("deleteChannel", function(channelId, botToken)
+	return discordRest:deleteChannel(channelId, botToken)
+end)
+
 --- Delete a message from a channel.
 -- @function exports.discord_rest:deleteMessage
 -- @param channelId The ID of the channel.
@@ -31,6 +62,16 @@ end)
 -- @usage exports.discord_rest:getChannel("[channel ID]", "[bot token]"):next(function(channel) ... end)
 exports("getChannel", function(channelId, botToken)
 	return discordRest:getChannel(channelId, botToken)
+end)
+
+--- Get a specific message from a channel.
+-- @param channelId The ID of the channel.
+-- @param messageId The ID of the message.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:getChannelMessage("[channel ID]", "[messageId]", "[bot token]")
+exports("getChannelMessage", function(channelId, messageId, botToken)
+	return discordRest:getChannelMessage(channelId, messageId, botToken)
 end)
 
 --- Get messages from a channel.
