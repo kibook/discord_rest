@@ -5,11 +5,12 @@ local discordApi = "https://discord.com/api"
 
 -- Discord REST API endpoint URIs
 local endpoints = {
-	channel     = "/channels/%s",
-	message     = "/channels/%s/messages/%s",
-	messages    = "/channels/%s/messages",
-	ownReaction = "/channels/%s/messages/%s/reactions/%s/@me",
-	user        = "/users/%s"
+	["channel"]      = "/channels/%s",
+	["message"]      = "/channels/%s/messages/%s",
+	["messages"]     = "/channels/%s/messages",
+	["ownReaction"]  = "/channels/%s/messages/%s/reactions/%s/@me",
+	["userReaction"] = "/channels/%s/messages/%s/reactions/%s/%s",
+	["user"]         = "/users/%s",
 }
 
 -- Check if an HTTP status code indicates an error
@@ -52,7 +53,11 @@ end
 
 -- Format an API endpoint URI
 local function formatEndpoint(name, variables, parameters)
-	return discordApi .. endpoints[name]:format(table.unpack(variables)) .. createQueryString(parameters)
+	if type(variables) == "table" then
+		return discordApi .. endpoints[name]:format(table.unpack(variables)) .. createQueryString(parameters)
+	else
+		return discordApi .. endpoints[name]:format(variables) .. createQueryString(parameters)
+	end
 end
 
 --- Discord REST API interface
@@ -220,14 +225,26 @@ function DiscordRest:deleteMessage(channelId, messageId, botToken)
 end
 
 --- Remove own reaction from a message.
--- @param channelId the ID of the channel containing the message.
+-- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to remove the reaction from.
 -- @param emoji The emoji of the reaction to remove.
--- @param botToken Optional bot token to use for authentication.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗")
 function DiscordRest:deleteOwnReaction(channelId, messageId, emoji, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("ownReaction", {channelId, messageId, emoji}), "DELETE", nil, botToken)
+end
+
+--- Remove a user's reaction from a message.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The message to remove the reaction from.
+-- @param emoji The emoji of the reaction to remove.
+-- @param userId The ID of the user whose reaction will be removed.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteUserReaction("[channel ID]", "[message ID]", "💗", "[user ID]")
+function DiscordRest:deleteUserReaction(channelId, messageId, emoji, userId, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("userReaction", {channelId, messageId, emoji, userId}), "DELETE", nil, botToken)
 end
 
 --- Execute a Discord webhook
