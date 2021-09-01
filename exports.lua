@@ -129,6 +129,19 @@ exports("deleteUserReaction", function(channelId, messageId, emoji, userId, botT
 	return discordRest:deleteUserReaction(channelId, messageId, emoji, userId, botToken)
 end)
 
+--- Edit the channel permission overwrites for a user or role in a channel.
+-- @function editChannelPermissions
+-- @param channelId The ID of the channel to edit the permissions of.
+-- @param overwriteId The ID of the user or role to edit permissions for.
+-- @param permissions The permissions to set.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:editChannelPermissions("[channel ID]", "[overwrite ID]", {allow = 6, deny = 8, type = 0})
+-- @see https://discord.com/developers/docs/resources/channel#edit-channel-permissions
+exports("editChannelPermissions", function(channelId, overwriteId, permissions, botToken)
+	return discordRest:editChannelPermissions(channelId, overwriteId, permissions, botToken)
+end)
+
 --- Edit a previously sent message.
 -- @function editMessage
 -- @param channelId The ID of the channel containing the message.

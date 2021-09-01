@@ -365,6 +365,18 @@ function DiscordRest:deleteUserReaction(channelId, messageId, emoji, userId, bot
 	return self:performAuthorizedRequest(routes.userReaction, {channelId, messageId, emoji, userId}, nil, "DELETE", nil, botToken)
 end
 
+--- Edit the channel permission overwrites for a user or role in a channel.
+-- @param channelId The ID of the channel to edit the permissions of.
+-- @param overwriteId The ID of the user or role to edit permissions for.
+-- @param permissions The permissions to set.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:editChannelPermissions("[channel ID]", "[overwrite ID]", {allow = 6, deny = 8, type = 0})
+-- @see https://discord.com/developers/docs/resources/channel#edit-channel-permissions
+function DiscordRest:editChannelPermissions(channelId, overwriteId, permissions, botToken)
+	return self:performAuthorizedRequest(routes.editChannelPermissions, {channelId, overwriteId}, nil, "PUT", permissions, botToken)
+end
+
 --- Edit a previously sent message.
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to edit.
