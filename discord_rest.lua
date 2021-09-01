@@ -263,6 +263,17 @@ function DiscordRest:bulkDeleteMessages(channelId, messages, botToken)
 	return self:performAuthorizedRequest(routes.bulkDelete, {channelId}, nil, "POST", {messages = messages}, botToken)
 end
 
+--- Create a new invite for a channel.
+-- @param channelId The ID of the channel to create an invite for.
+-- @param invite The invite settings.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the newly created invite.
+-- @usage discord:createChannelInvite("[channel ID]", {max_age = 3600, max_uses = 1})
+-- @see https://discord.com/developers/docs/resources/channel#create-channel-invite
+function DiscordRest:createChannelInvite(channelId, invite, botToken)
+	return self:performAuthorizedRequest(routes.channelInvites, {channelId}, nil, "POST", invite, botToken)
+end
+
 --- Post a message.
 -- @param channelId The ID of the channel to post in.
 -- @param message The message parameters.

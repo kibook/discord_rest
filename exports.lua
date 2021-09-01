@@ -17,6 +17,18 @@ exports("bulkDeleteMessages", function(channelId, messages, botToken)
 	return discordRest:bulkDeleteMessages(channelId, messages, botToken)
 end)
 
+--- Create a new invite for a channel.
+-- @function createChannelInvite
+-- @param channelId The ID of the channel to create an invite for.
+-- @param invite The invite settings.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise that resolves with the newly created invite.
+-- @usage discord:createChannelInvite("[channel ID]", {max_age = 3600, max_uses = 1})
+-- @see https://discord.com/developers/docs/resources/channel#create-channel-invite
+exports("createChannelInvite", function(channelId, invite, botToken)
+	return discordRest:createChannelInvite(channelId, invite, botToken)
+end)
+
 --- Post a message.
 -- @function createMessage
 -- @param channelId The ID of the channel to post in.
