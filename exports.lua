@@ -70,6 +70,18 @@ exports("deleteUserReaction", function(channelId, messageId, emoji, userId, botT
 	return discordRest:deleteUserReaction(channelId, messageId, emoji, userId, botToken)
 end)
 
+--- Edit a previously sent message.
+-- @function editMessage
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to edit.
+-- @param message The edited message.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise, which resolves with the edited message when the request is completed.
+-- @usage exports.discord_rest:editMessage("[channel ID]", "[message ID]", {content = "I edited this message!"}, "[bot token]")
+exports("editMessage", function(channelId, messageId, message, botToken)
+	return discordRest:editMessage(channelId, messageId, message, botToken)
+end)
+
 --- Execute a webhook.
 -- @function executeWebhook
 -- @param url The webhook URL.

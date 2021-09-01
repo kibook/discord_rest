@@ -248,6 +248,17 @@ function DiscordRest:deleteUserReaction(channelId, messageId, emoji, userId, bot
 	return self:performAuthorizedRequest(formatEndpoint("userReaction", {channelId, messageId, emoji, userId}), "DELETE", nil, botToken)
 end
 
+--- Edit a previously sent message.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to edit.
+-- @param message The edited message.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise, which resolves with the edited message when the request is completed.
+-- @usage discord:editMessage("[channel ID]", "[message ID]", {content = "I edited this message!"})
+function DiscordRest:editMessage(channelId, messageId, message, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "PATCH", message, botToken)
+end
+
 --- Execute a Discord webhook
 -- @param url The webhook URL.
 -- @param data The data to send.
