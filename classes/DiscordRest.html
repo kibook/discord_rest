@@ -33,17 +33,23 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Class_DiscordRest">Class DiscordRest </a></li>
+<li><a href="#Channel">Channel </a></li>
+<li><a href="#User">User </a></li>
+<li><a href="#Webhook">Webhook </a></li>
 </ul>
 
 
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>DiscordRest</strong></li>
+</ul>
 <h2>Modules</h2>
 <ul class="nowrap">
-  <li><strong>discord_rest</strong></li>
   <li><a href="../modules/exports.html">exports</a></li>
 </ul>
 <h2>Examples</h2>
 <ul class="nowrap">
-  <li><a href="../examples/custom.lua.html">custom.lua</a></li>
+  <li><a href="../examples/class.lua.html">class.lua</a></li>
   <li><a href="../examples/exports.lua.html">exports.lua</a></li>
 </ul>
 
@@ -51,7 +57,7 @@
 
 <div id="content">
 
-<h1>Module <code>discord_rest</code></h1>
+<h1>Class <code>DiscordRest</code></h1>
 <p>Discord REST API interface</p>
 <p></p>
 
@@ -66,6 +72,9 @@
 	<td class="name" nowrap><a href="#DiscordRest:performHttpRequest">DiscordRest:performHttpRequest (url, callback, method, data, headers)</a></td>
 	<td class="summary">Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.</td>
 	</tr>
+</table>
+<h2><a href="#Channel">Channel </a></h2>
+<table class="function_list">
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:createMessage">DiscordRest:createMessage (channelId, message, botToken)</a></td>
 	<td class="summary">Post a message.</td>
@@ -95,10 +104,6 @@
 	<td class="summary">Edit a previously sent message.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:executeWebhook">DiscordRest:executeWebhook (url, data)</a></td>
-	<td class="summary">Execute a Discord webhook</td>
-	</tr>
-	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getChannel">DiscordRest:getChannel (channelId, botToken)</a></td>
 	<td class="summary">Get channel information.</td>
 	</tr>
@@ -115,12 +120,22 @@
 	<td class="summary">Get a list of users that reacted to a message with a specific emoji.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyChannel">DiscordRest:modifyChannel (channelId, channel, botToken)</a></td>
+	<td class="summary">Update a channel's settings.</td>
+	</tr>
+</table>
+<h2><a href="#User">User </a></h2>
+<table class="function_list">
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getUser">DiscordRest:getUser (userId, botToken)</a></td>
 	<td class="summary">Get user information.</td>
 	</tr>
+</table>
+<h2><a href="#Webhook">Webhook </a></h2>
+<table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:modifyChannel">DiscordRest:modifyChannel (channelId, channel, botToken)</a></td>
-	<td class="summary">Update a channel's settings.</td>
+	<td class="name" nowrap><a href="#DiscordRest:executeWebhook">DiscordRest:executeWebhook (url, data)</a></td>
+	<td class="summary">Execute a Discord webhook</td>
 	</tr>
 </table>
 
@@ -192,6 +207,10 @@
 
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/PerformHttpRequest/">https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/PerformHttpRequest/</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -199,6 +218,10 @@
     </ul>
 
 </dd>
+</dl>
+    <h2 class="section-header "><a name="Channel"></a>Channel </h2>
+
+    <dl class="function">
     <dt>
     <a name = "DiscordRest:createMessage"></a>
     <strong>DiscordRest:createMessage (channelId, message, botToken)</strong>
@@ -227,6 +250,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#create-message">https://discord.com/developers/docs/resources/channel#create-message</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -265,6 +292,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#create-reaction">https://discord.com/developers/docs/resources/channel#create-reaction</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -297,6 +328,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#deleteclose-channel">https://discord.com/developers/docs/resources/channel#deleteclose-channel</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -332,6 +367,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#delete-message">https://discord.com/developers/docs/resources/channel#delete-message</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -370,6 +409,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#delete-own-reaction">https://discord.com/developers/docs/resources/channel#delete-own-reaction</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -411,6 +454,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#delete-user-reaction">https://discord.com/developers/docs/resources/channel#delete-user-reaction</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -449,42 +496,14 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#edit-message">https://discord.com/developers/docs/resources/channel#edit-message</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:editMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, {content = <span class="string">"I edited this message!"</span>})</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "DiscordRest:executeWebhook"></a>
-    <strong>DiscordRest:executeWebhook (url, data)</strong>
-    </dt>
-    <dd>
-    Execute a Discord webhook
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">url</span>
-         The webhook URL.
-        </li>
-        <li><span class="parameter">data</span>
-         The data to send.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A new promise.
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">discord:executeWebhook(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>, {content = <span class="string">"Hello, world!"</span>})</pre>
     </ul>
 
 </dd>
@@ -513,6 +532,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#get-channel">https://discord.com/developers/docs/resources/channel#get-channel</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -548,6 +571,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#get-channel-message">https://discord.com/developers/docs/resources/channel#get-channel-message</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -583,6 +610,10 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#get-channel-messages">https://discord.com/developers/docs/resources/channel#get-channel-messages</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
@@ -624,42 +655,14 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#get-reactions">https://discord.com/developers/docs/resources/channel#get-reactions</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:getReactions(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>):<span class="global">next</span>(<span class="keyword">function</span>(users) ... <span class="keyword">end</span>)</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "DiscordRest:getUser"></a>
-    <strong>DiscordRest:getUser (userId, botToken)</strong>
-    </dt>
-    <dd>
-    Get user information.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">userId</span>
-         The ID of the user.
-        </li>
-        <li><span class="parameter">botToken</span>
-         Optional bot token to use for authorization.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A new promise.
-    </ol>
-
-
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">discord:getUser(<span class="string">"[user ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -691,10 +694,94 @@
     </ol>
 
 
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#modify-channel">https://discord.com/developers/docs/resources/channel#modify-channel</a>
+    </ul>
 
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:modifyChannel(<span class="string">"[channel ID]"</span>, {name = <span class="string">"new-name"</span>})</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="User"></a>User </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "DiscordRest:getUser"></a>
+    <strong>DiscordRest:getUser (userId, botToken)</strong>
+    </dt>
+    <dd>
+    Get user information.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">userId</span>
+         The ID of the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#get-user">https://discord.com/developers/docs/resources/user#get-user</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getUser(<span class="string">"[user ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Webhook"></a>Webhook </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "DiscordRest:executeWebhook"></a>
+    <strong>DiscordRest:executeWebhook (url, data)</strong>
+    </dt>
+    <dd>
+    Execute a Discord webhook
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The webhook URL.
+        </li>
+        <li><span class="parameter">data</span>
+         The data to send.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">https://discord.com/developers/docs/resources/webhook#execute-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:executeWebhook(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>, {content = <span class="string">"Hello, world!"</span>})</pre>
     </ul>
 
 </dd>
@@ -705,7 +792,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-01 01:50:04 </i>
+<i style="float:right;">Last updated 2021-09-01 04:51:12 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
