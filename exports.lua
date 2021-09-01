@@ -5,6 +5,18 @@ local discordRest = DiscordRest:new()
 --- Channel
 -- @section Channel
 
+--- Delete multiple messages in a single request.
+-- @function bulkDeleteMessages
+-- @param channelId The ID of the channel containing the messages.
+-- @param messages A list of message IDs to delete (2-100).
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:bulkDeleteMessages("[channel ID]", {"[message ID 1]", "[message ID 2]", ...})
+-- @see https://discord.com/developers/docs/resources/channel#bulk-delete-messages
+exports("bulkDeleteMessages", function(channelId, messages, botToken)
+	return discordRest:bulkDeleteMessages(channelId, messages, botToken)
+end)
+
 --- Post a message.
 -- @function createMessage
 -- @param channelId The ID of the channel to post in.

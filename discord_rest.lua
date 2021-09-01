@@ -6,6 +6,7 @@ local discordApi = "https://discord.com/api"
 
 -- Discord REST API routes
 local routes = {
+	bulkDelete   = "/channels/%s/messages/bulk-delete",
 	channel      = "/channels/%s",
 	crosspost    = "/channels/%s/messages/%s/crosspost",
 	message      = "/channels/%s/messages/%s",
@@ -249,6 +250,17 @@ end
 
 --- Channel
 -- @section channel
+
+--- Delete multiple messages in a single request.
+-- @param channelId The ID of the channel containing the messages.
+-- @param messages A list of message IDs to delete (2-100).
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:bulkDeleteMessages("[channel ID]", {"[message ID 1]", "[message ID 2]", ...})
+-- @see https://discord.com/developers/docs/resources/channel#bulk-delete-messages
+function DiscordRest:bulkDeleteMessages(channelId, messages, botToken)
+	return self:performAuthorizedRequest(routes.bulkDelete, {channelId}, nil, "POST", {messages = messages}, botToken)
+end
 
 --- Post a message.
 -- @param channelId The ID of the channel to post in.
