@@ -3,7 +3,7 @@
 local discordRest = DiscordRest:new()
 
 --- Post a message.
--- @function exports.discord_rest:createMessage
+-- @function createMessage
 -- @param channelId The ID of the channel to post in.
 -- @param message The message parameters.
 -- @param botToken Bot token to use for authorization.
@@ -14,7 +14,7 @@ exports("createMessage", function(channelId, message, botToken)
 end)
 
 --- Create a reaction for a message.
--- @function exports.discord_rest:createReaction
+-- @function createReaction
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to add a reaction to.
 -- @param emoji The name of the emoji to react with.
@@ -26,7 +26,7 @@ exports("createReaction", function(channelId, messageId, emoji, botToken)
 end)
 
 --- Delete a channel.
--- @function exports.discord_rest:deleteChannel
+-- @function deleteChannel
 -- @param channelId The ID of the channel.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
@@ -36,7 +36,7 @@ exports("deleteChannel", function(channelId, botToken)
 end)
 
 --- Delete a message from a channel.
--- @function exports.discord_rest:deleteMessage
+-- @function deleteMessage
 -- @param channelId The ID of the channel.
 -- @param messageId The ID of the message.
 -- @param botToken Bot token to use for authorization.
@@ -47,7 +47,7 @@ exports("deleteMessage", function(channelId, messageId, botToken)
 end)
 
 --- Remove own reaction from a message.
--- @function exports.discord_rest:deleteOwnReaction
+-- @function deleteOwnReaction
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to remove the reaction from.
 -- @param emoji The emoji of the reaction to remove.
@@ -59,7 +59,7 @@ exports("deleteOwnReaction", function(channelId, messageId, emoji, botToken)
 end)
 
 --- Remove own reaction from a message.
--- @function exports.discord_rest:deleteUserReaction
+-- @function deleteUserReaction
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to remove the reaction from.
 -- @param emoji The emoji of the reaction to remove.
@@ -71,7 +71,7 @@ exports("deleteUserReaction", function(channelId, messageId, emoji, userId, botT
 end)
 
 --- Execute a webhook.
--- @function exports.discord_rest:executeWebhook
+-- @function executeWebhook
 -- @param url The webhook URL.
 -- @param data The data to send.
 -- @return A new promise.
@@ -81,7 +81,7 @@ exports("executeWebhook", function(url, data)
 end)
 
 --- Get channel information.
--- @function exports.discord_rest:getChannel
+-- @function getChannel
 -- @param channelId The ID of the channel.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
@@ -91,7 +91,7 @@ exports("getChannel", function(channelId, botToken)
 end)
 
 --- Get a specific message from a channel.
--- @function exports.discord_rest:getChannelMessage
+-- @function getChannelMessage
 -- @param channelId The ID of the channel.
 -- @param messageId The ID of the message.
 -- @param botToken Bot token to use for authorization.
@@ -102,7 +102,7 @@ exports("getChannelMessage", function(channelId, messageId, botToken)
 end)
 
 --- Get messages from a channel.
--- @function exports.discord_rest:getChannelMessages
+-- @function getChannelMessages
 -- @param channelId The ID of the channel.
 -- @param options Options to tailor the query.
 -- @param botToken Bot token to use for authorization.
@@ -113,7 +113,7 @@ exports("getChannelMessages", function(channelId, options, botToken)
 end)
 
 --- Get user information.
--- @function exports.discord_rest:getUser
+-- @function getUser
 -- @param userId The ID of the user.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise.
@@ -123,7 +123,7 @@ exports("getUser", function(userId, botToken)
 end)
 
 --- Update a channel's settings.
--- @function exports.discord_rest:modifyChannel
+-- @function modifyChannel
 -- @param channelId The ID of the channel.
 -- @param channel The new channel settings.
 -- @param botToken Bot token to use for authorization.
@@ -134,7 +134,7 @@ exports("modifyChannel", function(channelId, channel, botToken)
 end)
 
 --- Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.
--- @function exports.discord_rest:performHttpRequest
+-- @function performHttpRequest
 -- @param url The endpoint of the API to request.
 -- @param callback An optional callback function to execute when the response is received.
 -- @param method The HTTP method of the request.
