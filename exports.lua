@@ -166,6 +166,17 @@ exports("getChannel", function(channelId, botToken)
 	return discordRest:getChannel(channelId, botToken)
 end)
 
+--- Get a list of invites for a channel.
+-- @function getChannelInvites
+-- @param channelId The ID of the channel to get invites for.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise that resolves with the list of invites.
+-- @usage discord:getChannelInvites("[channel ID]"):next(function(invites) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#get-channel-invites
+exports("getChannelInvites", function(channelId, botToken)
+	return discordRest:getChannelInvites(channelId, botToken)
+end)
+
 --- Get a specific message from a channel.
 -- @function getChannelMessage
 -- @param channelId The ID of the channel.

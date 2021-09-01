@@ -6,16 +6,17 @@ local discordApi = "https://discord.com/api"
 
 -- Discord REST API routes
 local routes = {
-	bulkDelete   = "/channels/%s/messages/bulk-delete",
-	channel      = "/channels/%s",
-	crosspost    = "/channels/%s/messages/%s/crosspost",
-	message      = "/channels/%s/messages/%s",
-	messages     = "/channels/%s/messages",
-	ownReaction  = "/channels/%s/messages/%s/reactions/%s/@me",
-	reaction     = "/channels/%s/messages/%s/reactions/%s",
-	reactions    = "/channels/%s/messages/%s/reactions",
-	userReaction = "/channels/%s/messages/%s/reactions/%s/%s",
-	user         = "/users/%s",
+	bulkDelete     = "/channels/%s/messages/bulk-delete",
+	channel        = "/channels/%s",
+	channelInvites = "/channels/%s/invites",
+	crosspost      = "/channels/%s/messages/%s/crosspost",
+	message        = "/channels/%s/messages/%s",
+	messages       = "/channels/%s/messages",
+	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
+	reaction       = "/channels/%s/messages/%s/reactions/%s",
+	reactions      = "/channels/%s/messages/%s/reactions",
+	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
+	user           = "/users/%s",
 }
 
 -- Check if an HTTP status code indicates an error
@@ -397,6 +398,16 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#get-channel
 function DiscordRest:getChannel(channelId, botToken)
 	return self:performAuthorizedRequest(routes.channel, {channelId}, nil, "GET", nil, botToken)
+end
+
+--- Get a list of invites for a channel.
+-- @param channelId The ID of the channel to get invites for.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the list of invites.
+-- @usage discord:getChannelInvites("[channel ID]"):next(function(invites) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#get-channel-invites
+function DiscordRest:getChannelInvites(channelId, botToken)
+	return self:performAuthorizedRequest(routes.channelInvites, {channelId}, nil, "GET", nil, botToken)
 end
 
 --- Get a specific message from a channel.
