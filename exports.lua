@@ -2,19 +2,6 @@
 
 local discordRest = DiscordRest:new()
 
---- Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.
--- @function performHttpRequest
--- @param url The endpoint of the API to request.
--- @param callback An optional callback function to execute when the response is received.
--- @param method The HTTP method of the request.
--- @param data Data to send in the body of the request.
--- @param headers The HTTP headers of the request.
--- @usage exports.discord_rest:performHttpRequest("https://discord.com/api/channels/[channel ID]/messages/[message ID]", nil, "DELETE", "", {["Authorization"] = "Bot [bot token]"})
--- @see https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/PerformHttpRequest/
-exports("performHttpRequest", function(url, callback, method, data, headers)
-	discordRest:performHttpRequest(url, callback, method, data, headers)
-end)
-
 --- Channel
 -- @section Channel
 

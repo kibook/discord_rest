@@ -4,15 +4,15 @@
 -- Discord API base URL
 local discordApi = "https://discord.com/api"
 
--- Discord REST API endpoint URIs
-local endpoints = {
-	["channel"]      = "/channels/%s",
-	["message"]      = "/channels/%s/messages/%s",
-	["messages"]     = "/channels/%s/messages",
-	["ownReaction"]  = "/channels/%s/messages/%s/reactions/%s/@me",
-	["reactions"]    = "/channels/%s/messages/%s/reactions/%s",
-	["userReaction"] = "/channels/%s/messages/%s/reactions/%s/%s",
-	["user"]         = "/users/%s",
+-- Discord REST API routes
+local routes = {
+	channel      = "/channels/%s",
+	message      = "/channels/%s/messages/%s",
+	messages     = "/channels/%s/messages",
+	ownReaction  = "/channels/%s/messages/%s/reactions/%s/@me",
+	reactions    = "/channels/%s/messages/%s/reactions/%s",
+	userReaction = "/channels/%s/messages/%s/reactions/%s/%s",
+	user         = "/users/%s",
 }
 
 -- Check if an HTTP status code indicates an error
@@ -53,13 +53,76 @@ function createQueryString(options)
 	end
 end
 
--- Format an API endpoint URI
-local function formatEndpoint(name, variables, parameters)
+-- Format an API route URI
+local function formatRoute(route, variables, options)
+	local queryString = createQueryString(options)
+
 	if type(variables) == "table" then
-		return discordApi .. endpoints[name]:format(table.unpack(variables)) .. createQueryString(parameters)
+		return discordApi .. route:format(table.unpack(variables)) .. queryString
 	else
-		return discordApi .. endpoints[name]:format(variables) .. createQueryString(parameters)
+		return discordApi .. route .. queryString
 	end
+end
+
+-- Per-route rate limit queue
+local RateLimitQueue = {}
+
+-- Create a new queue for a route
+function RateLimitQueue:new(route)
+	self.__index = self
+	local self = setmetatable({}, self)
+
+	self.route = route
+
+	self.items = {}
+	self.rateLimitRemaining = 0
+	self.rateLimitReset = 0
+
+	return self
+end
+
+-- Add a message to the queue
+function RateLimitQueue:enqueue(cb)
+	table.insert(self.items, 1, cb)
+end
+
+-- Remove a message from the queue and execute it
+function RateLimitQueue:dequeue()
+	local cb = table.remove(self.items)
+
+	if cb then
+		cb()
+	end
+end
+
+-- Check if the queue has any items and hasn't hit the rate limit
+function RateLimitQueue:isReady()
+	return #self.items > 0 and (self.rateLimitRemaining > 0 or os.time() > self.rateLimitReset)
+end
+
+-- Return the route this queue is for
+function RateLimitQueue:getRoute()
+	return self.route
+end
+
+-- Return the number of messages that can be sent on this route
+function RateLimitQueue:getRateLimitRemaining()
+	return self.rateLimitRemaining
+end
+
+-- Update the number of messages that can be sent on this route
+function RateLimitQueue:setRateLimitRemaining(value)
+	self.rateLimitRemaining = value
+end
+
+-- Return the time when the rate limit for this route resets
+function RateLimitQueue:getRateLimitReset()
+	return self.rateLimitReset
+end
+
+-- Updte the time when the rate limit for this route resets
+function RateLimitQueue:setRateLimitReset(value)
+	self.rateLimitReset = value
 end
 
 --- Discord REST API interface
@@ -76,13 +139,11 @@ function DiscordRest:new(botToken)
 
 	self.botToken = botToken
 
-	self.queue = {}
-	self.rateLimitRemaining = 0
-	self.rateLimitReset = 0
+	self.queues = {}
 
 	Citizen.CreateThread(function()
 		while self do
-			self:processQueue()
+			self:processQueues()
 			Citizen.Wait(500)
 		end
 	end)
@@ -90,46 +151,46 @@ function DiscordRest:new(botToken)
 	return self
 end
 
--- Add a message to the queue
-function DiscordRest:enqueue(cb)
-	table.insert(self.queue, 1, cb)
-end
-
--- Remove a message from the queue
-function DiscordRest:dequeue()
-	local cb = table.remove(self.queue)
-
-	if cb then
-		cb()
+-- Get the queue for a route, or create it if it doesn't exist
+function DiscordRest:getQueue(route)
+	if not self.queues[route] then
+		self.queues[route] = RateLimitQueue:new(route)
 	end
+
+	return self.queues[route]
 end
 
 -- Process message while respecting the rate limit
-function DiscordRest:processQueue()
-	if self.rateLimitRemaining > 0 or os.time() > self.rateLimitReset then
-		self:dequeue()
+function DiscordRest:processQueues()
+	for route, queue in pairs(self.queues) do
+		if queue:isReady() then
+			queue:dequeue()
+			break
+		end
 	end
 end
 
 -- Handle HTTP responses from the Discord REST API
-function DiscordRest:handleResponse(status, text, headers, callback)
+function DiscordRest:handleResponse(queue, url, status, text, headers, callback)
 	if isResponseError(status) then
 		if status == 429 then
-			self.rateLimitRemaining = 0
-			self.rateLimitReset = os.time() + 5
+			-- No access to headers/body if status > 400, so can't use Retry-After
+			-- https://github.com/citizenfx/fivem/blob/6a83275c44a0044b4765e7865f73ca670de45cc3/code/components/http-client/src/HttpClient.cpp#L114
+			queue:setRateLimitRemaining(0)
+			queue:setRateLimitReset(os.time() + 5)
 		end
 
-		print(("Discord REST API error: %d"):format(status, text or "", json.encode(headers)))
+		print(("Discord REST API error: %s: %d"):format(url, status))
 	else
 		local rateLimitRemaining = tonumber(headers["x-ratelimit-remaining"])
 		local rateLimitReset = tonumber(headers["x-ratelimit-reset"])
 
 		if rateLimitRemaining then
-			self.rateLimitRemaining = rateLimitRemaining
+			queue:setRateLimitRemaining(rateLimitRemaining)
 		end
 
 		if rateLimitReset then
-			self.rateLimitReset = rateLimitReset
+			queue:setRateLimitReset(rateLimitReset)
 		end
 	end
 
@@ -143,38 +204,15 @@ function DiscordRest:getAuthorization(botToken)
 	return "Bot " .. (botToken or self.botToken or "")
 end
 
---- Perform a custom HTTP request to the Discord REST API, while still respecting the rate limit.
--- @param url The endpoint of the API to request.
--- @param callback An optional callback function to execute when the response is received.
--- @param method The HTTP method of the request.
--- @param data Data to send in the body of the request.
--- @param headers The HTTP headers of the request.
--- @usage discord:performHttpRequest("https://discord.com/api/channels/[channel ID]/messages/[message ID]", nil, "DELETE", "", {["Authorization"] = "Bot [bot token]"})
--- @see https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/PerformHttpRequest/
-function DiscordRest:performHttpRequest(url, callback, method, data, headers)
-	self:enqueue(function()
-		PerformHttpRequest(url,
-			function(status, text, headers)
-				self:handleResponse(status, text, headers, callback)
-			end,
-			method, data, headers)
-	end)
-end
-
--- Perform an authorized request to the REST API
-function DiscordRest:performAuthorizedRequest(url, method, data, botToken)
-	local p = promise.new()
-
-	local authorization = self:getAuthorization(botToken)
-
-	local headers = {
-		["Authorization"] = authorization
-	}
+-- Enqueue a request to the REST API
+function DiscordRest:enqueueRequest(queue, url, callback, method, data, headers)
+	if not headers then
+		headers = {}
+	end
 
 	if data then
-		headers["Content-Type"] = "application/json"
-
 		if type(data) ~= "string" then
+			headers["Content-Type"] = "application/json"
 			data = json.encode(data)
 		end
 	else
@@ -182,9 +220,29 @@ function DiscordRest:performAuthorizedRequest(url, method, data, botToken)
 		data = ""
 	end
 
-	self:performHttpRequest(url, createSimplePromiseCallback(p), method, data, headers)
+	queue:enqueue(function()
+		PerformHttpRequest(url,
+			function(status, data, headers)
+				self:handleResponse(queue, url, status, data, headers, callback)
+			end,
+			method, data, headers)
+	end)
+end
 
+-- Perform a request to a REST API route
+function DiscordRest:performRequest(route, parameters, options, method, data, headers)
+	local queue = self:getQueue(route)
+	local url = formatRoute(route, parameters, options)
+	local p = promise.new()
+	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), method, data, headers)
 	return p
+end
+
+-- Perform an authorized request to a REST API route
+function DiscordRest:performAuthorizedRequest(route, parameters, options, method, data, botToken)
+	return self:performRequest(route, parameters, options, method, data, {
+		["Authorization"] = self:getAuthorization(botToken)
+	})
 end
 
 --- Channel
@@ -198,7 +256,7 @@ end
 -- @usage discord:createMessage("[channel ID]", {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/channel#create-message
 function DiscordRest:createMessage(channelId, message, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("messages", {channelId}), "POST", message, botToken)
+	return self:performAuthorizedRequest(routes.messages, {channelId}, nil, "POST", message, botToken)
 end
 
 --- Create a reaction for a message.
@@ -210,7 +268,7 @@ end
 -- @usage discord:createReaction("[channel ID]", "[message ID]", "💗")
 -- @see https://discord.com/developers/docs/resources/channel#create-reaction
 function DiscordRest:createReaction(channelId, messageId, emoji, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("ownReaction", {channelId, messageId, emoji}), "PUT", nil, botToken)
+	return self:performAuthorizedRequest(routes.ownReaction, {channelId, messageId, emoji}, nil, "PUT", nil, botToken)
 end
 
 --- Delete a channel.
@@ -220,7 +278,7 @@ end
 -- @usage discord:deleteChannel("[channel ID]")
 -- @see https://discord.com/developers/docs/resources/channel#deleteclose-channel
 function DiscordRest:deleteChannel(channelId, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("channel", {channelId}), "DELETE", nil, botToken)
+	return self:performAuthorizedRequest(routes.channel, {channelId}, nil, "DELETE", nil, botToken)
 end
 
 --- Delete a message from a channel.
@@ -231,7 +289,7 @@ end
 -- @usage discord:deleteMessage("[channel ID]", "[message ID]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-message
 function DiscordRest:deleteMessage(channelId, messageId, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "DELETE", nil, botToken)
+	return self:performAuthorizedRequest(routes.message, {channelId, messageId}, nil, "DELETE", nil, botToken)
 end
 
 --- Remove own reaction from a message.
@@ -243,7 +301,7 @@ end
 -- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗")
 -- @see https://discord.com/developers/docs/resources/channel#delete-own-reaction
 function DiscordRest:deleteOwnReaction(channelId, messageId, emoji, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("ownReaction", {channelId, messageId, emoji}), "DELETE", nil, botToken)
+	return self:performAuthorizedRequest(routes.ownReaction, {channelId, messageId, emoji}, nil, "DELETE", nil, botToken)
 end
 
 --- Remove a user's reaction from a message.
@@ -256,7 +314,7 @@ end
 -- @usage discord:deleteUserReaction("[channel ID]", "[message ID]", "💗", "[user ID]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-user-reaction
 function DiscordRest:deleteUserReaction(channelId, messageId, emoji, userId, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("userReaction", {channelId, messageId, emoji, userId}), "DELETE", nil, botToken)
+	return self:performAuthorizedRequest(routes.userReaction, {channelId, messageId, emoji, userId}, nil, "DELETE", nil, botToken)
 end
 
 --- Edit a previously sent message.
@@ -268,7 +326,7 @@ end
 -- @usage discord:editMessage("[channel ID]", "[message ID]", {content = "I edited this message!"})
 -- @see https://discord.com/developers/docs/resources/channel#edit-message
 function DiscordRest:editMessage(channelId, messageId, message, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "PATCH", message, botToken)
+	return self:performAuthorizedRequest(routes.message, {channelId, messageId}, nil, "PATCH", message, botToken)
 end
 
 --- Get channel information.
@@ -278,7 +336,7 @@ end
 -- @usage discord:getChannel("[channel ID]"):next(function(channel) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-channel
 function DiscordRest:getChannel(channelId, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("channel", {channelId}), "GET", nil, botToken)
+	return self:performAuthorizedRequest(routes.channel, {channelId}, nil, "GET", nil, botToken)
 end
 
 --- Get a specific message from a channel.
@@ -289,7 +347,7 @@ end
 -- @usage discord:getChannelMessage("[channel ID]", "[messageId]")
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-message
 function DiscordRest:getChannelMessage(channelId, messageId, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "GET", nil, botToken)
+	return self:performAuthorizedRequest(routes.message, {channelId, messageId}, nil, "GET", nil, botToken)
 end
 
 --- Get a list of messages from a channels
@@ -300,7 +358,7 @@ end
 -- @usage discord:getChannelMessage("[channel ID]", {limit = 1}):next(function(messages) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-messages
 function DiscordRest:getChannelMessages(channelId, options, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("messages", {channelId}, options), "GET", nil, botToken)
+	return self:performAuthorizedRequest(routes.messages, {channelId}, options, "GET", nil, botToken)
 end
 
 --- Get a list of users that reacted to a message with a specific emoji.
@@ -313,7 +371,7 @@ end
 -- @usage discord:getReactions("[channel ID]", "[message ID]", "💗"):next(function(users) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-reactions
 function DiscordRest:getReactions(channelId, messageId, emoji, options, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("reactions", {channelId, messageId, emoji}, options), "GET", nil, botToken)
+	return self:performAuthorizedRequest(routes.reactions, {channelId, messageId, emoji}, options, "GET", nil, botToken)
 end
 
 --- Update a channel's settings.
@@ -324,7 +382,7 @@ end
 -- @usage discord:modifyChannel("[channel ID]", {name = "new-name"})
 -- @see https://discord.com/developers/docs/resources/channel#modify-channel
 function DiscordRest:modifyChannel(channelId, channel, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("channel", channelId), "PATCH", channel, botToken)
+	return self:performAuthorizedRequest(routes.channel, {channelId}, nil, "PATCH", channel, botToken)
 end
 
 --- User
@@ -337,7 +395,7 @@ end
 -- @usage discord:getUser("[user ID]"):next(function(user) ... end)
 -- @see https://discord.com/developers/docs/resources/user#get-user
 function DiscordRest:getUser(userId, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("user", {userId}), "GET", nil, botToken)
+	return self:performAuthorizedRequest(routes.user, {userId}, nil, "GET", nil, botToken)
 end
 
 --- Webhook
@@ -350,7 +408,8 @@ end
 -- @usage discord:executeWebhook("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
 function DiscordRest:executeWebhook(url, data)
+	local queue = self:getQueue(url)
 	local p = promise.new()
-	self:performHttpRequest(url, createSimplePromiseCallback(p), "POST", json.encode(data), {["Content-Type"] = "application/json"})
+	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), "POST", data)
 	return p
 end
