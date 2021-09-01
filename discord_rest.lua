@@ -7,10 +7,12 @@ local discordApi = "https://discord.com/api"
 -- Discord REST API routes
 local routes = {
 	channel      = "/channels/%s",
+	crosspost    = "/channels/%s/messages/%s/crosspost",
 	message      = "/channels/%s/messages/%s",
 	messages     = "/channels/%s/messages",
 	ownReaction  = "/channels/%s/messages/%s/reactions/%s/@me",
-	reactions    = "/channels/%s/messages/%s/reactions/%s",
+	reaction     = "/channels/%s/messages/%s/reactions/%s",
+	reactions    = "/channels/%s/messages/%s/reactions",
 	userReaction = "/channels/%s/messages/%s/reactions/%s/%s",
 	user         = "/users/%s",
 }
@@ -271,6 +273,26 @@ function DiscordRest:createReaction(channelId, messageId, emoji, botToken)
 	return self:performAuthorizedRequest(routes.ownReaction, {channelId, messageId, emoji}, nil, "PUT", nil, botToken)
 end
 
+--- Crosspost a message in a News Channel to following channels.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to crosspost.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the crossposted message.
+-- @usage discord:crosspostMessage("[channel ID]", "[message ID]")
+function DiscordRest:crosspostMessage(channelId, messageId, botToken)
+	return self:performAuthorizedRequest(routes.crosspost, {channelId, messageId}, nil, "POST", nil, botToken)
+end
+
+--- Deletes all reactions on a message.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message whose reactions will be deleted.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteAllReactions("[channel ID]", "[message ID]")
+function DiscordRest:deleteAllReactions(channelId, messageId, botToken)
+	return self:performAuthorizedRequest(routes.reactions, {channelId, messageId}, nil, "DELETE", nil, botToken)
+end
+
 --- Delete a channel.
 -- @param channelId The ID of the channel.
 -- @param botToken Optional bot token to use for authorization.
@@ -371,7 +393,7 @@ end
 -- @usage discord:getReactions("[channel ID]", "[message ID]", "💗"):next(function(users) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-reactions
 function DiscordRest:getReactions(channelId, messageId, emoji, options, botToken)
-	return self:performAuthorizedRequest(routes.reactions, {channelId, messageId, emoji}, options, "GET", nil, botToken)
+	return self:performAuthorizedRequest(routes.reaction, {channelId, messageId, emoji}, options, "GET", nil, botToken)
 end
 
 --- Update a channel's settings.

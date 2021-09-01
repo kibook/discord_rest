@@ -30,6 +30,30 @@ exports("createReaction", function(channelId, messageId, emoji, botToken)
 	return discordRest:createReaction(channelId, messageId, emoji, botToken)
 end)
 
+--- Crosspost a message in a News Channel to following channels.
+-- @function crosspostMessage
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to crosspost.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise which is resolved with the crossposted message.
+-- @usage exports.discord_rest:crosspostMessage("[channel ID]", "[message ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#crosspost-message
+exports("crosspostMessage", function(channelId, messageId, botToken)
+	return discordRest:crosspostMessage(channelId, messageId, botToken)
+end)
+
+--- Deletes all reactions on a message.
+-- @function deleteAllReactions
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message whose reactions will be deleted.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteAllReactions("[channel ID]", "[message ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#delete-all-reactions
+exports("deleteAllReactions", function(channelId, messageId, botToken)
+	return discordRest:deleteAllReactions(channelId, messageId, botToken)
+end)
+
 --- Delete a channel.
 -- @function deleteChannel
 -- @param channelId The ID of the channel.
