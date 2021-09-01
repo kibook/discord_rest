@@ -64,12 +64,28 @@
 <h2><a href="#Channel">Channel </a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" nowrap><a href="#bulkDeleteMessages">bulkDeleteMessages (channelId, messages, botToken)</a></td>
+	<td class="summary">Delete multiple messages in a single request.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#createMessage">createMessage (channelId, message, botToken)</a></td>
 	<td class="summary">Post a message.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#createReaction">createReaction (channelId, messageId, emoji, botToken)</a></td>
 	<td class="summary">Create a reaction for a message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#crosspostMessage">crosspostMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Crosspost a message in a News Channel to following channels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#deleteAllReactions">deleteAllReactions (channelId, messageId, botToken)</a></td>
+	<td class="summary">Deletes all reactions on a message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#deleteAllReactionsForEmoji">deleteAllReactionsForEmoji (channelId, messageId, emoji, botToken)</a></td>
+	<td class="summary">Deletes all the reactions for a given emoji on a message.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#deleteChannel">deleteChannel (channelId, botToken)</a></td>
@@ -88,12 +104,20 @@
 	<td class="summary">Remove a user's reaction from a message.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#editChannelPermissions">editChannelPermissions (channelId, overwriteId, permissions, botToken)</a></td>
+	<td class="summary">Edit the channel permission overwrites for a user or role in a channel.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#editMessage">editMessage (channelId, messageId, message, botToken)</a></td>
 	<td class="summary">Edit a previously sent message.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#getChannel">getChannel (channelId, botToken)</a></td>
 	<td class="summary">Get channel information.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getChannelInvites">getChannelInvites (channelId, botToken)</a></td>
+	<td class="summary">Get a list of invites for a channel.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#getChannelMessage">getChannelMessage (channelId, messageId, botToken)</a></td>
@@ -134,6 +158,45 @@
     <h2 class="section-header "><a name="Channel"></a>Channel </h2>
 
     <dl class="function">
+    <dt>
+    <a name = "bulkDeleteMessages"></a>
+    <strong>bulkDeleteMessages (channelId, messages, botToken)</strong>
+    </dt>
+    <dd>
+    Delete multiple messages in a single request.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the messages.
+        </li>
+        <li><span class="parameter">messages</span>
+         A list of message IDs to delete (2-100).
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#bulk-delete-messages">https://discord.com/developers/docs/resources/channel#bulk-delete-messages</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:bulkDeleteMessages(<span class="string">"[channel ID]"</span>, {<span class="string">"[message ID 1]"</span>, <span class="string">"[message ID 2]"</span>, ...})</pre>
+    </ul>
+
+</dd>
     <dt>
     <a name = "createMessage"></a>
     <strong>createMessage (channelId, message, botToken)</strong>
@@ -212,6 +275,126 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:createReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "crosspostMessage"></a>
+    <strong>crosspostMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Crosspost a message in a News Channel to following channels.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to crosspost.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the crossposted message.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#crosspost-message">https://discord.com/developers/docs/resources/channel#crosspost-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:crosspostMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "deleteAllReactions"></a>
+    <strong>deleteAllReactions (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Deletes all reactions on a message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message whose reactions will be deleted.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#delete-all-reactions">https://discord.com/developers/docs/resources/channel#delete-all-reactions</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:deleteAllReactions(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "deleteAllReactionsForEmoji"></a>
+    <strong>deleteAllReactionsForEmoji (channelId, messageId, emoji, botToken)</strong>
+    </dt>
+    <dd>
+    Deletes all the reactions for a given emoji on a message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to delete reactions from.
+        </li>
+        <li><span class="parameter">emoji</span>
+         The emoji of the reaction to delete.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji">https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:deleteAllReactionsForEmoji(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -378,6 +561,48 @@
 
 </dd>
     <dt>
+    <a name = "editChannelPermissions"></a>
+    <strong>editChannelPermissions (channelId, overwriteId, permissions, botToken)</strong>
+    </dt>
+    <dd>
+    Edit the channel permission overwrites for a user or role in a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to edit the permissions of.
+        </li>
+        <li><span class="parameter">overwriteId</span>
+         The ID of the user or role to edit permissions for.
+        </li>
+        <li><span class="parameter">permissions</span>
+         The permissions to set.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#edit-channel-permissions">https://discord.com/developers/docs/resources/channel#edit-channel-permissions</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:editChannelPermissions(<span class="string">"[channel ID]"</span>, <span class="string">"[overwrite ID]"</span>, {allow = <span class="number">6</span>, deny = <span class="number">8</span>, <span class="global">type</span> = <span class="number">0</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "editMessage"></a>
     <strong>editMessage (channelId, messageId, message, botToken)</strong>
     </dt>
@@ -452,6 +677,42 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:getChannel(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getChannelInvites"></a>
+    <strong>getChannelInvites (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of invites for a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to get invites for.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with the list of invites.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#get-channel-invites">https://discord.com/developers/docs/resources/channel#get-channel-invites</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getChannelInvites(<span class="string">"[channel ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(invites) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -704,7 +965,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-01 18:10:07 </i>
+<i style="float:right;">Last updated 2021-09-01 20:31:42 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
