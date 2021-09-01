@@ -23,7 +23,7 @@ end)
 -- @param invite The invite settings.
 -- @param botToken Bot token to use for authorization.
 -- @return A new promise that resolves with the newly created invite.
--- @usage discord:createChannelInvite("[channel ID]", {max_age = 3600, max_uses = 1})
+-- @usage exports.discord_rest:createChannelInvite("[channel ID]", {max_age = 3600, max_uses = 1})
 -- @see https://discord.com/developers/docs/resources/channel#create-channel-invite
 exports("createChannelInvite", function(channelId, invite, botToken)
 	return discordRest:createChannelInvite(channelId, invite, botToken)
@@ -100,6 +100,18 @@ end)
 -- @see https://discord.com/developers/docs/resources/channel#deleteclose-channel
 exports("deleteChannel", function(channelId, botToken)
 	return discordRest:deleteChannel(channelId, botToken)
+end)
+
+--- Delete a channel permission overwrite for a user or role in a channel.
+-- @function deleteChannelPermission
+-- @param channelId The ID of the channel.
+-- @param overwriteId The ID of the user or role to remove permissions for.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteChannelPermission("[channel ID]", "[overwrite ID]")
+-- @see https://discord.com/developers/docs/resources/channel#delete-channel-permission
+exports("deleteChannelPermission", function(channelId, overwriteId, botToken)
+	return discordRest:deleteChannelPermission(channelId, overwriteId, botToken)
 end)
 
 --- Delete a message from a channel.

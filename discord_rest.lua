@@ -341,6 +341,17 @@ function DiscordRest:deleteChannel(channelId, botToken)
 	return self:performAuthorizedRequest(routes.channel, {channelId}, nil, "DELETE", nil, botToken)
 end
 
+--- Delete a channel permission overwrite for a user or role in a channel.
+-- @param channelId The ID of the channel.
+-- @param overwriteId The ID of the user or role to remove permissions for.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteChannelPermission("[channel ID]", "[overwrite ID]")
+-- @see https://discord.com/developers/docs/resources/channel#delete-channel-permission
+function DiscordRest:deleteChannelPermission(channelId, overwriteId, botToken)
+	return self:performAuthorizedRequest(routes.editChannelPermissions, {channelId, overwriteId}, nil, "DELETE", nil, botToken)
+end
+
 --- Delete a message from a channel.
 -- @param channelId The ID of the channel.
 -- @param messageId The ID of the message.
