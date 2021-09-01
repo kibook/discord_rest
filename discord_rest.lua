@@ -1,4 +1,5 @@
 --- Discord REST API interface
+-- @classmod DiscordRest
 
 -- Discord API base URL
 local discordApi = "https://discord.com/api"
@@ -149,6 +150,7 @@ end
 -- @param data Data to send in the body of the request.
 -- @param headers The HTTP headers of the request.
 -- @usage discord:performHttpRequest("https://discord.com/api/channels/[channel ID]/messages/[message ID]", nil, "DELETE", "", {["Authorization"] = "Bot [bot token]"})
+-- @see https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/PerformHttpRequest/
 function DiscordRest:performHttpRequest(url, callback, method, data, headers)
 	self:enqueue(function()
 		PerformHttpRequest(url,
@@ -185,12 +187,16 @@ function DiscordRest:performAuthorizedRequest(url, method, data, botToken)
 	return p
 end
 
+--- Channel
+-- @section channel
+
 --- Post a message.
 -- @param channelId The ID of the channel to post in.
 -- @param message The message parameters.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved when the message is posted.
 -- @usage discord:createMessage("[channel ID]", {content = "Hello, world!"})
+-- @see https://discord.com/developers/docs/resources/channel#create-message
 function DiscordRest:createMessage(channelId, message, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("messages", {channelId}), "POST", message, botToken)
 end
@@ -202,6 +208,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved when the reaction is added to the message.
 -- @usage discord:createReaction("[channel ID]", "[message ID]", "💗")
+-- @see https://discord.com/developers/docs/resources/channel#create-reaction
 function DiscordRest:createReaction(channelId, messageId, emoji, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("ownReaction", {channelId, messageId, emoji}), "PUT", nil, botToken)
 end
@@ -211,6 +218,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteChannel("[channel ID]")
+-- @see https://discord.com/developers/docs/resources/channel#deleteclose-channel
 function DiscordRest:deleteChannel(channelId, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("channel", {channelId}), "DELETE", nil, botToken)
 end
@@ -221,6 +229,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteMessage("[channel ID]", "[message ID]")
+-- @see https://discord.com/developers/docs/resources/channel#delete-message
 function DiscordRest:deleteMessage(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "DELETE", nil, botToken)
 end
@@ -232,6 +241,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗")
+-- @see https://discord.com/developers/docs/resources/channel#delete-own-reaction
 function DiscordRest:deleteOwnReaction(channelId, messageId, emoji, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("ownReaction", {channelId, messageId, emoji}), "DELETE", nil, botToken)
 end
@@ -244,6 +254,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteUserReaction("[channel ID]", "[message ID]", "💗", "[user ID]")
+-- @see https://discord.com/developers/docs/resources/channel#delete-user-reaction
 function DiscordRest:deleteUserReaction(channelId, messageId, emoji, userId, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("userReaction", {channelId, messageId, emoji, userId}), "DELETE", nil, botToken)
 end
@@ -255,19 +266,9 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise, which resolves with the edited message when the request is completed.
 -- @usage discord:editMessage("[channel ID]", "[message ID]", {content = "I edited this message!"})
+-- @see https://discord.com/developers/docs/resources/channel#edit-message
 function DiscordRest:editMessage(channelId, messageId, message, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "PATCH", message, botToken)
-end
-
---- Execute a Discord webhook
--- @param url The webhook URL.
--- @param data The data to send.
--- @return A new promise.
--- @usage discord:executeWebhook("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
-function DiscordRest:executeWebhook(url, data)
-	local p = promise.new()
-	self:performHttpRequest(url, createSimplePromiseCallback(p), "POST", json.encode(data), {["Content-Type"] = "application/json"})
-	return p
 end
 
 --- Get channel information.
@@ -275,6 +276,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:getChannel("[channel ID]"):next(function(channel) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#get-channel
 function DiscordRest:getChannel(channelId, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("channel", {channelId}), "GET", nil, botToken)
 end
@@ -285,6 +287,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:getChannelMessage("[channel ID]", "[messageId]")
+-- @see https://discord.com/developers/docs/resources/channel#get-channel-message
 function DiscordRest:getChannelMessage(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "GET", nil, botToken)
 end
@@ -295,6 +298,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:getChannelMessage("[channel ID]", {limit = 1}):next(function(messages) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#get-channel-messages
 function DiscordRest:getChannelMessages(channelId, options, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("messages", {channelId}, options), "GET", nil, botToken)
 end
@@ -307,17 +311,9 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:getReactions("[channel ID]", "[message ID]", "💗"):next(function(users) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#get-reactions
 function DiscordRest:getReactions(channelId, messageId, emoji, options, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("reactions", {channelId, messageId, emoji}, options), "GET", nil, botToken)
-end
-
---- Get user information.
--- @param userId The ID of the user.
--- @param botToken Optional bot token to use for authorization.
--- @return A new promise.
--- @usage discord:getUser("[user ID]"):next(function(user) ... end)
-function DiscordRest:getUser(userId, botToken)
-	return self:performAuthorizedRequest(formatEndpoint("user", {userId}), "GET", nil, botToken)
 end
 
 --- Update a channel's settings.
@@ -326,6 +322,35 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:modifyChannel("[channel ID]", {name = "new-name"})
+-- @see https://discord.com/developers/docs/resources/channel#modify-channel
 function DiscordRest:modifyChannel(channelId, channel, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("channel", channelId), "PATCH", channel, botToken)
+end
+
+--- User
+-- @section user
+
+--- Get user information.
+-- @param userId The ID of the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:getUser("[user ID]"):next(function(user) ... end)
+-- @see https://discord.com/developers/docs/resources/user#get-user
+function DiscordRest:getUser(userId, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("user", {userId}), "GET", nil, botToken)
+end
+
+--- Webhook
+-- @section webhook
+
+--- Execute a Discord webhook
+-- @param url The webhook URL.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage discord:executeWebhook("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
+function DiscordRest:executeWebhook(url, data)
+	local p = promise.new()
+	self:performHttpRequest(url, createSimplePromiseCallback(p), "POST", json.encode(data), {["Content-Type"] = "application/json"})
+	return p
 end
