@@ -279,6 +279,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with the crossposted message.
 -- @usage discord:crosspostMessage("[channel ID]", "[message ID]")
+-- @see https://discord.com/developers/docs/resources/channel#crosspost-message
 function DiscordRest:crosspostMessage(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(routes.crosspost, {channelId, messageId}, nil, "POST", nil, botToken)
 end
@@ -289,8 +290,21 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteAllReactions("[channel ID]", "[message ID]")
+-- @see https://discord.com/developers/docs/resources/channel#delete-all-reactions
 function DiscordRest:deleteAllReactions(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(routes.reactions, {channelId, messageId}, nil, "DELETE", nil, botToken)
+end
+
+--- Deletes all the reactions for a given emoji on a message.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to delete reactions from.
+-- @param emoji The emoji of the reaction to delete.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteAllReactionsForEmoji("[channel ID]", "[message ID]", "💗")
+-- @see https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
+function DiscordRest:deleteAllReactionsForEmoji(channelId, messageId, emoji, botToken)
+	return self:performAuthorizedRequest(routes.reaction, {channelId, messageId, emoji}, nil, "DELETE", nil, botToken)
 end
 
 --- Delete a channel.

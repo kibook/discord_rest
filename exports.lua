@@ -54,6 +54,19 @@ exports("deleteAllReactions", function(channelId, messageId, botToken)
 	return discordRest:deleteAllReactions(channelId, messageId, botToken)
 end)
 
+--- Deletes all the reactions for a given emoji on a message.
+-- @function deleteAllReactionsForEmoji
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to delete reactions from.
+-- @param emoji The emoji of the reaction to delete.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteAllReactionsForEmoji("[channel ID]", "[message ID]", "💗", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
+exports("deleteAllReactionsForEmoji", function(channelId, messageId, emoji, botToken)
+	return discordRest:deleteAllReactionsForEmoji(channelId, messageId, emoji, botToken)
+end)
+
 --- Delete a channel.
 -- @function deleteChannel
 -- @param channelId The ID of the channel.
