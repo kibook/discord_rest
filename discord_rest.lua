@@ -3,6 +3,15 @@
 -- Discord API base URL
 local discordApi = "https://discord.com/api"
 
+-- Discord REST API endpoint URIs
+local endpoints = {
+	channel     = "/channels/%s",
+	message     = "/channels/%s/messages/%s",
+	messages    = "/channels/%s/messages",
+	ownReaction = "/channels/%s/messages/%s/reactions/%s/@me",
+	user        = "/users/%s"
+}
+
 -- Check if an HTTP status code indicates an error
 local function isResponseError(status)
 	return status < 200 or status > 299
@@ -39,6 +48,11 @@ function createQueryString(options)
 	else
 		return ""
 	end
+end
+
+-- Format an API endpoint URI
+local function formatEndpoint(name, variables, parameters)
+	return discordApi .. endpoints[name]:format(table.unpack(variables)) .. createQueryString(parameters)
 end
 
 --- Discord REST API interface
@@ -172,20 +186,18 @@ end
 -- @return A new promise which is resolved when the message is posted.
 -- @usage discord:createMessage("[channel ID]", {content = "Hello, world!"})
 function DiscordRest:createMessage(channelId, message, botToken)
-	local url = discordApi .. "/channels/" .. channelId .. "/messages"
-	return self:performAuthorizedRequest(url, "POST", message, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("messages", {channelId}), "POST", message, botToken)
 end
 
 --- Create a reaction for a message.
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to add a reaction to.
--- @param emoji The name of the emoji to react with.
+-- @param emoji The emoji to react with.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved when the reaction is added to the message.
--- @usage discord:createReaction("[channel ID]", "[message ID]", "[emoji]")
+-- @usage discord:createReaction("[channel ID]", "[message ID]", "💗")
 function DiscordRest:createReaction(channelId, messageId, emoji, botToken)
-	local url = discordApi .. "/channels/" .. channelId .. "/messages/" .. messageId .. "/reactions/" .. emoji .. "/@me"
-	return self:performAuthorizedRequest(url, "PUT", nil, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("ownReaction", {channelId, messageId, emoji}), "PUT", nil, botToken)
 end
 
 --- Delete a channel.
@@ -194,8 +206,7 @@ end
 -- @return A new promise.
 -- @usage discord:deleteChannel("[channel ID]")
 function DiscordRest:deleteChannel(channelId, botToken)
-	local url = discordApi .. "/channels/" .. channelId
-	return self:performAuthorizedRequest(url, "DELETE", nil, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("channel", {channelId}), "DELETE", nil, botToken)
 end
 
 --- Delete a message from a channel.
@@ -205,8 +216,18 @@ end
 -- @return A new promise.
 -- @usage discord:deleteMessage("[channel ID]", "[message ID]")
 function DiscordRest:deleteMessage(channelId, messageId, botToken)
-	local url = discordApi .. "/channels/" .. channelId .. "/messages/" .. messageId
-	return self:performAuthorizedRequest(url, "DELETE", nil, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "DELETE", nil, botToken)
+end
+
+--- Remove own reaction from a message.
+-- @param channelId the ID of the channel containing the message.
+-- @param messageId The ID of the message to remove the reaction from.
+-- @param emoji The emoji of the reaction to remove.
+-- @param botToken Optional bot token to use for authentication.
+-- @return A new promise.
+-- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗")
+function DiscordRest:deleteOwnReaction(channelId, messageId, emoji, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("ownReaction", {channelId, messageId, emoji}), "DELETE", nil, botToken)
 end
 
 --- Execute a Discord webhook
@@ -226,8 +247,7 @@ end
 -- @return A new promise.
 -- @usage discord:getChannel("[channel ID]"):next(function(channel) ... end)
 function DiscordRest:getChannel(channelId, botToken)
-	local url = discordApi .. "/channels/" .. channelId
-	return self:performAuthorizedRequest(url, "GET", nil, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("channel", {channelId}), "GET", nil, botToken)
 end
 
 --- Get a specific message from a channel.
@@ -237,8 +257,7 @@ end
 -- @return A new promise.
 -- @usage discord:getChannelMessage("[channel ID]", "[messageId]")
 function DiscordRest:getChannelMessage(channelId, messageId, botToken)
-	local url = discordApi .. "/channels/" .. channelId .. "/messages/" .. messageId
-	return self:performAuthorizedRequest(url, "GET", nil, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("message", {channelId, messageId}), "GET", nil, botToken)
 end
 
 --- Get a list of messages from a channels
@@ -248,8 +267,7 @@ end
 -- @return A new promise.
 -- @usage discord:getChannelMessage("[channel ID]", {limit = 1}):next(function(messages) ... end)
 function DiscordRest:getChannelMessages(channelId, options, botToken)
-	local url = discordApi .. "/channels/" .. channelId .. "/messages" .. createQueryString(options)
-	return self:performAuthorizedRequest(url, "GET", nil, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("messages", {channelId}, options), "GET", nil, botToken)
 end
 
 --- Get user information.
@@ -258,8 +276,7 @@ end
 -- @return A new promise.
 -- @usage discord:getUser("[user ID]"):next(function(user) ... end)
 function DiscordRest:getUser(userId, botToken)
-	local url = discordApi .. "/users/" .. userId
-	return self:performAuthorizedRequest(url, "GET", nil, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("user", {userId}), "GET", nil, botToken)
 end
 
 --- Update a channel's settings.
@@ -269,6 +286,5 @@ end
 -- @return A new promise.
 -- @usage discord:modifyChannel("[channel ID]", {name = "new-name"})
 function DiscordRest:modifyChannel(channelId, channel, botToken)
-	local url = discordApi .. "/channels/" .. channelId
-	return self:performAuthorizedRequest(url, "PATCH", channel, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("channel", channelId), "PATCH", channel, botToken)
 end

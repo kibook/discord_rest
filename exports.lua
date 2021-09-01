@@ -18,7 +18,7 @@ end)
 -- @param emoji The name of the emoji to react with.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved when the reaction is added to the message.
--- @usage discord:createReaction("[channel ID]", "[message ID]", "[emoji]")
+-- @usage discord:createReaction("[channel ID]", "[message ID]", "💗")
 exports("createReaction", function(channelId, messageId, emoji, botToken)
 	return discordRest:createReaction(channelId, messageId, emoji, botToken)
 end)
@@ -42,6 +42,17 @@ end)
 -- @usage exports.discord_rest:deleteMessage("[channel ID]", "[message ID]", "[bot token]")
 exports("deleteMessage", function(channelId, messageId, botToken)
 	return discordRest:deleteMessage(channelId, messageId, botToken)
+end)
+
+--- Remove own reaction from a message.
+-- @param channelId the ID of the channel containing the message.
+-- @param messageId The ID of the message to remove the reaction from.
+-- @param emoji The emoji of the reaction to remove.
+-- @param botToken Optional bot token to use for authentication.
+-- @return A new promise.
+-- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗")
+exports("deleteOwnReaction", function(channelId, messageId, emoji, botToken)
+	return discordRest:deleteOwnReaction(channelId, messageId, emoji, botToken)
 end)
 
 --- Execute a webhook.
