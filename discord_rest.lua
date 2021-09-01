@@ -9,6 +9,7 @@ local endpoints = {
 	["message"]      = "/channels/%s/messages/%s",
 	["messages"]     = "/channels/%s/messages",
 	["ownReaction"]  = "/channels/%s/messages/%s/reactions/%s/@me",
+	["reactions"]    = "/channels/%s/messages/%s/reactions/%s",
 	["userReaction"] = "/channels/%s/messages/%s/reactions/%s/%s",
 	["user"]         = "/users/%s",
 }
@@ -285,6 +286,18 @@ end
 -- @usage discord:getChannelMessage("[channel ID]", {limit = 1}):next(function(messages) ... end)
 function DiscordRest:getChannelMessages(channelId, options, botToken)
 	return self:performAuthorizedRequest(formatEndpoint("messages", {channelId}, options), "GET", nil, botToken)
+end
+
+--- Get a list of users that reacted to a message with a specific emoji.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to get reactions from.
+-- @param emoji The emoji of the reaction.
+-- @param options Options to tailor the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:getReactions("[channel ID]", "[message ID]", "💗"):next(function(users) ... end)
+function DiscordRest:getReactions(channelId, messageId, emoji, options, botToken)
+	return self:performAuthorizedRequest(formatEndpoint("reactions", {channelId, messageId, emoji}, options), "GET", nil, botToken)
 end
 
 --- Get user information.

@@ -112,6 +112,19 @@ exports("getChannelMessages", function(channelId, options, botToken)
 	return discordRest:getChannelMessages(channelId, options, botToken)
 end)
 
+--- Get a list of users that reacted to a message with a specific emoji.
+-- @function getReactions
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to get reactions from.
+-- @param emoji The emoji of the reaction.
+-- @param options Options to tailor the query.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:getReactions("[channel ID]", "[message ID]", "💗", nil, "[bot token]"):next(function(users) ... end)
+exports("getReactions", function(channelId, messageId, emoji, options, botToken)
+	return discordRest:getReactions(channelId, messageId, emoji, options, botToken)
+end)
+
 --- Get user information.
 -- @function getUser
 -- @param userId The ID of the user.
