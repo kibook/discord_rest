@@ -12,6 +12,7 @@ local routes = {
 	createDm       = "/users/@me/channels",
 	crosspost      = "/channels/%s/messages/%s/crosspost",
 	followers      = "/channels/%s/followers",
+	groupDm        = "/channels/%s/recipients/%s",
 	guildMember    = "/guilds/%s/members/%s",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
@@ -492,6 +493,29 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#get-reactions
 function DiscordRest:getReactions(channelId, messageId, emoji, options, botToken)
 	return self:performAuthorizedRequest(routes.reaction, {channelId, messageId, emoji}, options, "GET", nil, botToken)
+end
+
+--- Adds a recipient to a Group DM using their access token.
+-- @param channelId The ID of the group DM channel.
+-- @param userId The ID of the user to add.
+-- @param params Parameters for adding the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:groupDmAddRecipient("[channel ID]", "[user ID]", {access_token = "..."})
+-- @see https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+function DiscordRest:groupDmAddRecipient(channelId, userId, params, botToken)
+	return self:performAuthorizedRequest(routes.groupDm, {channelId, userId}, nil, "PUT", params, botToken)
+end
+
+--- Removes a recipient from a Group DM.
+-- @param channelId The ID of the group DM channel.
+-- @param userId The ID of the user to remove.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:groupDmRemoveRecipient("[channel ID]", "[user ID]")
+-- @see https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient
+function DiscordRest:groupDmRemoveRecipient(channelId, userId, botToken)
+	return self:performAuthorizedRequest(routes.groupDm, {channelId, userId}, nil, "DELETE", nil, botToken)
 end
 
 --- Update a channel's settings.

@@ -262,6 +262,31 @@ exports("getReactions", function(channelId, messageId, emoji, options, botToken)
 	return discordRest:getReactions(channelId, messageId, emoji, options, botToken)
 end)
 
+--- Adds a recipient to a Group DM using their access token.
+-- @function groupDmAddRecipient
+-- @param channelId The ID of the group DM channel.
+-- @param userId The ID of the user to add.
+-- @param params Parameters for adding the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:groupDmAddRecipient("[channel ID]", "[user ID]", {access_token = "..."}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#group-dm-add-recipient
+exports("groupDmAddRecipient", function(channelId, userId, params, botToken)
+	return discordRest:groupDmAddRecipient(channelId, userId, params, botToken)
+end)
+
+--- Removes a recipient from a Group DM.
+-- @function groupDmRemoveRecipient
+-- @param channelId The ID of the group DM channel.
+-- @param userId The ID of the user to remove.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:groupDmRemoveRecipient("[channel ID]", "[user ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient
+exports("groupDmRemoveRecipient", function(channelId, userId, botToken)
+	return discordRest:groupDmRemoveRecipient(channelId, userId, botToken)
+end)
+
 --- Update a channel's settings.
 -- @function modifyChannel
 -- @param channelId The ID of the channel.
