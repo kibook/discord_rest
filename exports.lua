@@ -287,6 +287,17 @@ exports("groupDmRemoveRecipient", function(channelId, userId, botToken)
 	return discordRest:groupDmRemoveRecipient(channelId, userId, botToken)
 end)
 
+--- Adds the current user to a thread.
+-- @function joinThread
+-- @param channelId The ID of the thread channel to join.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:joinThread("[channel ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#join-thread
+exports("joinThread", function(channelId, botToken)
+	return discordRest:joinThread(channelId, botToken)
+end)
+
 --- Update a channel's settings.
 -- @function modifyChannel
 -- @param channelId The ID of the channel.

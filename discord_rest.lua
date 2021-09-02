@@ -23,6 +23,7 @@ local routes = {
 	pins           = "/channels/%s/pins",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
+	threadSelf     = "/channels/%s/thread-members/@me",
 	typing         = "/channels/%s/typing",
 	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
 	user           = "/users/%s",
@@ -518,6 +519,16 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient
 function DiscordRest:groupDmRemoveRecipient(channelId, userId, botToken)
 	return self:performAuthorizedRequest(routes.groupDm, {channelId, userId}, nil, "DELETE", nil, botToken)
+end
+
+--- Adds the current user to a thread.
+-- @param channelId The ID of the thread channel to join.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:joinThread("[channel ID]")
+-- @see https://discord.com/developers/docs/resources/channel#join-thread
+function DiscordRest:joinThread(channelId, botToken)
+	return self:performAuthorizedRequest(routes.threadSelf, {channelId}, nil, "PUT", nil, botToken)
 end
 
 --- Update a channel's settings.
