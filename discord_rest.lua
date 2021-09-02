@@ -514,6 +514,17 @@ function DiscordRest:pinMessage(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(routes.pinMessage, {channelId, messageId}, nil, "PUT", nil, botToken)
 end
 
+--- Unpin a message in a channel.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to unpin.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:unpinMessage("[channel ID]", "[message ID]")
+-- @see https://discord.com/developers/docs/resources/channel#unpin-message
+function DiscordRest:unpinMessage(channelId, messageId, botToken)
+	return self:performAuthorizedRequest(routes.pinMessage, {channelId, messageId}, nil, "DELETE", nil, botToken)
+end
+
 --- Post a typing indicator for the specified channel.
 -- @param channelId The ID of the channel to show the typing indicator in.
 -- @param botToken Optional bot token to use for authorization.
