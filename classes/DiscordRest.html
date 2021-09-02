@@ -34,6 +34,7 @@
 <ul>
 <li><a href="#Class_DiscordRest">Class DiscordRest </a></li>
 <li><a href="#Channel">Channel </a></li>
+<li><a href="#Guild">Guild </a></li>
 <li><a href="#User">User </a></li>
 <li><a href="#Webhook">Webhook </a></li>
 </ul>
@@ -128,6 +129,10 @@
 	<td class="summary">Edit a previously sent message.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:followNewsChannel">DiscordRest:followNewsChannel (channelId, targetChannelId, botToken)</a></td>
+	<td class="summary">Follow a News Channel to send messages to a target channel.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getChannel">DiscordRest:getChannel (channelId, botToken)</a></td>
 	<td class="summary">Get channel information.</td>
 	</tr>
@@ -144,6 +149,10 @@
 	<td class="summary">Get a list of messages from a channels</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getPinnedMessages">DiscordRest:getPinnedMessages (channelId, botToken)</a></td>
+	<td class="summary">Returns all pinned messages in the channel.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getReactions">DiscordRest:getReactions (channelId, messageId, emoji, options, botToken)</a></td>
 	<td class="summary">Get a list of users that reacted to a message with a specific emoji.</td>
 	</tr>
@@ -151,9 +160,32 @@
 	<td class="name" nowrap><a href="#DiscordRest:modifyChannel">DiscordRest:modifyChannel (channelId, channel, botToken)</a></td>
 	<td class="summary">Update a channel's settings.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:pinMessage">DiscordRest:pinMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Pin a message in a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:unpinMessage">DiscordRest:unpinMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Unpin a message in a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:triggerTypingIndicator">DiscordRest:triggerTypingIndicator (channelId, botToken)</a></td>
+	<td class="summary">Post a typing indicator for the specified channel.</td>
+	</tr>
+</table>
+<h2><a href="#Guild">Guild </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildMember">DiscordRest:getGuildMember (guildId, userId, botToken)</a></td>
+	<td class="summary">Get info for a member of a guild.</td>
+	</tr>
 </table>
 <h2><a href="#User">User </a></h2>
 <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:createDm">DiscordRest:createDm (recipientId, botToken)</a></td>
+	<td class="summary">Create a new DM channel with a user.</td>
+	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getUser">DiscordRest:getUser (userId, botToken)</a></td>
 	<td class="summary">Get user information.</td>
@@ -775,6 +807,45 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:followNewsChannel"></a>
+    <strong>DiscordRest:followNewsChannel (channelId, targetChannelId, botToken)</strong>
+    </dt>
+    <dd>
+    Follow a News Channel to send messages to a target channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the news channel.
+        </li>
+        <li><span class="parameter">targetChannelId</span>
+         The ID of the target channel.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with a followed channel object.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#follow-news-channel">https://discord.com/developers/docs/resources/channel#follow-news-channel</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:followNewsChannel(<span class="string">"[channel ID]"</span>, <span class="string">"[target channel ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getChannel"></a>
     <strong>DiscordRest:getChannel (channelId, botToken)</strong>
     </dt>
@@ -925,6 +996,42 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:getPinnedMessages"></a>
+    <strong>DiscordRest:getPinnedMessages (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Returns all pinned messages in the channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to get pinned messages from.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which resolves with a list of pinned messages.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#get-pinned-messages">https://discord.com/developers/docs/resources/channel#get-pinned-messages</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getPinnedMessages(<span class="string">"[channel ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getReactions"></a>
     <strong>DiscordRest:getReactions (channelId, messageId, emoji, options, botToken)</strong>
     </dt>
@@ -1008,10 +1115,203 @@
     </ul>
 
 </dd>
+    <dt>
+    <a name = "DiscordRest:pinMessage"></a>
+    <strong>DiscordRest:pinMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Pin a message in a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to pin.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#pin-message">https://discord.com/developers/docs/resources/channel#pin-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:pinMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:unpinMessage"></a>
+    <strong>DiscordRest:unpinMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Unpin a message in a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to unpin.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#unpin-message">https://discord.com/developers/docs/resources/channel#unpin-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:unpinMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:triggerTypingIndicator"></a>
+    <strong>DiscordRest:triggerTypingIndicator (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Post a typing indicator for the specified channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to show the typing indicator in.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#trigger-typing-indicator">https://discord.com/developers/docs/resources/channel#trigger-typing-indicator</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:triggerTypingIndicator(<span class="string">"[channel ID]"</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Guild"></a>Guild </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "DiscordRest:getGuildMember"></a>
+    <strong>DiscordRest:getGuildMember (guildId, userId, botToken)</strong>
+    </dt>
+    <dd>
+    Get info for a member of a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with the info of the member if they are in the guild.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-member">https://discord.com/developers/docs/resources/guild#get-guild-member</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(member) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="User"></a>User </h2>
 
     <dl class="function">
+    <dt>
+    <a name = "DiscordRest:createDm"></a>
+    <strong>DiscordRest:createDm (recipientId, botToken)</strong>
+    </dt>
+    <dd>
+    Create a new DM channel with a user.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">recipientId</span>
+         The ID of the user to start the DM with.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that is resolved with the DM channel information.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#create-dm">https://discord.com/developers/docs/resources/user#create-dm</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:createDm(<span class="string">"[recipient ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
     <dt>
     <a name = "DiscordRest:getUser"></a>
     <strong>DiscordRest:getUser (userId, botToken)</strong>
@@ -1095,7 +1395,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-01 22:56:58 </i>
+<i style="float:right;">Last updated 2021-09-02 04:56:37 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

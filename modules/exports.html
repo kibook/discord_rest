@@ -33,6 +33,7 @@
 <h2>Contents</h2>
 <ul>
 <li><a href="#Channel">Channel </a></li>
+<li><a href="#Guild">Guild </a></li>
 <li><a href="#User">User </a></li>
 <li><a href="#Webhook">Webhook </a></li>
 </ul>
@@ -120,6 +121,10 @@
 	<td class="summary">Edit a previously sent message.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#followNewsChannel">followNewsChannel (channelId, targetChannelId, botToken)</a></td>
+	<td class="summary">Follow a News Channel to send messages to a target channel.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#getChannel">getChannel (channelId, botToken)</a></td>
 	<td class="summary">Get channel information.</td>
 	</tr>
@@ -136,6 +141,10 @@
 	<td class="summary">Get messages from a channel.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#getPinnedMessages">getPinnedMessages (channelId, botToken)</a></td>
+	<td class="summary">Returns all pinned messages in the channel.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#getReactions">getReactions (channelId, messageId, emoji, options, botToken)</a></td>
 	<td class="summary">Get a list of users that reacted to a message with a specific emoji.</td>
 	</tr>
@@ -143,9 +152,32 @@
 	<td class="name" nowrap><a href="#modifyChannel">modifyChannel (channelId, channel, botToken)</a></td>
 	<td class="summary">Update a channel's settings.</td>
 	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#pinMessage">pinMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Pin a message in a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unpinMessage">unpinMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Unpin a message in a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#triggerTypingIndicator">triggerTypingIndicator (channelId, botToken)</a></td>
+	<td class="summary">Post a typing indicator for the specified channel.</td>
+	</tr>
+</table>
+<h2><a href="#Guild">Guild </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#getGuildMember">getGuildMember (guildId, userId, botToken)</a></td>
+	<td class="summary">Get info for a member of a guild.</td>
+	</tr>
 </table>
 <h2><a href="#User">User </a></h2>
 <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#createDm">createDm (recipientId, botToken)</a></td>
+	<td class="summary">Create a new DM channel with a user.</td>
+	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#getUser">getUser (userId, botToken)</a></td>
 	<td class="summary">Get user information.</td>
@@ -183,7 +215,7 @@
          A list of message IDs to delete (2-100).
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -201,7 +233,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:bulkDeleteMessages(<span class="string">"[channel ID]"</span>, {<span class="string">"[message ID 1]"</span>, <span class="string">"[message ID 2]"</span>, ...})</pre>
+        <pre class="example">exports.discord_rest:bulkDeleteMessages(<span class="string">"[channel ID]"</span>, {<span class="string">"[message ID 1]"</span>, <span class="string">"[message ID 2]"</span>, ...}, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -222,7 +254,7 @@
          The invite settings.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -261,7 +293,7 @@
          The message parameters.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -303,7 +335,7 @@
          The name of the emoji to react with.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -342,7 +374,7 @@
          The ID of the message to crosspost.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -381,7 +413,7 @@
          The ID of the message whose reactions will be deleted.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -423,7 +455,7 @@
          The emoji of the reaction to delete.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -459,7 +491,7 @@
          The ID of the channel.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -498,7 +530,7 @@
          The ID of the user or role to remove permissions for.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -516,7 +548,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">exports.discord_rest:deleteChannelPermission(<span class="string">"[channel ID]"</span>, <span class="string">"[overwrite ID]"</span>)</pre>
+        <pre class="example">exports.discord_rest:deleteChannelPermission(<span class="string">"[channel ID]"</span>, <span class="string">"[overwrite ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -537,7 +569,7 @@
          The ID of the message.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -579,7 +611,7 @@
          The emoji of the reaction to remove.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -597,7 +629,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:deleteOwnReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="string">"[bot token]"</span>)</pre>
+        <pre class="example">exports.discord_rest:deleteOwnReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -624,7 +656,7 @@
          The ID of the user whose reaction will be removed.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -642,7 +674,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:deleteOwnReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="string">"[bot token]"</span>)</pre>
+        <pre class="example">exports.discord_rest:deleteOwnReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -666,7 +698,7 @@
          The permissions to set.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -684,7 +716,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:editChannelPermissions(<span class="string">"[channel ID]"</span>, <span class="string">"[overwrite ID]"</span>, {allow = <span class="number">6</span>, deny = <span class="number">8</span>, <span class="global">type</span> = <span class="number">0</span>})</pre>
+        <pre class="example">exports.discord_rest:editChannelPermissions(<span class="string">"[channel ID]"</span>, <span class="string">"[overwrite ID]"</span>, {allow = <span class="number">6</span>, deny = <span class="number">8</span>, <span class="global">type</span> = <span class="number">0</span>})</pre>
     </ul>
 
 </dd>
@@ -708,7 +740,7 @@
          The edited message.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -731,6 +763,45 @@
 
 </dd>
     <dt>
+    <a name = "followNewsChannel"></a>
+    <strong>followNewsChannel (channelId, targetChannelId, botToken)</strong>
+    </dt>
+    <dd>
+    Follow a News Channel to send messages to a target channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the news channel.
+        </li>
+        <li><span class="parameter">targetChannelId</span>
+         The ID of the target channel.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with a followed channel object.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#follow-news-channel">https://discord.com/developers/docs/resources/channel#follow-news-channel</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:followNewsChannel(<span class="string">"[channel ID]"</span>, <span class="string">"[target channel ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "getChannel"></a>
     <strong>getChannel (channelId, botToken)</strong>
     </dt>
@@ -744,7 +815,7 @@
          The ID of the channel.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -780,7 +851,7 @@
          The ID of the channel to get invites for.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -798,7 +869,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:getChannelInvites(<span class="string">"[channel ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(invites) ... <span class="keyword">end</span>)</pre>
+        <pre class="example">exports.discord_rest:getChannelInvites(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(invites) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -819,7 +890,7 @@
          The ID of the message.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -858,7 +929,7 @@
          Options to tailor the query.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -877,6 +948,42 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:getChannelMessages(<span class="string">"[channel ID]"</span>, {limit = <span class="number">1</span>}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(messages) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getPinnedMessages"></a>
+    <strong>getPinnedMessages (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Returns all pinned messages in the channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to get pinned messages from.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which resolves with a list of pinned messages.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#get-pinned-messages">https://discord.com/developers/docs/resources/channel#get-pinned-messages</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getPinnedMessages(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -903,7 +1010,7 @@
          Options to tailor the query.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -942,7 +1049,7 @@
          The new channel settings.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -964,10 +1071,203 @@
     </ul>
 
 </dd>
+    <dt>
+    <a name = "pinMessage"></a>
+    <strong>pinMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Pin a message in a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to pin.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#pin-message">https://discord.com/developers/docs/resources/channel#pin-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:pinMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "unpinMessage"></a>
+    <strong>unpinMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Unpin a message in a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to unpin.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#unpin-message">https://discord.com/developers/docs/resources/channel#unpin-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:unpinMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "triggerTypingIndicator"></a>
+    <strong>triggerTypingIndicator (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Post a typing indicator for the specified channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to show the typing indicator in.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#trigger-typing-indicator">https://discord.com/developers/docs/resources/channel#trigger-typing-indicator</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:triggerTypingIndicator(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Guild"></a>Guild </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "getGuildMember"></a>
+    <strong>getGuildMember (guildId, userId, botToken)</strong>
+    </dt>
+    <dd>
+    Get info for a member of a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with the info of the member if they are in the guild.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-member">https://discord.com/developers/docs/resources/guild#get-guild-member</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(member) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
 </dl>
     <h2 class="section-header "><a name="User"></a>User </h2>
 
     <dl class="function">
+    <dt>
+    <a name = "createDm"></a>
+    <strong>createDm (recipientId, botToken)</strong>
+    </dt>
+    <dd>
+    Create a new DM channel with a user.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">recipientId</span>
+         The ID of the user to start the DM with.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that is resolved with the DM channel information.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#create-dm">https://discord.com/developers/docs/resources/user#create-dm</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:createDm(<span class="string">"[recipient ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
     <dt>
     <a name = "getUser"></a>
     <strong>getUser (userId, botToken)</strong>
@@ -982,7 +1282,7 @@
          The ID of the user.
         </li>
         <li><span class="parameter">botToken</span>
-         Bot token to use for authorization.
+         Optional bot token to use for authorization.
         </li>
     </ul>
 
@@ -1051,7 +1351,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-01 22:56:58 </i>
+<i style="float:right;">Last updated 2021-09-02 04:56:37 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
