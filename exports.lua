@@ -332,6 +332,18 @@ exports("listActiveThreads", function(channelId, botToken)
 	return discordRest:listActiveThreads(channelId, botToken)
 end)
 
+--- Returns archived threads in the channel that are private, and the user has joined.
+-- @function listJoinedPrivateArchivedThreads
+-- @param channelId The ID of the channel to get a list of private archived threads from.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a table of information on private archived threads.
+-- @usage exports.discord_rest:listJoinedPrivateArchivedThreads("[channel ID]", {limit = 5}, "[bot token]"):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
+exports("listJoinedPrivateArchivedThreads", function(channelId, options, botToken)
+	return discordRest:listJoinedPrivateArchivedThreads(channelId, options, botToken)
+end)
+
 --- Returns archived threads in the channel that are private.
 -- @function listPrivateArchivedThreads
 -- @param channelId The ID of the channel to get a list of private archived threads from.

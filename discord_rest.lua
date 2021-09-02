@@ -16,6 +16,7 @@ local routes = {
 	followers      = "/channels/%s/followers",
 	groupDm        = "/channels/%s/recipients/%s",
 	guildMember    = "/guilds/%s/members/%s",
+	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	messageThreads = "/channels/%s/messages/%s/threads",
@@ -565,6 +566,17 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#list-active-threads
 function DiscordRest:listActiveThreads(channelId, botToken)
 	return self:performAuthorizedRequest(routes.activeThreads, {channelId}, nil, "GET", nil, botToken)
+end
+
+--- Returns archived threads in the channel that are private, and the user has joined.
+-- @param channelId The ID of the channel to get a list of private archived threads from.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a table of information on private archived threads.
+-- @usage discord:listJoinedPrivateArchivedThreads("[channel ID]", {limit = 5}):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads
+function DiscordRest:listJoinedPrivateArchivedThreads(channelId, options, botToken)
+	return self:performAuthorizedRequest(routes.joinedThreads, {channelId}, options, "GET", nil, botToken)
 end
 
 --- Returns archived threads in the channel that are private.
