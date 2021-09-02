@@ -318,10 +318,22 @@ end)
 -- @param params Parameters for the thread.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with the new thread channel.
--- @usage exports.discord_rest:startThreadWithMessage("[channel ID]", "[message ID]", {name = "New Thread"}, "[bot token]")
+-- @usage exports.discord_rest:startThreadWithMessage("[channel ID]", "[message ID]", {name = "New thread"}, "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#start-thread-with-message
 exports("startThreadWithMessage", function(channelId, messageId, params, botToken)
 	return discordRest:startThreadWithMessage(channelId, messageId, params, botToken)
+end)
+
+--- Creates a new thread that is not connected to an existing message.
+-- @function startThreadWithoutMessage
+-- @param channelId The ID of the channel to create the thread in.
+-- @param params Parameters for the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the new thread channel.
+-- @usage exports.discord_rest:startThreadWithoutMessage("[channel ID]", {name = "New thread", auto_archive_duration = 60, type = 11}, "[bot token]"):next(function(channel) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#start-thread-without-message
+exports("startThreadWithoutMessage", function(channelId, params, botToken)
+	return discordRest:startThreadWithoutMessage(channelId, params, botToken)
 end)
 
 --- Post a typing indicator for the specified channel.

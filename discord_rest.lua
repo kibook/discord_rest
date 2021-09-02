@@ -9,6 +9,7 @@ local routes = {
 	bulkDelete     = "/channels/%s/messages/bulk-delete",
 	channel        = "/channels/%s",
 	channelInvites = "/channels/%s/invites",
+	channelThreads = "/channels/%s/threads",
 	createDm       = "/users/@me/channels",
 	crosspost      = "/channels/%s/messages/%s/crosspost",
 	followers      = "/channels/%s/followers",
@@ -547,10 +548,21 @@ end
 -- @param params Parameters for the thread.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with the new thread channel.
--- @usage discord:startThreadWithMessage("[channel ID]", "[message ID]", {name = "New Thread"})
+-- @usage discord:startThreadWithMessage("[channel ID]", "[message ID]", {name = "New thread"}):next(function(channel) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#start-thread-with-message
 function DiscordRest:startThreadWithMessage(channelId, messageId, params, botToken)
 	return self:performAuthorizedRequest(routes.messageThreads, {channelId, messageId}, nil, "POST", params, botToken)
+end
+
+--- Creates a new thread that is not connected to an existing message.
+-- @param channelId The ID of the channel to create the thread in.
+-- @param params Parameters for the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the new thread channel.
+-- @usage discord:startThreadWithoutMessage("[channel ID]", {name = "New thread", auto_archive_duration = 60, type = 11}):next(function(channel) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#start-thread-without-message
+function DiscordRest:startThreadWithoutMessage(channelId, params, botToken)
+	return self:performAuthorizedRequest(routes.channelThreads, {channelId}, nil, "POST", params, botToken)
 end
 
 --- Post a typing indicator for the specified channel.
