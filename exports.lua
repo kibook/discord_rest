@@ -529,6 +529,29 @@ end)
 --- Guild
 -- @section guild
 
+--- Create a new guild.
+-- @function createGuild
+-- @param params Parameters for the new guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the new guild.
+-- @usage exports.discord_rest:createGuild({name = "My Guild"})
+-- @see https://discord.com/developers/docs/resources/guild#create-guild
+exports("createGuild", function(params, botToken)
+	return discordRest:createGuild(params, botToken)
+end)
+
+--- Get info for a given guild.
+-- @function getGuild
+-- @param guildId The ID of the guild.
+-- @param withCounts Whether to include approximate member and presence counts in the returned info.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the guild info.
+-- @usage exports.discord_rest:getGuild("[guild ID]"):next(function(guild) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild
+exports("getGuild", function(guildId, withCounts, botToken)
+	return discordRest:getGuild(guildId, withCounts, botTokens)
+end)
+
 --- Get info for a member of a guild.
 -- @function getGuildMember
 -- @param guildId The ID of the guild.

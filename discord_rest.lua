@@ -15,9 +15,11 @@ local routes = {
 	crosspost      = "/channels/%s/messages/%s/crosspost",
 	followers      = "/channels/%s/followers",
 	groupDm        = "/channels/%s/recipients/%s",
+	guild          = "/guilds/%s",
 	guildEmoji     = "/guilds/%s/emojis/%s",
 	guildEmojis    = "/guilds/%s/emojis",
 	guildMember    = "/guilds/%s/members/%s",
+	guilds         = "/guilds",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
@@ -754,6 +756,27 @@ end
 
 --- Guild
 -- @section guild
+
+--- Create a new guild.
+-- @param params Parameters for the new guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the new guild.
+-- @usage discord:createGuild({name = "My Guild"})
+-- @see https://discord.com/developers/docs/resources/guild#create-guild
+function DiscordRest:createGuild(params, botToken)
+	return self:performAuthorizedRequest(routes.guilds, nil, nil, "POST", params, botToken)
+end
+
+--- Get info for a given guild.
+-- @param guildId The ID of the guild.
+-- @param withCounts Whether to include approximate member and presence counts in the returned info.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the guild info.
+-- @usage discord:getGuild("[guild ID]"):next(function(guild) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild
+function DiscordRest:getGuild(guildId, withCounts, botToken)
+	return self:performAuthorizedRequest(routes.guild, {guildId}, {with_counts = withCounts}, "GET", nil, botToken)
+end
 
 --- Get info for a member of a guild.
 -- @param guildId The ID of the guild.
