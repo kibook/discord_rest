@@ -463,6 +463,69 @@ exports("unpinMessage", function(channelId, messageId, botToken)
 	return discordRest:unpinMessage(channelId, messageId, botToken)
 end)
 
+--- Emoji
+-- @section emoji
+
+--- Create a new emoji for the guild.
+-- @function createGuildEmoji
+-- @param guildId The ID of the guild to create the emoji for.
+-- @param params Parameters for the new emoji.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise whih is resolved with the new emoji.
+-- @usage exports.discord_rest:createGuildEmoji("[guild ID]", {name = "emojiname", image = "data:image/jpeg;base64,..."}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/emoji#create-guild-emoji
+exports("createGuildEmoji", function(guildId, params, botToken)
+	return discordRest:createGuildEmoji(guildId, params, botToken)
+end)
+
+--- Delete the given emoji.
+-- @function deleteGuildEmoji
+-- @param guildId The ID of the guild to delete the emoji from.
+-- @param emojiId The ID of the emoji to delete.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteGuildEmoji("[guild ID]", "[emoji ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/emoji#delete-guild-emoji
+exports("deleteGuildEmoji", function(guildId, emojiId, botToken)
+	return discordRest:deleteGuildEmoji(guildId, emojiId, botToken)
+end)
+
+--- Get information on a guild emoji.
+-- @function getGuildEmoji
+-- @param guildId The ID of the guild where the emoji is from.
+-- @param emojiId The ID of the emoji to get information about.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the information about the emoji.
+-- @usage exports.discord_rest:getGuildEmoji("[guild ID]", "[emoji ID]"):next(function(emoji) ... end)
+-- @see https://discord.com/developers/docs/resources/emoji#get-guild-emoji
+exports("getGuildEmoji", function(guildId, emojiId, botToken)
+	return discordRest:getGuildEmoji(guildId, emojiId, botToken)
+end)
+
+--- Return a list of emoji for the given guild.
+-- @function listGuildEmojis
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of emoji.
+-- @usage exports.discord_rest:listGuildEmojis("[guild ID]", "[bot token]"):next(function(emojis) ... end)
+-- @see https://discord.com/developers/docs/resources/emoji#list-guild-emojis
+exports("listGuildEmojis", function(guildId, botToken)
+	return discordRest:listGuildEmojis(guildId, botToken)
+end)
+
+--- Modify the given emoji.
+-- @function modifyGuildEmoji
+-- @param guildId The ID of the guild where the emoji is from.
+-- @param emojiId The ID of the emoji to modify.
+-- @param params Modified parameters for the emoji.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated emoji.
+-- @usage exports.discord_rest:modifyGuildEmoji("[guild ID]", "[emoji ID]", {name = "newemojiname"}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/emoji#modify-guild-emoji
+exports("modifyGuildEmoji", function(guildId, emojiId, params, botToken)
+	return discordRest:modifyGuildEmoji(guildId, emojiId, params, botToken)
+end)
+
 --- Guild
 -- @section guild
 

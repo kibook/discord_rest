@@ -15,6 +15,8 @@ local routes = {
 	crosspost      = "/channels/%s/messages/%s/crosspost",
 	followers      = "/channels/%s/followers",
 	groupDm        = "/channels/%s/recipients/%s",
+	guildEmoji     = "/guilds/%s/emojis/%s",
+	guildEmojis    = "/guilds/%s/emojis",
 	guildMember    = "/guilds/%s/members/%s",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
 	message        = "/channels/%s/messages/%s",
@@ -686,6 +688,64 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#unpin-message
 function DiscordRest:unpinMessage(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(routes.pinMessage, {channelId, messageId}, nil, "DELETE", nil, botToken)
+end
+
+--- Emoji
+-- @section emoji
+
+--- Create a new emoji for the guild.
+-- @param guildId The ID of the guild to create the emoji for.
+-- @param params Parameters for the new emoji.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise whih is resolved with the new emoji.
+-- @usage discord:createGuildEmoji("[guild ID]", {name = "emojiname", image = "data:image/jpeg;base64,..."})
+-- @see https://discord.com/developers/docs/resources/emoji#create-guild-emoji
+function DiscordRest:createGuildEmoji(guildId, params, botToken)
+	return self:performAuthorizedRequest(routes.guildEmojis, {guildId}, nil, "POST", params, botToken)
+end
+
+--- Delete the given emoji.
+-- @param guildId The ID of the guild to delete the emoji from.
+-- @param emojiId The ID of the emoji to delete.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteGuildEmoji("[guild ID]", "[emoji ID]")
+-- @see https://discord.com/developers/docs/resources/emoji#delete-guild-emoji
+function DiscordRest:deleteGuildEmoji(guildId, emojiId, botToken)
+	return self:performAuthorizedRequest(routes.guildEmoji, {guildId, emojiId}, nil, "DELETE", nil, botToken)
+end
+
+--- Get information on a guild emoji.
+-- @param guildId The ID of the guild where the emoji is from.
+-- @param emojiId The ID of the emoji to get information about.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the information about the emoji.
+-- @usage discord:getGuildEmoji("[guild ID]", "[emoji ID]"):next(function(emoji) ... end)
+-- @see https://discord.com/developers/docs/resources/emoji#get-guild-emoji
+function DiscordRest:getGuildEmoji(guildId, emojiId, botToken)
+	return self:performAuthorizedRequest(routes.guildEmoji, {guildId, emojiId}, nil, "GET", nil, botToken)
+end
+
+--- Return a list of emoji for the given guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of emoji.
+-- @usage discord:listGuildEmojis("[guild ID]"):next(function(emojis) ... end)
+-- @see https://discord.com/developers/docs/resources/emoji#list-guild-emojis
+function DiscordRest:listGuildEmojis(guildId, botToken)
+	return self:performAuthorizedRequest(routes.guildEmojis, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Modify the given emoji.
+-- @param guildId The ID of the guild where the emoji is from.
+-- @param emojiId The ID of the emoji to modify.
+-- @param params Modified parameters for the emoji.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated emoji.
+-- @usage discord:modifyGuildEmoji("[guild ID]", "[emoji ID]", {name = "newemojiname"})
+-- @see https://discord.com/developers/docs/resources/emoji#modify-guild-emoji
+function DiscordRest:modifyGuildEmoji(guildId, emojiId, params, botToken)
+	return self:performAuthorizedRequest(routes.guildEmoji, {guildId, emojiId}, nil, "PATCH", params, botToken)
 end
 
 --- Guild
