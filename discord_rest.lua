@@ -9,6 +9,7 @@ local routes = {
 	bulkDelete     = "/channels/%s/messages/bulk-delete",
 	channel        = "/channels/%s",
 	channelInvites = "/channels/%s/invites",
+	createDm       = "/users/@me/channels",
 	crosspost      = "/channels/%s/messages/%s/crosspost",
 	followers      = "/channels/%s/followers",
 	message        = "/channels/%s/messages/%s",
@@ -537,6 +538,16 @@ end
 
 --- User
 -- @section user
+
+--- Create a new DM channel with a user.
+-- @param recipientId The ID of the user to start the DM with.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that is resolved with the DM channel information.
+-- @usage discord:createDm("[recipient ID]"):next(function(channel) ... end)
+-- @see https://discord.com/developers/docs/resources/user#create-dm
+function DiscordRest:createDm(recipientId, botToken)
+	return self:performAuthorizedRequest(routes.createDm, nil, nil, "POST", {recipient_id = recipientId}, botToken)
+end
 
 --- Get user information.
 -- @param userId The ID of the user.

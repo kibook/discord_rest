@@ -312,6 +312,17 @@ end)
 --- User
 -- @section user
 
+--- Create a new DM channel with a user.
+-- @function createDm
+-- @param recipientId The ID of the user to start the DM with.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that is resolved with the DM channel information.
+-- @usage exports.discord_rest:createDm("[recipient ID]", "[bot token]"):next(function(channel) ... end)
+-- @see https://discord.com/developers/docs/resources/user#create-dm
+exports("createDm", function(recipientId, botToken)
+	return discordRest:createDm(recipientId, botToken)
+end)
+
 --- Get user information.
 -- @function getUser
 -- @param userId The ID of the user.
