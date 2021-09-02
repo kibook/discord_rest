@@ -5,6 +5,18 @@ local discordRest = DiscordRest:new(Config.botToken)
 --- Channel
 -- @section channel
 
+--- Adds another member to a thread.
+-- @function addThreadMember
+-- @param channelId The ID of the thread channel.
+-- @param userId The ID of the user to add to the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:addThreadMember("[channel ID]", "[user ID]")
+-- @see https://discord.com/developers/docs/resources/channel#add-thread-member
+exports("addThreadMember", function(channelId, userId, botToken)
+	return discordRest:addThreadMember(channelId, userId, botToken)
+end)
+
 --- Delete multiple messages in a single request.
 -- @function bulkDeleteMessages
 -- @param channelId The ID of the channel containing the messages.

@@ -24,6 +24,7 @@ local routes = {
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
 	threadSelf     = "/channels/%s/thread-members/@me",
+	threadUser     = "/channels/%s/thread-members/%s",
 	typing         = "/channels/%s/typing",
 	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
 	user           = "/users/%s",
@@ -261,6 +262,17 @@ end
 
 --- Channel
 -- @section channel
+
+--- Adds another member to a thread.
+-- @param channelId The ID of the thread channel.
+-- @param userId The ID of the user to add to the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:addThreadMember("[channel ID]", "[user ID]")
+-- @see https://discord.com/developers/docs/resources/channel#add-thread-member
+function DiscordRest:addThreadMember(channelId, userId, botToken)
+	return self:performAuthorizedRequest(routes.threadUser, {channelId, userId}, nil, "PUT", nil, botToken)
+end
 
 --- Delete multiple messages in a single request.
 -- @param channelId The ID of the channel containing the messages.
