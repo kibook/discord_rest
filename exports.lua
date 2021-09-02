@@ -310,6 +310,17 @@ exports("joinThread", function(channelId, botToken)
 	return discordRest:joinThread(channelId, botToken)
 end)
 
+--- Removes the current user from a thread.
+-- @function leaveThread
+-- @param channelId The ID of the thread channel to leave.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:leaveThread("[channel ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#leave-thread
+exports("leaveThread", function(channelId, botToken)
+	return discordRest:leaveThread(channelId, botToken)
+end)
+
 --- Update a channel's settings.
 -- @function modifyChannel
 -- @param channelId The ID of the channel.

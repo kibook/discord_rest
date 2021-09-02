@@ -543,6 +543,16 @@ function DiscordRest:joinThread(channelId, botToken)
 	return self:performAuthorizedRequest(routes.threadSelf, {channelId}, nil, "PUT", nil, botToken)
 end
 
+--- Removes the current user from a thread.
+-- @param channelId The ID of the thread channel to leave.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:leaveThread("[channel ID]")
+-- @see https://discord.com/developers/docs/resources/channel#leave-thread
+function DiscordRest:leaveThread(channelId, botToken)
+	return self:performAuthorizedRequest(routes.threadSelf, {channelId}, nil, "DELETE", nil, botToken)
+end
+
 --- Update a channel's settings.
 -- @param channelId The ID of the channel.
 -- @param channel The new channel settings.
