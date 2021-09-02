@@ -412,6 +412,17 @@ function DiscordRest:editMessage(channelId, messageId, message, botToken)
 	return self:performAuthorizedRequest(routes.message, {channelId, messageId}, nil, "PATCH", message, botToken)
 end
 
+--- Follow a News Channel to send messages to a target channel.
+-- @param channelId The ID of the news channel.
+-- @param targetChannelId The ID of the target channel.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with a followed channel object.
+-- @usage discord:followNewsChannel("[channel ID]", "[target channel ID]")
+-- @see https://discord.com/developers/docs/resources/channel#follow-news-channel
+function DiscordRest:followNewsChannel(channelId, targetChannelId, botToken)
+	return self:performAuthorizedRequest("/channels/%s/followers", {channelId}, nil, "POST", {webhook_channel_id = targetChannelId}, botToken)
+end
+
 --- Get channel information.
 -- @param channelId The ID of the channel.
 -- @param botToken Optional bot token to use for authorization.

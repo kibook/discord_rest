@@ -179,6 +179,18 @@ exports("editMessage", function(channelId, messageId, message, botToken)
 	return discordRest:editMessage(channelId, messageId, message, botToken)
 end)
 
+--- Follow a News Channel to send messages to a target channel.
+-- @function followNewsChannel
+-- @param channelId The ID of the news channel.
+-- @param targetChannelId The ID of the target channel.
+-- @param botToken Bot token to use for authorization.
+-- @return A new promise that resolves with a followed channel object.
+-- @usage exports.discord_rest:followNewsChannel("[channel ID]", "[target channel ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#follow-news-channel
+exports("followNewsChannel", function(channelId, targetChannelId, botToken)
+	return discordRest:followNewsChannel(channelId, targetChannelId, botToken)
+end)
+
 --- Get channel information.
 -- @function getChannel
 -- @param channelId The ID of the channel.
