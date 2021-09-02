@@ -65,6 +65,10 @@
 <h2><a href="#Channel">Channel </a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" nowrap><a href="#addThreadMember">addThreadMember (channelId, userId, botToken)</a></td>
+	<td class="summary">Adds another member to a thread.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#bulkDeleteMessages">bulkDeleteMessages (channelId, messages, botToken)</a></td>
 	<td class="summary">Delete multiple messages in a single request.</td>
 	</tr>
@@ -149,6 +153,22 @@
 	<td class="summary">Get a list of users that reacted to a message with a specific emoji.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#groupDmAddRecipient">groupDmAddRecipient (channelId, userId, params, botToken)</a></td>
+	<td class="summary">Adds a recipient to a Group DM using their access token.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#groupDmRemoveRecipient">groupDmRemoveRecipient (channelId, userId, botToken)</a></td>
+	<td class="summary">Removes a recipient from a Group DM.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#joinThread">joinThread (channelId, botToken)</a></td>
+	<td class="summary">Adds the current user to a thread.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#leaveThread">leaveThread (channelId, botToken)</a></td>
+	<td class="summary">Removes the current user from a thread.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#modifyChannel">modifyChannel (channelId, channel, botToken)</a></td>
 	<td class="summary">Update a channel's settings.</td>
 	</tr>
@@ -157,12 +177,24 @@
 	<td class="summary">Pin a message in a channel.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#unpinMessage">unpinMessage (channelId, messageId, botToken)</a></td>
-	<td class="summary">Unpin a message in a channel.</td>
+	<td class="name" nowrap><a href="#removeThreadMember">removeThreadMember (channelId, userId, botToken)</a></td>
+	<td class="summary">Removes another member from a thread.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#startThreadWithMessage">startThreadWithMessage (channelId, messageId, params, botToken)</a></td>
+	<td class="summary">Creates a new thread from an existing message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#startThreadWithoutMessage">startThreadWithoutMessage (channelId, params, botToken)</a></td>
+	<td class="summary">Creates a new thread that is not connected to an existing message.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#triggerTypingIndicator">triggerTypingIndicator (channelId, botToken)</a></td>
 	<td class="summary">Post a typing indicator for the specified channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#unpinMessage">unpinMessage (channelId, messageId, botToken)</a></td>
+	<td class="summary">Unpin a message in a channel.</td>
 	</tr>
 </table>
 <h2><a href="#Guild">Guild </a></h2>
@@ -198,6 +230,45 @@
     <h2 class="section-header "><a name="Channel"></a>Channel </h2>
 
     <dl class="function">
+    <dt>
+    <a name = "addThreadMember"></a>
+    <strong>addThreadMember (channelId, userId, botToken)</strong>
+    </dt>
+    <dd>
+    Adds another member to a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to add to the thread.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#add-thread-member">https://discord.com/developers/docs/resources/channel#add-thread-member</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:addThreadMember(<span class="string">"[channel ID]"</span>, <span class="string">"[user ID]"</span>)</pre>
+    </ul>
+
+</dd>
     <dt>
     <a name = "bulkDeleteMessages"></a>
     <strong>bulkDeleteMessages (channelId, messages, botToken)</strong>
@@ -1033,6 +1104,159 @@
 
 </dd>
     <dt>
+    <a name = "groupDmAddRecipient"></a>
+    <strong>groupDmAddRecipient (channelId, userId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a recipient to a Group DM using their access token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the group DM channel.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to add.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for adding the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#group-dm-add-recipient">https://discord.com/developers/docs/resources/channel#group-dm-add-recipient</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:groupDmAddRecipient(<span class="string">"[channel ID]"</span>, <span class="string">"[user ID]"</span>, {access_token = <span class="string">"..."</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "groupDmRemoveRecipient"></a>
+    <strong>groupDmRemoveRecipient (channelId, userId, botToken)</strong>
+    </dt>
+    <dd>
+    Removes a recipient from a Group DM.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the group DM channel.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to remove.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient">https://discord.com/developers/docs/resources/channel#group-dm-remove-recipient</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:groupDmRemoveRecipient(<span class="string">"[channel ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "joinThread"></a>
+    <strong>joinThread (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Adds the current user to a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel to join.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#join-thread">https://discord.com/developers/docs/resources/channel#join-thread</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:joinThread(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "leaveThread"></a>
+    <strong>leaveThread (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Removes the current user from a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel to leave.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#leave-thread">https://discord.com/developers/docs/resources/channel#leave-thread</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:leaveThread(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "modifyChannel"></a>
     <strong>modifyChannel (channelId, channel, botToken)</strong>
     </dt>
@@ -1111,20 +1335,20 @@
 
 </dd>
     <dt>
-    <a name = "unpinMessage"></a>
-    <strong>unpinMessage (channelId, messageId, botToken)</strong>
+    <a name = "removeThreadMember"></a>
+    <strong>removeThreadMember (channelId, userId, botToken)</strong>
     </dt>
     <dd>
-    Unpin a message in a channel.
+    Removes another member from a thread.
 
 
     <h3>Parameters:</h3>
     <ul>
         <li><span class="parameter">channelId</span>
-         The ID of the channel containing the message.
+         The ID of the thread channel.
         </li>
-        <li><span class="parameter">messageId</span>
-         The ID of the message to unpin.
+        <li><span class="parameter">userId</span>
+         The ID of the user to remove from the thread.
         </li>
         <li><span class="parameter">botToken</span>
          Optional bot token to use for authorization.
@@ -1140,12 +1364,93 @@
 
     <h3>See also:</h3>
     <ul>
-         <a href="https://discord.com/developers/docs/resources/channel#unpin-message">https://discord.com/developers/docs/resources/channel#unpin-message</a>
+         <a href="https://discord.com/developers/docs/resources/channel#remove-thread-member">https://discord.com/developers/docs/resources/channel#remove-thread-member</a>
     </ul>
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">exports.discord_rest:unpinMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+        <pre class="example">exports.discord_rest:removeThreadMember(<span class="string">"[channel ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "startThreadWithMessage"></a>
+    <strong>startThreadWithMessage (channelId, messageId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Creates a new thread from an existing message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to start the thread from.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the thread.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with the new thread channel.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#start-thread-with-message">https://discord.com/developers/docs/resources/channel#start-thread-with-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:startThreadWithMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, {name = <span class="string">"New thread"</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "startThreadWithoutMessage"></a>
+    <strong>startThreadWithoutMessage (channelId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Creates a new thread that is not connected to an existing message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to create the thread in.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the thread.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with the new thread channel.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#start-thread-without-message">https://discord.com/developers/docs/resources/channel#start-thread-without-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:startThreadWithoutMessage(<span class="string">"[channel ID]"</span>, {name = <span class="string">"New thread"</span>, auto_archive_duration = <span class="number">60</span>, <span class="global">type</span> = <span class="number">11</span>}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -1182,6 +1487,45 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:triggerTypingIndicator(<span class="string">"[channel ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "unpinMessage"></a>
+    <strong>unpinMessage (channelId, messageId, botToken)</strong>
+    </dt>
+    <dd>
+    Unpin a message in a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message to unpin.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#unpin-message">https://discord.com/developers/docs/resources/channel#unpin-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:unpinMessage(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -1351,7 +1695,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-02 04:56:37 </i>
+<i style="float:right;">Last updated 2021-09-02 08:47:34 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
