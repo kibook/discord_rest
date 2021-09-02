@@ -575,6 +575,17 @@ function DiscordRest:pinMessage(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(routes.pinMessage, {channelId, messageId}, nil, "PUT", nil, botToken)
 end
 
+--- Removes another member from a thread.
+-- @param channelId The ID of the thread channel.
+-- @param userId The ID of the user to remove from the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:removeThreadMember("[channel ID]", "[user ID]")
+-- @see https://discord.com/developers/docs/resources/channel#remove-thread-member
+function DiscordRest:removeThreadMember(channelId, userId, botToken)
+	return self:performAuthorizedRequest(routes.threadUser, {channelId, userId}, nil, "DELETE", nil, botToken)
+end
+
 --- Creates a new thread from an existing message.
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to start the thread from.

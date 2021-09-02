@@ -345,6 +345,18 @@ exports("pinMessage", function(channelId, messageId, botToken)
 	return discordRest:pinMessage(channelId, messageId, botToken)
 end)
 
+--- Removes another member from a thread.
+-- @function removeThreadMember
+-- @param channelId The ID of the thread channel.
+-- @param userId The ID of the user to remove from the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removeThreadMember("[channel ID]", "[user ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#remove-thread-member
+exports("removeThreadMember", function(channelId, userId, botToken)
+	return discordRest:removeThreadMember(channelId, userId, botToken)
+end)
+
 --- Creates a new thread from an existing message.
 -- @function startThreadWithMessage
 -- @param channelId The ID of the channel containing the message.
