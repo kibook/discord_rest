@@ -11,7 +11,7 @@ local discordRest = DiscordRest:new(Config.botToken)
 -- @param messages A list of message IDs to delete (2-100).
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
--- @usage discord:bulkDeleteMessages("[channel ID]", {"[message ID 1]", "[message ID 2]", ...})
+-- @usage exports.discord_rest:bulkDeleteMessages("[channel ID]", {"[message ID 1]", "[message ID 2]", ...}, "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#bulk-delete-messages
 exports("bulkDeleteMessages", function(channelId, messages, botToken)
 	return discordRest:bulkDeleteMessages(channelId, messages, botToken)
@@ -108,7 +108,7 @@ end)
 -- @param overwriteId The ID of the user or role to remove permissions for.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
--- @usage exports.discord_rest:deleteChannelPermission("[channel ID]", "[overwrite ID]")
+-- @usage exports.discord_rest:deleteChannelPermission("[channel ID]", "[overwrite ID]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-channel-permission
 exports("deleteChannelPermission", function(channelId, overwriteId, botToken)
 	return discordRest:deleteChannelPermission(channelId, overwriteId, botToken)
@@ -133,7 +133,7 @@ end)
 -- @param emoji The emoji of the reaction to remove.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
--- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗", "[bot token]")
+-- @usage exports.discord_rest:deleteOwnReaction("[channel ID]", "[message ID]", "💗", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-own-reaction
 exports("deleteOwnReaction", function(channelId, messageId, emoji, botToken)
 	return discordRest:deleteOwnReaction(channelId, messageId, emoji, botToken)
@@ -147,7 +147,7 @@ end)
 -- @param userId The ID of the user whose reaction will be removed.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
--- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗", "[bot token]")
+-- @usage exports.discord_rest:deleteOwnReaction("[channel ID]", "[message ID]", "💗", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-user-reaction
 exports("deleteUserReaction", function(channelId, messageId, emoji, userId, botToken)
 	return discordRest:deleteUserReaction(channelId, messageId, emoji, userId, botToken)
@@ -160,7 +160,7 @@ end)
 -- @param permissions The permissions to set.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
--- @usage discord:editChannelPermissions("[channel ID]", "[overwrite ID]", {allow = 6, deny = 8, type = 0})
+-- @usage exports.discord_rest:editChannelPermissions("[channel ID]", "[overwrite ID]", {allow = 6, deny = 8, type = 0})
 -- @see https://discord.com/developers/docs/resources/channel#edit-channel-permissions
 exports("editChannelPermissions", function(channelId, overwriteId, permissions, botToken)
 	return discordRest:editChannelPermissions(channelId, overwriteId, permissions, botToken)
@@ -207,7 +207,7 @@ end)
 -- @param channelId The ID of the channel to get invites for.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with the list of invites.
--- @usage discord:getChannelInvites("[channel ID]"):next(function(invites) ... end)
+-- @usage exports.discord_rest:getChannelInvites("[channel ID]", "[bot token]"):next(function(invites) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-invites
 exports("getChannelInvites", function(channelId, botToken)
 	return discordRest:getChannelInvites(channelId, botToken)
@@ -235,6 +235,17 @@ end)
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-messages
 exports("getChannelMessages", function(channelId, options, botToken)
 	return discordRest:getChannelMessages(channelId, options, botToken)
+end)
+
+--- Returns all pinned messages in the channel.
+-- @function getPinnedMessages
+-- @param channelId The ID of the channel to get pinned messages from.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which resolves with a list of pinned messages.
+-- @usage exports.discord_rest:getPinnedMessages("[channel ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#get-pinned-messages
+exports("getPinnedMessages", function(channelId, botToken)
+	return discordRest:getPinnedMessages(channelId, botToken)
 end)
 
 --- Get a list of users that reacted to a message with a specific emoji.
@@ -268,7 +279,7 @@ end)
 -- @param channelId The ID of the channel to show the typing indicator in.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
--- @usage discord:triggerTypingIndicator("[channel ID]")
+-- @usage exports.discord_rest:triggerTypingIndicator("[channel ID]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
 exports("triggerTypingIndicator", function(channelId, botToken)
 	return discordRest:triggerTypingIndicator(channelId, botToken)

@@ -14,6 +14,7 @@ local routes = {
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
+	pins           = "/channels/%s/pins",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
 	typing         = "/channels/%s/typing",
@@ -465,6 +466,16 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-messages
 function DiscordRest:getChannelMessages(channelId, options, botToken)
 	return self:performAuthorizedRequest(routes.messages, {channelId}, options, "GET", nil, botToken)
+end
+
+--- Returns all pinned messages in the channel.
+-- @param channelId The ID of the channel to get pinned messages from.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which resolves with a list of pinned messages.
+-- @usage discord:getPinnedMessages("[channel ID]")
+-- @see https://discord.com/developers/docs/resources/channel#get-pinned-messages
+function DiscordRest:getPinnedMessages(channelId, botToken)
+	return self:performAuthorizedRequest(routes.pins, {channelId}, nil, "GET", nil, botToken)
 end
 
 --- Get a list of users that reacted to a message with a specific emoji.
