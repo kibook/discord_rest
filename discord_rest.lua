@@ -6,6 +6,7 @@ local discordApi = "https://discord.com/api"
 
 -- Discord REST API routes
 local routes = {
+	activeThreads  = "/channels/%s/threads/active",
 	bulkDelete     = "/channels/%s/messages/bulk-delete",
 	channel        = "/channels/%s",
 	channelInvites = "/channels/%s/invites",
@@ -552,6 +553,16 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#leave-thread
 function DiscordRest:leaveThread(channelId, botToken)
 	return self:performAuthorizedRequest(routes.threadSelf, {channelId}, nil, "DELETE", nil, botToken)
+end
+
+--- Returns all active threads in the channel, including public and private threads.
+-- @param channelId The ID of the channel to get a list of active threads for.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of information on active threads.
+-- @usage discord:listActiveThreads("[channel ID]"):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-active-threads
+function DiscordRest:listActiveThreads(channelId, botToken)
+	return self:performAuthorizedRequest(routes.activeThreads, {channelId}, nil, "GET", nil, botToken)
 end
 
 --- Get a list of members of a thread.

@@ -321,6 +321,17 @@ exports("leaveThread", function(channelId, botToken)
 	return discordRest:leaveThread(channelId, botToken)
 end)
 
+--- Returns all active threads in the channel, including public and private threads.
+-- @function listActiveThreads
+-- @param channelId The ID of the channel to get a list of active threads for.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of information on active threads.
+-- @usage exports.discord_rest:listActiveThreads("[channel ID]"):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-active-threads
+exports("listActiveThreads", function(channelId, botToken)
+	return discordRest:listActiveThreads(channelId, botToken)
+end)
+
 --- Get a list of members of a thread.
 -- @function listThreadMembers
 -- @param channelId The ID of the thread channel.
