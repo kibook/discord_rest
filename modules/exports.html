@@ -35,6 +35,7 @@
 <li><a href="#Channel">Channel </a></li>
 <li><a href="#Emoji">Emoji </a></li>
 <li><a href="#Guild">Guild </a></li>
+<li><a href="#Invite">Invite </a></li>
 <li><a href="#User">User </a></li>
 <li><a href="#Webhook">Webhook </a></li>
 </ul>
@@ -244,8 +245,27 @@
 <h2><a href="#Guild">Guild </a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" nowrap><a href="#createGuild">createGuild (params, botToken)</a></td>
+	<td class="summary">Create a new guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuild">getGuild (guildId, withCounts, botToken)</a></td>
+	<td class="summary">Get info for a given guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#getGuildMember">getGuildMember (guildId, userId, botToken)</a></td>
 	<td class="summary">Get info for a member of a guild.</td>
+	</tr>
+</table>
+<h2><a href="#Invite">Invite </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#deleteInvite">deleteInvite (inviteCode, botToken)</a></td>
+	<td class="summary">Delete an invite.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getInvite">getInvite (inviteCode, options, botToken)</a></td>
+	<td class="summary">Return info for an invite.</td>
 	</tr>
 </table>
 <h2><a href="#User">User </a></h2>
@@ -309,7 +329,7 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:addThreadMember(<span class="string">"[channel ID]"</span>, <span class="string">"[user ID]"</span>)</pre>
+        <pre class="example">exports.discord_rest:addThreadMember(<span class="string">"[channel ID]"</span>, <span class="string">"[user ID]"</span>)</pre>
     </ul>
 
 </dd>
@@ -1966,6 +1986,81 @@
 
     <dl class="function">
     <dt>
+    <a name = "createGuild"></a>
+    <strong>createGuild (params, botToken)</strong>
+    </dt>
+    <dd>
+    Create a new guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">params</span>
+         Parameters for the new guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the new guild.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#create-guild">https://discord.com/developers/docs/resources/guild#create-guild</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:createGuild({name = <span class="string">"My Guild"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuild"></a>
+    <strong>getGuild (guildId, withCounts, botToken)</strong>
+    </dt>
+    <dd>
+    Get info for a given guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">withCounts</span>
+         Whether to include approximate member and presence counts in the returned info.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the guild info.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild">https://discord.com/developers/docs/resources/guild#get-guild</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuild(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(guild) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "getGuildMember"></a>
     <strong>getGuildMember (guildId, userId, botToken)</strong>
     </dt>
@@ -2001,6 +2096,85 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:getGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(member) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Invite"></a>Invite </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "deleteInvite"></a>
+    <strong>deleteInvite (inviteCode, botToken)</strong>
+    </dt>
+    <dd>
+    Delete an invite.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">inviteCode</span>
+         The code of the invite that will be deleted.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/invite#delete-invite">https://discord.com/developers/docs/resources/invite#delete-invite</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:deleteInvite(<span class="string">"[invite code]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getInvite"></a>
+    <strong>getInvite (inviteCode, options, botToken)</strong>
+    </dt>
+    <dd>
+    Return info for an invite.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">inviteCode</span>
+         The code of the invite.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the invite info.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/invite#get-invite">https://discord.com/developers/docs/resources/invite#get-invite</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getInvite(<span class="string">"[invite code]"</span>, {with_expiration = <span class="keyword">true</span>}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(invite) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -2127,7 +2301,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-02 14:27:15 </i>
+<i style="float:right;">Last updated 2021-09-02 20:38:53 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
