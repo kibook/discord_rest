@@ -137,6 +137,10 @@ function RateLimitQueue:setRateLimitRemaining(value)
 	self.rateLimitRemaining = value
 end
 
+function RateLimitQueue:decrementRateLimitRemaining()
+	self.rateLimitRemaining = self.rateLimitRemaining - 1
+end
+
 -- Return the time when the rate limit for this route resets
 function RateLimitQueue:getRateLimitReset()
 	return self.rateLimitReset
@@ -193,16 +197,16 @@ function DiscordRest:processQueues()
 end
 
 -- Handle HTTP responses from the Discord REST API
-function DiscordRest:handleResponse(queue, url, status, text, headers, callback)
+function DiscordRest:handleResponse(queue, status, text, headers, callback)
 	if isResponseError(status) then
+		-- No access to headers/body if status > 400, so can't read rate limit info or use Retry-After:
+		-- https://github.com/citizenfx/fivem/blob/6a83275c44a0044b4765e7865f73ca670de45cc3/code/components/http-client/src/HttpClient.cpp#L114
 		if status == 429 then
-			-- No access to headers/body if status > 400, so can't use Retry-After
-			-- https://github.com/citizenfx/fivem/blob/6a83275c44a0044b4765e7865f73ca670de45cc3/code/components/http-client/src/HttpClient.cpp#L114
 			queue:setRateLimitRemaining(0)
 			queue:setRateLimitReset(os.time() + 5)
+		else
+			queue:decrementRateLimitRemaining()
 		end
-
-		print(("Discord REST API error: %s: %d"):format(url, status))
 	else
 		local rateLimitRemaining = tonumber(headers["x-ratelimit-remaining"])
 		local rateLimitReset = tonumber(headers["x-ratelimit-reset"])
@@ -245,7 +249,7 @@ function DiscordRest:enqueueRequest(queue, url, callback, method, data, headers)
 	queue:enqueue(function()
 		PerformHttpRequest(url,
 			function(status, data, headers)
-				self:handleResponse(queue, url, status, data, headers, callback)
+				self:handleResponse(queue, status, data, headers, callback)
 			end,
 			method, data, headers)
 	end)
