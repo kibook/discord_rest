@@ -3,7 +3,7 @@
 local discordRest = DiscordRest:new(Config.botToken)
 
 --- Channel
--- @section Channel
+-- @section channel
 
 --- Delete multiple messages in a single request.
 -- @function bulkDeleteMessages
@@ -307,6 +307,21 @@ end)
 -- @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
 exports("triggerTypingIndicator", function(channelId, botToken)
 	return discordRest:triggerTypingIndicator(channelId, botToken)
+end)
+
+--- Guild
+-- @section guild
+
+--- Get info for a member of a guild.
+-- @function getGuildMember
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the info of the member if they are in the guild.
+-- @usage exports.discord_rest:getGuildMember("[guild ID]", "[user ID]", "[bot token]"):next(function(member) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-member
+exports("getGuildMember", function(guildId, userId, botToken)
+	return discordRest:getGuildMember(guildId, userId, botToken)
 end)
 
 --- User

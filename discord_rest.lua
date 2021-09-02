@@ -12,6 +12,7 @@ local routes = {
 	createDm       = "/users/@me/channels",
 	crosspost      = "/channels/%s/messages/%s/crosspost",
 	followers      = "/channels/%s/followers",
+	guildMember    = "/guilds/%s/members/%s",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
@@ -534,6 +535,20 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
 function DiscordRest:triggerTypingIndicator(channelId, botToken)
 	return self:performAuthorizedRequest(routes.typing, {channelId}, nil, "POST", nil, botToken)
+end
+
+--- Guild
+-- @section guild
+
+--- Get info for a member of a guild.
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the info of the member if they are in the guild.
+-- @usage discord:getGuildMember("[guild ID]", "[user ID]"):next(function(member) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-member
+function DiscordRest:getGuildMember(guildId, userId, botToken)
+	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "GET", nil, botToken)
 end
 
 --- User
