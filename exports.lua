@@ -564,6 +564,32 @@ exports("getGuildMember", function(guildId, userId, botToken)
 	return discordRest:getGuildMember(guildId, userId, botToken)
 end)
 
+--- Invite
+-- @section invite
+
+--- Delete an invite.
+-- @function deleteInvite
+-- @param inviteCode The code of the invite that will be deleted.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteInvite("[invite code]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/invite#delete-invite
+exports("deleteInvite", function(inviteCode, botToken)
+	return discordRest:deleteInvite(inviteCode, botToken)
+end)
+
+--- Return info for an invite.
+-- @function getInvite
+-- @param inviteCode The code of the invite.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the invite info.
+-- @usage exports.discord_rest:getInvite("[invite code]", {with_expiration = true}, "[bot token]"):next(function(invite) ... end)
+-- @see https://discord.com/developers/docs/resources/invite#get-invite
+exports("getInvite", function(inviteCode, options, botToken)
+	return discordRest:getInvite(inviteCode, options, botToken)
+end)
+
 --- User
 -- @section user
 

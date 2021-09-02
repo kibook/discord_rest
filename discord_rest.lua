@@ -20,6 +20,7 @@ local routes = {
 	guildEmojis    = "/guilds/%s/emojis",
 	guildMember    = "/guilds/%s/members/%s",
 	guilds         = "/guilds",
+	invite         = "/invites/%s",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
@@ -787,6 +788,30 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-member
 function DiscordRest:getGuildMember(guildId, userId, botToken)
 	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "GET", nil, botToken)
+end
+
+--- Invite
+-- @section invite
+
+--- Delete an invite.
+-- @param inviteCode The code of the invite that will be deleted.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteInvite("[invite code]")
+-- @see https://discord.com/developers/docs/resources/invite#delete-invite
+function DiscordRest:deleteInvite(inviteCode, botToken)
+	return self:performAuthorizedRequest(routes.invite, {inviteCode}, nil, "DELETE", nil, botToken)
+end
+
+--- Return info for an invite.
+-- @param inviteCode The code of the invite.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the invite info.
+-- @usage discord:getInvite("[invite code]", {with_expiration = true}):next(function(invite) ... end)
+-- @see https://discord.com/developers/docs/resources/invite#get-invite
+function DiscordRest:getInvite(inviteCode, options, botToken)
+	return self:performAuthorizedRequest(routes.invite, {inviteCode}, options, "GET", nil, botToken)
 end
 
 --- User
