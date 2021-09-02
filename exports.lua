@@ -263,6 +263,17 @@ exports("modifyChannel", function(channelId, channel, botToken)
 	return discordRest:modifyChannel(channelId, channel, botToken)
 end)
 
+--- Post a typing indicator for the specified channel.
+-- @function triggerTypingIndicator
+-- @param channelId The ID of the channel to show the typing indicator in.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:triggerTypingIndicator("[channel ID]")
+-- @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
+exports("triggerTypingIndicator", function(channelId, botToken)
+	return discordRest:triggerTypingIndicator(channelId, botToken)
+end)
+
 --- User
 -- @section user
 

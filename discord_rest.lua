@@ -16,6 +16,7 @@ local routes = {
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
+	typing         = "/channels/%s/typing",
 	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
 	user           = "/users/%s",
 }
@@ -488,6 +489,16 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#modify-channel
 function DiscordRest:modifyChannel(channelId, channel, botToken)
 	return self:performAuthorizedRequest(routes.channel, {channelId}, nil, "PATCH", channel, botToken)
+end
+
+--- Post a typing indicator for the specified channel.
+-- @param channelId The ID of the channel to show the typing indicator in.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:triggerTypingIndicator("[channel ID]")
+-- @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
+function DiscordRest:triggerTypingIndicator(channelId, botToken)
+	return self:performAuthorizedRequest(routes.typing, {channelId}, nil, "POST", nil, botToken)
 end
 
 --- User
