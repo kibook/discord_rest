@@ -357,7 +357,7 @@ exports("listPrivateArchivedThreads", function(channelId, options, botToken)
 end)
 
 --- Returns archived threads in the channel that are public.
--- @functon listPublicArchivedThreads
+-- @function listPublicArchivedThreads
 -- @param channelId The ID of the channel to get a list of public archived threads for.
 -- @param options Options for the query.
 -- @param botToken Optional bot token to use for authorization.
