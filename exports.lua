@@ -9,7 +9,7 @@ local discordRest = DiscordRest:new(Config.botToken)
 -- @function bulkDeleteMessages
 -- @param channelId The ID of the channel containing the messages.
 -- @param messages A list of message IDs to delete (2-100).
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:bulkDeleteMessages("[channel ID]", {"[message ID 1]", "[message ID 2]", ...})
 -- @see https://discord.com/developers/docs/resources/channel#bulk-delete-messages
@@ -21,7 +21,7 @@ end)
 -- @function createChannelInvite
 -- @param channelId The ID of the channel to create an invite for.
 -- @param invite The invite settings.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with the newly created invite.
 -- @usage exports.discord_rest:createChannelInvite("[channel ID]", {max_age = 3600, max_uses = 1})
 -- @see https://discord.com/developers/docs/resources/channel#create-channel-invite
@@ -33,7 +33,7 @@ end)
 -- @function createMessage
 -- @param channelId The ID of the channel to post in.
 -- @param message The message parameters.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved when the message is posted.
 -- @usage exports.discord_rest:createMessage("[channel ID]", {content = "Hello, world!"}, "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#create-message
@@ -46,7 +46,7 @@ end)
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to add a reaction to.
 -- @param emoji The name of the emoji to react with.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved when the reaction is added to the message.
 -- @usage exports.discord_rest:createReaction("[channel ID]", "[message ID]", "💗", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#create-reaction
@@ -58,7 +58,7 @@ end)
 -- @function crosspostMessage
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to crosspost.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with the crossposted message.
 -- @usage exports.discord_rest:crosspostMessage("[channel ID]", "[message ID]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#crosspost-message
@@ -70,7 +70,7 @@ end)
 -- @function deleteAllReactions
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message whose reactions will be deleted.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:deleteAllReactions("[channel ID]", "[message ID]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-all-reactions
@@ -83,7 +83,7 @@ end)
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to delete reactions from.
 -- @param emoji The emoji of the reaction to delete.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:deleteAllReactionsForEmoji("[channel ID]", "[message ID]", "💗", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-all-reactions-for-emoji
@@ -94,7 +94,7 @@ end)
 --- Delete a channel.
 -- @function deleteChannel
 -- @param channelId The ID of the channel.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:deleteChannel("[channel ID]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#deleteclose-channel
@@ -106,7 +106,7 @@ end)
 -- @function deleteChannelPermission
 -- @param channelId The ID of the channel.
 -- @param overwriteId The ID of the user or role to remove permissions for.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:deleteChannelPermission("[channel ID]", "[overwrite ID]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-channel-permission
@@ -118,7 +118,7 @@ end)
 -- @function deleteMessage
 -- @param channelId The ID of the channel.
 -- @param messageId The ID of the message.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:deleteMessage("[channel ID]", "[message ID]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-message
@@ -131,7 +131,7 @@ end)
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to remove the reaction from.
 -- @param emoji The emoji of the reaction to remove.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-own-reaction
@@ -145,7 +145,7 @@ end)
 -- @param messageId The ID of the message to remove the reaction from.
 -- @param emoji The emoji of the reaction to remove.
 -- @param userId The ID of the user whose reaction will be removed.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:deleteOwnReaction("[channel ID]", "[message ID]", "💗", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#delete-user-reaction
@@ -158,7 +158,7 @@ end)
 -- @param channelId The ID of the channel to edit the permissions of.
 -- @param overwriteId The ID of the user or role to edit permissions for.
 -- @param permissions The permissions to set.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:editChannelPermissions("[channel ID]", "[overwrite ID]", {allow = 6, deny = 8, type = 0})
 -- @see https://discord.com/developers/docs/resources/channel#edit-channel-permissions
@@ -171,7 +171,7 @@ end)
 -- @param channelId The ID of the channel containing the message.
 -- @param messageId The ID of the message to edit.
 -- @param message The edited message.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise, which resolves with the edited message when the request is completed.
 -- @usage exports.discord_rest:editMessage("[channel ID]", "[message ID]", {content = "I edited this message!"}, "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#edit-message
@@ -183,7 +183,7 @@ end)
 -- @function followNewsChannel
 -- @param channelId The ID of the news channel.
 -- @param targetChannelId The ID of the target channel.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with a followed channel object.
 -- @usage exports.discord_rest:followNewsChannel("[channel ID]", "[target channel ID]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#follow-news-channel
@@ -194,7 +194,7 @@ end)
 --- Get channel information.
 -- @function getChannel
 -- @param channelId The ID of the channel.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:getChannel("[channel ID]", "[bot token]"):next(function(channel) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-channel
@@ -205,7 +205,7 @@ end)
 --- Get a list of invites for a channel.
 -- @function getChannelInvites
 -- @param channelId The ID of the channel to get invites for.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with the list of invites.
 -- @usage discord:getChannelInvites("[channel ID]"):next(function(invites) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-invites
@@ -217,7 +217,7 @@ end)
 -- @function getChannelMessage
 -- @param channelId The ID of the channel.
 -- @param messageId The ID of the message.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:getChannelMessage("[channel ID]", "[messageId]", "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-message
@@ -229,7 +229,7 @@ end)
 -- @function getChannelMessages
 -- @param channelId The ID of the channel.
 -- @param options Options to tailor the query.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:getChannelMessages("[channel ID]", {limit = 1}, "[bot token]"):next(function(messages) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-channel-messages
@@ -243,7 +243,7 @@ end)
 -- @param messageId The ID of the message to get reactions from.
 -- @param emoji The emoji of the reaction.
 -- @param options Options to tailor the query.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:getReactions("[channel ID]", "[message ID]", "💗", nil, "[bot token]"):next(function(users) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#get-reactions
@@ -255,7 +255,7 @@ end)
 -- @function modifyChannel
 -- @param channelId The ID of the channel.
 -- @param channel The new channel settings.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:modifyChannel("[channel ID]", {name = "new-name"}, "[bot token]")
 -- @see https://discord.com/developers/docs/resources/channel#modify-channel
@@ -269,7 +269,7 @@ end)
 --- Get user information.
 -- @function getUser
 -- @param userId The ID of the user.
--- @param botToken Bot token to use for authorization.
+-- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:getUser("[user ID]", "[bot token]"):next(function(user) ... end)
 -- @see https://discord.com/developers/docs/resources/user#get-user
