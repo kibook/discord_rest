@@ -11,7 +11,7 @@ local discordRest = DiscordRest:new(Config.botToken)
 -- @param userId The ID of the user to add to the thread.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
--- @usage discord:addThreadMember("[channel ID]", "[user ID]")
+-- @usage exports.discord_rest:addThreadMember("[channel ID]", "[user ID]")
 -- @see https://discord.com/developers/docs/resources/channel#add-thread-member
 exports("addThreadMember", function(channelId, userId, botToken)
 	return discordRest:addThreadMember(channelId, userId, botToken)
