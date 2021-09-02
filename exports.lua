@@ -321,6 +321,17 @@ exports("leaveThread", function(channelId, botToken)
 	return discordRest:leaveThread(channelId, botToken)
 end)
 
+--- Get a list of members of a thread.
+-- @function listThreadMembers
+-- @param channelId The ID of the thread channel.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of members of the thread.
+-- @usage exports.discord_rest:listThreadMembers("[channel ID]", "[bot token]"):next(function(members) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-thread-members
+exports("listThreadMembers", function(channelId, botToken)
+	return discordRest:listThreadMembers(channelId, botToken)
+end)
+
 --- Update a channel's settings.
 -- @function modifyChannel
 -- @param channelId The ID of the channel.

@@ -23,6 +23,7 @@ local routes = {
 	pins           = "/channels/%s/pins",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
+	threadMembers  = "/channels/%s/thread-members",
 	threadSelf     = "/channels/%s/thread-members/@me",
 	threadUser     = "/channels/%s/thread-members/%s",
 	typing         = "/channels/%s/typing",
@@ -551,6 +552,16 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#leave-thread
 function DiscordRest:leaveThread(channelId, botToken)
 	return self:performAuthorizedRequest(routes.threadSelf, {channelId}, nil, "DELETE", nil, botToken)
+end
+
+--- Get a list of members of a thread.
+-- @param channelId The ID of the thread channel.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of members of the thread.
+-- @usage discord:listThreadMembers("[channel ID]"):next(function(members) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-thread-members
+function DiscordRest:listThreadMembers(channelId, botToken)
+	return self:performAuthorizedRequest(routes.threadMembers, {channelId}, nil, "GET", nil, botToken)
 end
 
 --- Update a channel's settings.
