@@ -311,6 +311,17 @@ exports("pinMessage", function(channelId, messageId, botToken)
 	return discordRest:pinMessage(channelId, messageId, botToken)
 end)
 
+--- Post a typing indicator for the specified channel.
+-- @function triggerTypingIndicator
+-- @param channelId The ID of the channel to show the typing indicator in.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:triggerTypingIndicator("[channel ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
+exports("triggerTypingIndicator", function(channelId, botToken)
+	return discordRest:triggerTypingIndicator(channelId, botToken)
+end)
+
 --- Unpin a message in a channel.
 -- @function unpinMessage
 -- @param channelId The ID of the channel containing the message.
@@ -321,17 +332,6 @@ end)
 -- @see https://discord.com/developers/docs/resources/channel#unpin-message
 exports("unpinMessage", function(channelId, messageId, botToken)
 	return discordRest:unpinMessage(channelId, messageId, botToken)
-end)
-
---- Post a typing indicator for the specified channel.
--- @function triggerTypingIndicator
--- @param channelId The ID of the channel to show the typing indicator in.
--- @param botToken Optional bot token to use for authorization.
--- @return A new promise.
--- @usage exports.discord_rest:triggerTypingIndicator("[channel ID]", "[bot token]")
--- @see https://discord.com/developers/docs/resources/channel#trigger-typing-indicator
-exports("triggerTypingIndicator", function(channelId, botToken)
-	return discordRest:triggerTypingIndicator(channelId, botToken)
 end)
 
 --- Guild
