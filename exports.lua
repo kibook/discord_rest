@@ -311,6 +311,19 @@ exports("pinMessage", function(channelId, messageId, botToken)
 	return discordRest:pinMessage(channelId, messageId, botToken)
 end)
 
+--- Creates a new thread from an existing message.
+-- @function startThreadWithMessage
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to start the thread from.
+-- @param params Parameters for the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the new thread channel.
+-- @usage exports.discord_rest:startThreadWithMessage("[channel ID]", "[message ID]", {name = "New Thread"}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#start-thread-with-message
+exports("startThreadWithMessage", function(channelId, messageId, params, botToken)
+	return discordRest:startThreadWithMessage(channelId, messageId, params, botToken)
+end)
+
 --- Post a typing indicator for the specified channel.
 -- @function triggerTypingIndicator
 -- @param channelId The ID of the channel to show the typing indicator in.

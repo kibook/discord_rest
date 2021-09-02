@@ -16,6 +16,7 @@ local routes = {
 	guildMember    = "/guilds/%s/members/%s",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
+	messageThreads = "/channels/%s/messages/%s/threads",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
 	pinMessage     = "/channels/%s/pins/%s",
 	pins           = "/channels/%s/pins",
@@ -538,6 +539,18 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#pin-message
 function DiscordRest:pinMessage(channelId, messageId, botToken)
 	return self:performAuthorizedRequest(routes.pinMessage, {channelId, messageId}, nil, "PUT", nil, botToken)
+end
+
+--- Creates a new thread from an existing message.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to start the thread from.
+-- @param params Parameters for the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the new thread channel.
+-- @usage discord:startThreadWithMessage("[channel ID]", "[message ID]", {name = "New Thread"})
+-- @see https://discord.com/developers/docs/resources/channel#start-thread-with-message
+function DiscordRest:startThreadWithMessage(channelId, messageId, params, botToken)
+	return self:performAuthorizedRequest(routes.messageThreads, {channelId, messageId}, nil, "POST", params, botToken)
 end
 
 --- Post a typing indicator for the specified channel.
