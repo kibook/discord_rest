@@ -22,6 +22,7 @@ local routes = {
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
 	pinMessage     = "/channels/%s/pins/%s",
 	pins           = "/channels/%s/pins",
+	publicThreads  = "/channels/%s/threads/archived/public",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
 	threadMembers  = "/channels/%s/thread-members",
@@ -558,11 +559,22 @@ end
 --- Returns all active threads in the channel, including public and private threads.
 -- @param channelId The ID of the channel to get a list of active threads for.
 -- @param botToken Optional bot token to use for authorization.
--- @return A new promise which is resolved with a list of information on active threads.
+-- @return A new promise which is resolved with a table of information on active threads.
 -- @usage discord:listActiveThreads("[channel ID]"):next(function(data) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#list-active-threads
 function DiscordRest:listActiveThreads(channelId, botToken)
 	return self:performAuthorizedRequest(routes.activeThreads, {channelId}, nil, "GET", nil, botToken)
+end
+
+--- Returns archived threads in the channel that are public.
+-- @param channelId The ID of the channel to get a list of public archived threads for.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a table of information on public archived threads.
+-- @usage discord:listPublicArchivedThreads("[channel ID]"):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-public-archived-threads
+function DiscordRest:listPublicArchivedThreads(channelId, options, botToken)
+	return self:performAuthorizedRequest(routes.publicThreads, {channelId}, options, "GET", nil, botToken)
 end
 
 --- Get a list of members of a thread.

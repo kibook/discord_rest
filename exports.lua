@@ -332,6 +332,18 @@ exports("listActiveThreads", function(channelId, botToken)
 	return discordRest:listActiveThreads(channelId, botToken)
 end)
 
+--- Returns archived threads in the channel that are public.
+-- @functon listPublicArchivedThreads
+-- @param channelId The ID of the channel to get a list of public archived threads for.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a table of information on public archived threads.
+-- @usage exports.discord_rest:listPublicArchivedThreads("[channel ID]", "[bot token]"):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/channel#list-public-archived-threads
+exports("listPublicArchivedThreads", function(channelId, options, botToken)
+	return discordRest:listPublicArchivedThreads(channelId, options, botToken)
+end)
+
 --- Get a list of members of a thread.
 -- @function listThreadMembers
 -- @param channelId The ID of the thread channel.
