@@ -34,6 +34,7 @@
 <ul>
 <li><a href="#Class_DiscordRest">Class DiscordRest </a></li>
 <li><a href="#Channel">Channel </a></li>
+<li><a href="#Emoji">Emoji </a></li>
 <li><a href="#Guild">Guild </a></li>
 <li><a href="#User">User </a></li>
 <li><a href="#Webhook">Webhook </a></li>
@@ -177,6 +178,26 @@
 	<td class="summary">Removes the current user from a thread.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:listActiveThreads">DiscordRest:listActiveThreads (channelId, botToken)</a></td>
+	<td class="summary">Returns all active threads in the channel, including public and private threads.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:listJoinedPrivateArchivedThreads">DiscordRest:listJoinedPrivateArchivedThreads (channelId, options, botToken)</a></td>
+	<td class="summary">Returns archived threads in the channel that are private, and the user has joined.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:listPrivateArchivedThreads">DiscordRest:listPrivateArchivedThreads (channelId, options, botToken)</a></td>
+	<td class="summary">Returns archived threads in the channel that are private.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:listPublicArchivedThreads">DiscordRest:listPublicArchivedThreads (channelId, options, botToken)</a></td>
+	<td class="summary">Returns archived threads in the channel that are public.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:listThreadMembers">DiscordRest:listThreadMembers (channelId, botToken)</a></td>
+	<td class="summary">Get a list of members of a thread.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyChannel">DiscordRest:modifyChannel (channelId, channel, botToken)</a></td>
 	<td class="summary">Update a channel's settings.</td>
 	</tr>
@@ -203,6 +224,29 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:unpinMessage">DiscordRest:unpinMessage (channelId, messageId, botToken)</a></td>
 	<td class="summary">Unpin a message in a channel.</td>
+	</tr>
+</table>
+<h2><a href="#Emoji">Emoji </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:createGuildEmoji">DiscordRest:createGuildEmoji (guildId, params, botToken)</a></td>
+	<td class="summary">Create a new emoji for the guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteGuildEmoji">DiscordRest:deleteGuildEmoji (guildId, emojiId, botToken)</a></td>
+	<td class="summary">Delete the given emoji.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildEmoji">DiscordRest:getGuildEmoji (guildId, emojiId, botToken)</a></td>
+	<td class="summary">Get information on a guild emoji.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:listGuildEmojis">DiscordRest:listGuildEmojis (guildId, botToken)</a></td>
+	<td class="summary">Return a list of emoji for the given guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyGuildEmoji">DiscordRest:modifyGuildEmoji (guildId, emojiId, params, botToken)</a></td>
+	<td class="summary">Modify the given emoji.</td>
 	</tr>
 </table>
 <h2><a href="#Guild">Guild </a></h2>
@@ -1301,6 +1345,195 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:listActiveThreads"></a>
+    <strong>DiscordRest:listActiveThreads (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Returns all active threads in the channel, including public and private threads.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to get a list of active threads for.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a table of information on active threads.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#list-active-threads">https://discord.com/developers/docs/resources/channel#list-active-threads</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:listActiveThreads(<span class="string">"[channel ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(data) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:listJoinedPrivateArchivedThreads"></a>
+    <strong>DiscordRest:listJoinedPrivateArchivedThreads (channelId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Returns archived threads in the channel that are private, and the user has joined.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to get a list of private archived threads from.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a table of information on private archived threads.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads">https://discord.com/developers/docs/resources/channel#list-joined-private-archived-threads</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:listJoinedPrivateArchivedThreads(<span class="string">"[channel ID]"</span>, {limit = <span class="number">5</span>}):<span class="global">next</span>(<span class="keyword">function</span>(data) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:listPrivateArchivedThreads"></a>
+    <strong>DiscordRest:listPrivateArchivedThreads (channelId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Returns archived threads in the channel that are private.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to get a list of private archived threads from.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a table of information on private archived threads.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#list-private-archived-threads">https://discord.com/developers/docs/resources/channel#list-private-archived-threads</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:listPrivateArchivedThreads(<span class="string">"[channel ID]"</span>, {limit = <span class="number">5</span>}):<span class="global">next</span>(<span class="keyword">function</span>(data) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:listPublicArchivedThreads"></a>
+    <strong>DiscordRest:listPublicArchivedThreads (channelId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Returns archived threads in the channel that are public.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel to get a list of public archived threads from.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a table of information on public archived threads.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#list-public-archived-threads">https://discord.com/developers/docs/resources/channel#list-public-archived-threads</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:listPublicArchivedThreads(<span class="string">"[channel ID]"</span>, {limit = <span class="number">5</span>}):<span class="global">next</span>(<span class="keyword">function</span>(data) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:listThreadMembers"></a>
+    <strong>DiscordRest:listThreadMembers (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of members of a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of members of the thread.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/channel#list-thread-members">https://discord.com/developers/docs/resources/channel#list-thread-members</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:listThreadMembers(<span class="string">"[channel ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(members) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:modifyChannel"></a>
     <strong>DiscordRest:modifyChannel (channelId, channel, botToken)</strong>
     </dt>
@@ -1574,6 +1807,205 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Emoji"></a>Emoji </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "DiscordRest:createGuildEmoji"></a>
+    <strong>DiscordRest:createGuildEmoji (guildId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Create a new emoji for the guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to create the emoji for.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the new emoji.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise whih is resolved with the new emoji.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/emoji#create-guild-emoji">https://discord.com/developers/docs/resources/emoji#create-guild-emoji</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:createGuildEmoji(<span class="string">"[guild ID]"</span>, {name = <span class="string">"emojiname"</span>, image = <span class="string">"data:image/jpeg;base64,..."</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:deleteGuildEmoji"></a>
+    <strong>DiscordRest:deleteGuildEmoji (guildId, emojiId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete the given emoji.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to delete the emoji from.
+        </li>
+        <li><span class="parameter">emojiId</span>
+         The ID of the emoji to delete.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/emoji#delete-guild-emoji">https://discord.com/developers/docs/resources/emoji#delete-guild-emoji</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteGuildEmoji(<span class="string">"[guild ID]"</span>, <span class="string">"[emoji ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildEmoji"></a>
+    <strong>DiscordRest:getGuildEmoji (guildId, emojiId, botToken)</strong>
+    </dt>
+    <dd>
+    Get information on a guild emoji.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild where the emoji is from.
+        </li>
+        <li><span class="parameter">emojiId</span>
+         The ID of the emoji to get information about.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the information about the emoji.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/emoji#get-guild-emoji">https://discord.com/developers/docs/resources/emoji#get-guild-emoji</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildEmoji(<span class="string">"[guild ID]"</span>, <span class="string">"[emoji ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(emoji) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:listGuildEmojis"></a>
+    <strong>DiscordRest:listGuildEmojis (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Return a list of emoji for the given guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the list of emoji.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/emoji#list-guild-emojis">https://discord.com/developers/docs/resources/emoji#list-guild-emojis</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:listGuildEmojis(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(emojis) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyGuildEmoji"></a>
+    <strong>DiscordRest:modifyGuildEmoji (guildId, emojiId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify the given emoji.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild where the emoji is from.
+        </li>
+        <li><span class="parameter">emojiId</span>
+         The ID of the emoji to modify.
+        </li>
+        <li><span class="parameter">params</span>
+         Modified parameters for the emoji.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated emoji.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/emoji#modify-guild-emoji">https://discord.com/developers/docs/resources/emoji#modify-guild-emoji</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyGuildEmoji(<span class="string">"[guild ID]"</span>, <span class="string">"[emoji ID]"</span>, {name = <span class="string">"newemojiname"</span>})</pre>
+    </ul>
+
+</dd>
+</dl>
     <h2 class="section-header "><a name="Guild"></a>Guild </h2>
 
     <dl class="function">
@@ -1739,7 +2171,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-02 08:47:34 </i>
+<i style="float:right;">Last updated 2021-09-02 14:24:33 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
