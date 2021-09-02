@@ -1,6 +1,6 @@
 --- Discord REST API export functions
 
-local discordRest = DiscordRest:new()
+local discordRest = DiscordRest:new(Config.botToken)
 
 --- Channel
 -- @section Channel

@@ -271,7 +271,7 @@ end
 -- @usage discord:createChannelInvite("[channel ID]", {max_age = 3600, max_uses = 1})
 -- @see https://discord.com/developers/docs/resources/channel#create-channel-invite
 function DiscordRest:createChannelInvite(channelId, invite, botToken)
-	return self:performAuthorizedRequest(routes.channelInvites, {channelId}, nil, "POST", invite, botToken)
+	return self:performAuthorizedRequest(routes.channelInvites, {channelId}, nil, "POST", invite or {}, botToken)
 end
 
 --- Post a message.
