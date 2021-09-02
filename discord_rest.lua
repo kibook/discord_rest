@@ -10,6 +10,7 @@ local routes = {
 	channel        = "/channels/%s",
 	channelInvites = "/channels/%s/invites",
 	crosspost      = "/channels/%s/messages/%s/crosspost",
+	followers      = "/channels/%s/followers",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
@@ -420,7 +421,7 @@ end
 -- @usage discord:followNewsChannel("[channel ID]", "[target channel ID]")
 -- @see https://discord.com/developers/docs/resources/channel#follow-news-channel
 function DiscordRest:followNewsChannel(channelId, targetChannelId, botToken)
-	return self:performAuthorizedRequest("/channels/%s/followers", {channelId}, nil, "POST", {webhook_channel_id = targetChannelId}, botToken)
+	return self:performAuthorizedRequest(routes.followers, {channelId}, nil, "POST", {webhook_channel_id = targetChannelId}, botToken)
 end
 
 --- Get channel information.
