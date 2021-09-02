@@ -14,6 +14,7 @@ local routes = {
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
+	pinMessage     = "/channels/%s/pins/%s",
 	pins           = "/channels/%s/pins",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
@@ -500,6 +501,17 @@ end
 -- @see https://discord.com/developers/docs/resources/channel#modify-channel
 function DiscordRest:modifyChannel(channelId, channel, botToken)
 	return self:performAuthorizedRequest(routes.channel, {channelId}, nil, "PATCH", channel, botToken)
+end
+
+--- Pin a message in a channel.
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to pin.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:pinMessage("[channel ID]", "[message ID]")
+-- @see https://discord.com/developers/docs/resources/channel#pin-message
+function DiscordRest:pinMessage(channelId, messageId, botToken)
+	return self:performAuthorizedRequest(routes.pinMessage, {channelId, messageId}, nil, "PUT", nil, botToken)
 end
 
 --- Post a typing indicator for the specified channel.

@@ -274,6 +274,18 @@ exports("modifyChannel", function(channelId, channel, botToken)
 	return discordRest:modifyChannel(channelId, channel, botToken)
 end)
 
+--- Pin a message in a channel.
+-- @function pinMessage
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The ID of the message to pin.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:pinMessage("[channel ID]", "[message ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/channel#pin-message
+exports("pinMessage", function(channelId, messageId, botToken)
+	return discordRest:pinMessage(channelId, messageId, botToken)
+end)
+
 --- Post a typing indicator for the specified channel.
 -- @function triggerTypingIndicator
 -- @param channelId The ID of the channel to show the typing indicator in.
