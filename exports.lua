@@ -540,6 +540,17 @@ exports("createGuild", function(params, botToken)
 	return discordRest:createGuild(params, botToken)
 end)
 
+--- Delete a guild permanently.
+-- @function deleteGuild
+-- @param guildId The ID of the guild to delete.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteGuild("[guild ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#delete-guild
+exports("deleteGuild", function(guildId, botToken)
+	return discordRest:deleteGuild(guildId, botToken)
+end)
+
 --- Get info for a given guild.
 -- @function getGuild
 -- @param guildId The ID of the guild.
