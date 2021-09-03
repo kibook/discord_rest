@@ -55,6 +55,7 @@
   <li><a href="../examples/check-player.lua.html">check-player.lua</a></li>
   <li><a href="../examples/class.lua.html">class.lua</a></li>
   <li><a href="../examples/exports.lua.html">exports.lua</a></li>
+  <li><a href="../examples/respond-to-message.lua.html">respond-to-message.lua</a></li>
   <li><a href="../examples/send-message.lua.html">send-message.lua</a></li>
 </ul>
 
@@ -263,6 +264,10 @@
 	<td class="summary">Adds a user to the guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:addGuildMemberRole">DiscordRest:addGuildMemberRole (guildId, userId, roleId, botToken)</a></td>
+	<td class="summary">Adds a role to a guild member.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:createGuild">DiscordRest:createGuild (params, botToken)</a></td>
 	<td class="summary">Create a new guild.</td>
 	</tr>
@@ -305,6 +310,22 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildChannelPositions">DiscordRest:modifyGuildChannelPositions (guildId, channelPositions, botToken)</a></td>
 	<td class="summary">Modify the positions of a set of channels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyCurrentUserNick">DiscordRest:modifyCurrentUserNick (guildId, nick, botToken)</a></td>
+	<td class="summary">Modifies the nickname of the current user in a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyGuildMember">DiscordRest:modifyGuildMember (guildId, userId, params, botToken)</a></td>
+	<td class="summary">Modify attributes of a guild member.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:removeGuildMember">DiscordRest:removeGuildMember (guildId, userId, botToken)</a></td>
+	<td class="summary">Remove a member from a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:removeGuildMemberRole">DiscordRest:removeGuildMemberRole (guildId, userId, roleId, botToken)</a></td>
+	<td class="summary">Removes a role from a guild member.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:searchGuildMembers">DiscordRest:searchGuildMembers (guildId, options, botToken)</a></td>
@@ -2172,6 +2193,48 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:addGuildMemberRole"></a>
+    <strong>DiscordRest:addGuildMemberRole (guildId, userId, roleId, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a role to a guild member.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to add the role to.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role to add to the member.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#add-guild-member-role">https://discord.com/developers/docs/resources/guild#add-guild-member-role</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:addGuildMemberRole(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[role ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:createGuild"></a>
     <strong>DiscordRest:createGuild (params, botToken)</strong>
     </dt>
@@ -2586,6 +2649,168 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:modifyCurrentUserNick"></a>
+    <strong>DiscordRest:modifyCurrentUserNick (guildId, nick, botToken)</strong>
+    </dt>
+    <dd>
+    Modifies the nickname of the current user in a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">nick</span>
+         The value to set the user's nickname to.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-nick">https://discord.com/developers/docs/resources/guild#modify-current-user-nick</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyCurrentUserNick(<span class="string">"[guild ID]"</span>, <span class="string">"New nickname"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyGuildMember"></a>
+    <strong>DiscordRest:modifyGuildMember (guildId, userId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify attributes of a guild member.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the member to modify.
+        </li>
+        <li><span class="parameter">params</span>
+         The parameters to modify.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the modified guild member.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-guild-member">https://discord.com/developers/docs/resources/guild#modify-guild-member</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, {nick = <span class="string">"New nickname"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:removeGuildMember"></a>
+    <strong>DiscordRest:removeGuildMember (guildId, userId, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a member from a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to remove the member from.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the member to remove from the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#remove-guild-member">https://discord.com/developers/docs/resources/guild#remove-guild-member</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:removeGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:removeGuildMemberRole"></a>
+    <strong>DiscordRest:removeGuildMemberRole (guildId, userId, roleId, botToken)</strong>
+    </dt>
+    <dd>
+    Removes a role from a guild member.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to remove the role from.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role to remove from the member.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#remove-guild-member-role">https://discord.com/developers/docs/resources/guild#remove-guild-member-role</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:removeGuildMemberRole(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[role ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:searchGuildMembers"></a>
     <strong>DiscordRest:searchGuildMembers (guildId, options, botToken)</strong>
     </dt>
@@ -2826,7 +3051,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-03 16:22:24 </i>
+<i style="float:right;">Last updated 2021-09-03 18:31:31 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
