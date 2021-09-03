@@ -609,6 +609,17 @@ exports("getGuildPreview", function(guildId, botToken)
 	return discordRest:getGuildPreview(guildId, botToken)
 end)
 
+--- Returns all active threads in the guild, including public and private threads.
+-- @function listActiveGuildThreads
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the lists of threads and thread members.
+-- @usage exports.discord_rest:listActiveGuildThreads("[guild ID]", "[bot token]"):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#list-active-threads
+exports("listActiveGuildThreads", function(guildId, botToken)
+	return discordRest:listActiveGuildThreads(guildId, botToken)
+end)
+
 --- Modify a guild's settings.
 -- @function modifyGuild
 -- @param guildId The ID of the guild to modify.

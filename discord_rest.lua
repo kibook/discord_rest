@@ -22,6 +22,7 @@ local routes = {
 	guildMember    = "/guilds/%s/members/%s",
 	guildPreview   = "/guilds/%s/preview",
 	guilds         = "/guilds",
+	guildThreads   = "/guilds/%s/threads/active",
 	invite         = "/invites/%s",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
 	message        = "/channels/%s/messages/%s",
@@ -871,6 +872,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-preview
 function DiscordRest:getGuildPreview(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guildPreview, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Returns all active threads in the guild, including public and private threads.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the lists of threads and thread members.
+-- @usage discord:listActiveGuildThreads("[guild ID]"):next(function(data) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#list-active-threads
+function DiscordRest:listActiveGuildThreads(guildId, botToken)
+	return self:performAuthorizedRequest(routes.guildThreads, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Modify a guild's settings.
