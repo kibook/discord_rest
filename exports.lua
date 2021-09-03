@@ -575,6 +575,18 @@ exports("getGuildPreview", function(guildId, botToken)
 	return discordRest:getGuildPreview(guildId, botToken)
 end)
 
+--- Modify a guild's settings.
+-- @function modifyGuild
+-- @param guildId The ID of the guild to modify.
+-- @param settings The modified settings for the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated guild.
+-- @usage exports.discord_rest:modifyGuild("[guild ID]", {name = "New guild name"}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild
+exports("modifyGuild", function(guildId, settings, botToken)
+	return discordRest:modifyGuild(guildId, settings, botToken)
+end)
+
 --- Invite
 -- @section invite
 

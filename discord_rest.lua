@@ -840,6 +840,17 @@ function DiscordRest:getGuildPreview(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guildPreview, {guildId}, nil, "GET", nil, botToken)
 end
 
+--- Modify a guild's settings.
+-- @param guildId The ID of the guild to modify.
+-- @param settings The modified settings for the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated guild.
+-- @usage discord:modifyGuild("[guild ID]", {name = "New guild name"})
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild
+function DiscordRest:modifyGuild(guildId, settings, botToken)
+	return self:performAuthorizedRequest(routes.guild, {guildId}, nil, "PATCH", params, botToken)
+end
+
 --- Invite
 -- @section invite
 
