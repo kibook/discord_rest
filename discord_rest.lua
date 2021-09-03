@@ -130,7 +130,7 @@ end
 
 -- Check if the queue has any items and hasn't hit the rate limit
 function RateLimitQueue:isReady()
-	return #self.items > 0 and (self.rateLimitRemaining > 0 or os.time() > self.rateLimitReset)
+	return #self.items > 0 and (self.rateLimitRemaining > 0 or os.time() - self.rateLimitReset > 5)
 end
 
 -- Return the route this queue is for
@@ -236,11 +236,13 @@ function DiscordRest:processQueues()
 end
 
 -- Handle HTTP responses from the Discord REST API
-function DiscordRest:handleResponse(queue, status, text, headers, callback)
+function DiscordRest:handleResponse(queue, url, status, text, headers, callback)
 	if isResponseError(status) then
 		-- No access to headers/body if status > 400, so can't read rate limit info or use Retry-After:
 		-- https://github.com/citizenfx/fivem/blob/6a83275c44a0044b4765e7865f73ca670de45cc3/code/components/http-client/src/HttpClient.cpp#L114
 		if status == 429 then
+			print(("Rate limiting detected for %s"):format(url))
+
 			queue:setRateLimitRemaining(0)
 			queue:setRateLimitReset(os.time() + 5)
 		else
@@ -286,11 +288,16 @@ function DiscordRest:enqueueRequest(queue, url, callback, method, data, headers)
 	end
 
 	queue:enqueue(function()
+		local p = promise.new()
+
 		PerformHttpRequest(url,
 			function(status, data, headers)
-				self:handleResponse(queue, status, data, headers, callback)
+				self:handleResponse(queue, url, status, data, headers, callback)
+				p:resolve()
 			end,
 			method, data, headers)
+
+		Citizen.Await(p)
 	end)
 end
 
