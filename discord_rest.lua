@@ -704,6 +704,10 @@ function DiscordRest:startThreadWithoutMessage(channelId, params, botToken)
 		params.auto_archive_duration = 1440 -- 24 hours
 	end
 
+	if type(params.type) == "string" then
+		params.type = DiscordRest.channelTypes[params.type]
+	end
+
 	if not params.type then
 		params.type = DiscordRest.channelTypes.GUILD_PUBLIC_THREAD
 	end
