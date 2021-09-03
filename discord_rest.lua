@@ -201,8 +201,7 @@ function DiscordRest:new(botToken)
 
 	Citizen.CreateThread(function()
 		while self do
-			self:processQueues()
-			Citizen.Wait(500)
+			Citizen.Wait(self:processQueues() and 50 or 500)
 		end
 	end)
 
@@ -223,9 +222,11 @@ function DiscordRest:processQueues()
 	for route, queue in pairs(self.queues) do
 		if queue:isReady() then
 			queue:dequeue()
-			break
+			return true
 		end
 	end
+
+	return false
 end
 
 -- Handle HTTP responses from the Discord REST API
