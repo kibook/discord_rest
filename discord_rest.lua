@@ -20,6 +20,7 @@ local routes = {
 	guildEmoji     = "/guilds/%s/emojis/%s",
 	guildEmojis    = "/guilds/%s/emojis",
 	guildMember    = "/guilds/%s/members/%s",
+	guildMembers   = "/guilds/%s/members",
 	guildPreview   = "/guilds/%s/preview",
 	guilds         = "/guilds",
 	guildThreads   = "/guilds/%s/threads/active",
@@ -882,6 +883,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#list-active-threads
 function DiscordRest:listActiveGuildThreads(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guildThreads, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get a list of members in a guild.
+-- @param guildId The ID of the guild to get a list of members for.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of guild members.
+-- @usage discord:listGuildMembers("[guild ID]", {limit = 5}):next(function(members) ... end)
+function DiscordRest:listGuildMembers(guildId, options, botToken)
+	return self:performAuthorizedRequest(routes.guildMembers, {guildId}, options, "GET", nil, botToken)
 end
 
 --- Modify a guild's settings.

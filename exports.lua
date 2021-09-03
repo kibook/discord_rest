@@ -620,6 +620,17 @@ exports("listActiveGuildThreads", function(guildId, botToken)
 	return discordRest:listActiveGuildThreads(guildId, botToken)
 end)
 
+--- Get a list of members in a guild.
+-- @function listGuildMembers
+-- @param guildId The ID of the guild to get a list of members for.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of guild members.
+-- @usage exports.discord_rest:listGuildMembers("[guild ID]", {limit = 5}, "[bot token]"):next(function(members) ... end)
+exports("listGuildMembers", function(guildId, options, botToken)
+	return discordRest:listGuildMembers(guildId, options, botToken)
+end)
+
 --- Modify a guild's settings.
 -- @function modifyGuild
 -- @param guildId The ID of the guild to modify.
