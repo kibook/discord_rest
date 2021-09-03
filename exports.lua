@@ -669,6 +669,18 @@ exports("modifyGuildChannelPositions", function(guildId, channelPositions, botTo
 	return discordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
 end)
 
+--- Modifies the nickname of the current user in a guild.
+-- @function modifyCurrentUserNick
+-- @param guildId The ID of the guild.
+-- @param nick The value to set the user's nickname to.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:modifyCurrentUserNick("[guild ID]", "New nickname")
+-- @see https://discord.com/developers/docs/resources/guild#modify-current-user-nick
+exports("modifyCurrentUserNick", function(guildId, nick, botToken)
+	return discordRest:modifyCurrentUserNick(guildId, nick, botToken)
+end)
+
 --- Modify attributes of a guild member.
 -- @function modifyGuildMember
 -- @param guildId The ID of the guild.

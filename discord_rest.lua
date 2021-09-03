@@ -29,6 +29,7 @@ local routes = {
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	messageThreads = "/channels/%s/messages/%s/threads",
+	nick           = "/guilds/%s/members/@me/nick",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
 	pinMessage     = "/channels/%s/pins/%s",
 	pins           = "/channels/%s/pins",
@@ -929,6 +930,17 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions
 function DiscordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
 	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "PATCH", channelPositions, botToken)
+end
+
+--- Modifies the nickname of the current user in a guild.
+-- @param guildId The ID of the guild.
+-- @param nick The value to set the user's nickname to.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:modifyCurrentUserNick("[guild ID]", "New nickname")
+-- @see https://discord.com/developers/docs/resources/guild#modify-current-user-nick
+function DiscordRest:modifyCurrentUserNick(guildId, nick, botToken)
+	return self:performAuthorizedRequest(routes.nick, {guildId}, {nick = nick}, "PATCH", nil, botToken)
 end
 
 --- Modify attributes of a guild member.
