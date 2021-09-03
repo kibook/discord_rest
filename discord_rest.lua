@@ -19,6 +19,7 @@ local routes = {
 	guildEmoji     = "/guilds/%s/emojis/%s",
 	guildEmojis    = "/guilds/%s/emojis",
 	guildMember    = "/guilds/%s/members/%s",
+	guildPreview   = "/guilds/%s/preview",
 	guilds         = "/guilds",
 	invite         = "/invites/%s",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
@@ -827,6 +828,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-member
 function DiscordRest:getGuildMember(guildId, userId, botToken)
 	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "GET", nil, botToken)
+end
+
+--- Get preview information for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the preview info for the guild.
+-- @usage discord:getGuildPreview("[guild ID]"):next(function(preview) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-preview
+function DiscordRest:getGuildPreview(guildId, botToken)
+	return self:performAuthorizedRequest(routes.guildPreview, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Invite

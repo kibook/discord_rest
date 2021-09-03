@@ -564,6 +564,17 @@ exports("getGuildMember", function(guildId, userId, botToken)
 	return discordRest:getGuildMember(guildId, userId, botToken)
 end)
 
+--- Get preview information for a guild.
+-- @function getGuildPreview
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the preview info for the guild.
+-- @usage exports.discord_rest:getGuildPreview("[guild ID]", "[bot token]"):next(function(preview) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-preview
+exports("getGuildPreview", function(guildId, botToken)
+	return discordRest:getGuildPreview(guildId, botToken)
+end)
+
 --- Invite
 -- @section invite
 
