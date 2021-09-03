@@ -884,6 +884,17 @@ function DiscordRest:modifyGuild(guildId, settings, botToken)
 	return self:performAuthorizedRequest(routes.guild, {guildId}, nil, "PATCH", params, botToken)
 end
 
+--- Modify the positions of a set of channels.
+-- @param guildId The ID of the guild containing the channels.
+-- @param channelPositions A set of channel position parameters.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:modifyGuildChannelPositions("[guild ID]", {{id = "[channel 1 ID]", position = 2}, {"[channel 2 ID]", position = 1}})
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions
+function DiscordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
+	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "PATCH", channelPositions, botToken)
+end
+
 --- Invite
 -- @section invite
 

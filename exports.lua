@@ -621,6 +621,18 @@ exports("modifyGuild", function(guildId, settings, botToken)
 	return discordRest:modifyGuild(guildId, settings, botToken)
 end)
 
+--- Modify the positions of a set of channels.
+-- @function modifyGuildChannelPositions
+-- @param guildId The ID of the guild containing the channels.
+-- @param channelPositions A set of channel position parameters.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:modifyGuildChannelPositions("[guild ID]", {{id = "[channel 1 ID]", position = 2}, {"[channel 2 ID]", position = 1}}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions
+exports("modifyGuildChannelPositions", function(guildId, channelPositions, botToken)
+	return discordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
+end)
+
 --- Invite
 -- @section invite
 
