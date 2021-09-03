@@ -655,6 +655,18 @@ exports("modifyGuildChannelPositions", function(guildId, channelPositions, botTo
 	return discordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
 end)
 
+--- Get a list of guild members whose username or nickname starts with a provided string.
+-- @function searchGuildMembers
+-- @param guildId The ID of the guild to search in.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of guild members that matched the query.
+-- @usage exports.discord_rest:searchGuildMembers("[guild ID]", {query = "Po"}, "[bot token]"):next(function(members) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#search-guild-members
+exports("searchGuildMembers", function(guildId, options, botToken)
+	return discordRest:searchGuildMembers(guildId, options, botToken)
+end)
+
 --- Invite
 -- @section invite
 

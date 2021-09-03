@@ -36,6 +36,7 @@ local routes = {
 	publicThreads  = "/channels/%s/threads/archived/public",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
+	searchMembers  = "/guilds/%s/members/search",
 	threadMembers  = "/channels/%s/thread-members",
 	threadSelf     = "/channels/%s/thread-members/@me",
 	threadUser     = "/channels/%s/thread-members/%s",
@@ -915,6 +916,17 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions
 function DiscordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
 	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "PATCH", channelPositions, botToken)
+end
+
+--- Get a list of guild members whose username or nickname starts with a provided string.
+-- @param guildId The ID of the guild to search in.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of guild members that matched the query.
+-- @usage discord:searchGuildMembers("[guild ID]", {query = "Po"}):next(function(members) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#search-guild-members
+function DiscordRest:searchGuildMembers(guildId, options, botToken)
+	return self:performAuthorizedRequest(routes.searchMembers, {guildId}, options, "GET", nil, botToken)
 end
 
 --- Invite
