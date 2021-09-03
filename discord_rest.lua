@@ -45,6 +45,7 @@ local routes = {
 	typing         = "/channels/%s/typing",
 	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
 	user           = "/users/%s",
+	webhook        = "/webhooks/%s/%s",
 }
 
 -- Check if an HTTP status code indicates an error
@@ -1052,13 +1053,24 @@ end
 --- Webhook
 -- @section webhook
 
---- Execute a Discord webhook
+--- Execute a webhook.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token for the webhook.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage discord:executeWebhook("[webhook ID]", "[webhook token]", {content = "Hello, world!"})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
+function DiscordRest:executeWebhook(webhookId, webhookToken, data)
+	return self:executeWebhookUrl(formatRoute(routes.webhook, {webhookId, webhookToken}), data)
+end
+
+--- Execute a webhook, using the full URL.
 -- @param url The webhook URL.
 -- @param data The data to send.
 -- @return A new promise.
--- @usage discord:executeWebhook("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
+-- @usage discord:executeWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
-function DiscordRest:executeWebhook(url, data)
+function DiscordRest:executeWebhookUrl(url, data)
 	local queue = self:getQueue(url)
 	local p = promise.new()
 	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), "POST", data)
