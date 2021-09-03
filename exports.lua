@@ -542,6 +542,19 @@ exports("addGuildMember", function(guildId, userId, params, botToken)
 	return discordRest:addGuildMember(guildId, userId, params, botToken)
 end)
 
+--- Adds a role to a guild member.
+-- @function addGuildMemberRole
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user to add the role to.
+-- @param roleId The ID of the role to add to the member.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:addGuildMemberRole("[guild ID]", "[user ID]", "[role ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#add-guild-member-role
+exports("addGuildMemberRole", function(guildId, userId, roleId, botToken)
+	return discordRest:addGuildMemberRole(guildId, userId, roleId, botToken)
+end)
+
 --- Create a new guild.
 -- @function createGuild
 -- @param params Parameters for the new guild.

@@ -26,6 +26,7 @@ local routes = {
 	guildThreads   = "/guilds/%s/threads/active",
 	invite         = "/invites/%s",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
+	memberRole     = "/guilds/%s/members/%s/roles/%s",
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	messageThreads = "/channels/%s/messages/%s/threads",
@@ -814,6 +815,18 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#add-guild-member
 function DiscordRest:addGuildMember(guildId, userId, params, botToken)
 	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "PUT", params, botToken)
+end
+
+--- Adds a role to a guild member.
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user to add the role to.
+-- @param roleId The ID of the role to add to the member.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:addGuildMemberRole("[guild ID]", "[user ID]", "[role ID]")
+-- @see https://discord.com/developers/docs/resources/guild#add-guild-member-role
+function DiscordRest:addGuildMemberRole(guildId, userId, roleId, botToken)
+	return self:performAuthorizedRequest(routes.memberRole, {guildId, userId, roleId}, nil, "PUT", nil, botToken)
 end
 
 --- Create a new guild.
