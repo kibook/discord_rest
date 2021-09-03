@@ -707,6 +707,18 @@ exports("modifyGuildMember", function(guildId, userId, params, botToken)
 	return discordRest:modifyGuildMember(guildId, userId, params, botToken)
 end)
 
+--- Remove a member from a guild.
+-- @function removeGuildMember
+-- @param guildId The ID of the guild to remove the member from.
+-- @param userId The ID of the member to remove from the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removeGuildMember("[guild ID]", "[user ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#remove-guild-member
+exports("removeGuildMember", function(guildId, userId, botToken)
+	return discordRest:removeGuildMember(guildId, userId, botToken)
+end)
+
 --- Removes a role from a guild member.
 -- @function removeGuildMemberRole
 -- @param guildId The ID of the guild.
