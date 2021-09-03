@@ -669,6 +669,19 @@ exports("modifyGuildChannelPositions", function(guildId, channelPositions, botTo
 	return discordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
 end)
 
+--- Modify attributes of a guild member.
+-- @function modifyGuildMember
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the member to modify.
+-- @param params The parameters to modify.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the modified guild member.
+-- @usage exports.discord_rest:modifyGuildMember("[guild ID]", "[user ID]", {nick = "New nickname"}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-member
+exports("modifyGuildMember", function(guildId, userId, params, botToken)
+	return discordRest:modifyGuildMember(guildId, userId, params, botToken)
+end)
+
 --- Get a list of guild members whose username or nickname starts with a provided string.
 -- @function searchGuildMembers
 -- @param guildId The ID of the guild to search in.

@@ -931,6 +931,18 @@ function DiscordRest:modifyGuildChannelPositions(guildId, channelPositions, botT
 	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "PATCH", channelPositions, botToken)
 end
 
+--- Modify attributes of a guild member.
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the member to modify.
+-- @param params The parameters to modify.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the modified guild member.
+-- @usage discord:modifyGuildMember("[guild ID]", "[user ID]", {nick = "New nickname"})
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-member
+function DiscordRest:modifyGuildMember(guildId, userId, params, botToken)
+	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "PATCH", params, botToken)
+end
+
 --- Get a list of guild members whose username or nickname starts with a provided string.
 -- @param guildId The ID of the guild to search in.
 -- @param options Options for the query.
