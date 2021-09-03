@@ -707,6 +707,19 @@ exports("modifyGuildMember", function(guildId, userId, params, botToken)
 	return discordRest:modifyGuildMember(guildId, userId, params, botToken)
 end)
 
+--- Removes a role from a guild member.
+-- @function removeGuildMemberRole
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user to remove the role from.
+-- @param roleId The ID of the role to remove from the member.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removeGuildMemberRole("[guild ID]", "[user ID]", "[role ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#remove-guild-member-role
+exports("removeGuildMemberRole", function(guildId, userId, roleId, botToken)
+	return discordRest:removeGuildMemberRole(guildId, userId, roleId, botToken)
+end)
+
 --- Get a list of guild members whose username or nickname starts with a provided string.
 -- @function searchGuildMembers
 -- @param guildId The ID of the guild to search in.

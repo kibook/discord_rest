@@ -968,6 +968,18 @@ function DiscordRest:modifyGuildMember(guildId, userId, params, botToken)
 	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "PATCH", params, botToken)
 end
 
+--- Removes a role from a guild member.
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user to remove the role from.
+-- @param roleId The ID of the role to remove from the member.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:removeGuildMemberRole("[guild ID]", "[user ID]", "[role ID]")
+-- @see https://discord.com/developers/docs/resources/guild#remove-guild-member-role
+function DiscordRest:removeGuildMemberRole(guildId, userId, roleId, botToken)
+	return self:performAuthorizedRequest(routes.memberRole, {guildId, userId, roleId}, nil, "DELETE", nil, botToken)
+end
+
 --- Get a list of guild members whose username or nickname starts with a provided string.
 -- @param guildId The ID of the guild to search in.
 -- @param options Options for the query.
