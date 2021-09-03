@@ -158,6 +158,21 @@ end
 -- @type DiscordRest
 DiscordRest = {}
 
+--- Discord channel types
+DiscordRest.channelTypes = {
+	GUILD_TEXT = 0,
+	DM = 1,
+	GUILD_VOICE = 2,
+	GROUP_DM = 3,
+	GUILD_CATEGORY = 4,
+	GUILD_NEWS = 5,
+	GUILD_STORE = 6,
+	GUILD_NEWS_THREAD = 10,
+	GUILD_PUBLIC_THREAD = 11,
+	GUILD_PRIVATE_THREAD = 12,
+	GUILD_STAGE_VOICE = 13
+}
+
 --- Create a new Discord REST API interface
 -- @param botToken Optional bot token to use for authorization
 -- @return A new Discord REST API interface object
@@ -670,9 +685,17 @@ end
 -- @param params Parameters for the thread.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with the new thread channel.
--- @usage discord:startThreadWithoutMessage("[channel ID]", {name = "New thread", auto_archive_duration = 60, type = 11}):next(function(channel) ... end)
+-- @usage discord:startThreadWithoutMessage("[channel ID]", {name = "New thread"}):next(function(channel) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#start-thread-without-message
 function DiscordRest:startThreadWithoutMessage(channelId, params, botToken)
+	if not params.auto_archive_duration then
+		params.auto_archive_duration = 1440 -- 24 hours
+	end
+
+	if not params.type then
+		params.type = DiscordRest.channelTypes.GUILD_PUBLIC_THREAD
+	end
+
 	return self:performAuthorizedRequest(routes.channelThreads, {channelId}, nil, "POST", params, botToken)
 end
 

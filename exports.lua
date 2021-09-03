@@ -434,7 +434,7 @@ end)
 -- @param params Parameters for the thread.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise that resolves with the new thread channel.
--- @usage exports.discord_rest:startThreadWithoutMessage("[channel ID]", {name = "New thread", auto_archive_duration = 60, type = 11}, "[bot token]"):next(function(channel) ... end)
+-- @usage exports.discord_rest:startThreadWithoutMessage("[channel ID]", {name = "New thread"}, "[bot token]"):next(function(channel) ... end)
 -- @see https://discord.com/developers/docs/resources/channel#start-thread-without-message
 exports("startThreadWithoutMessage", function(channelId, params, botToken)
 	return discordRest:startThreadWithoutMessage(channelId, params, botToken)
