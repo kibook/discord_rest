@@ -563,6 +563,17 @@ exports("getGuild", function(guildId, withCounts, botToken)
 	return discordRest:getGuild(guildId, withCounts, botTokens)
 end)
 
+--- Get a list of guild channels.
+-- @function getGuildChannels
+-- @param guildId The ID of the guild to get a list of channels for.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of channels.
+-- @usage exports.discord_rest:getGuildChannels("[guild ID]", "[bot token]"):next(function(channels) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-channels
+exports("getGuildChannels", function(guildId, botToken)
+	return discordRest:getGuildChannels(guildId, botToken)
+end)
+
 --- Get info for a member of a guild.
 -- @function getGuildMember
 -- @param guildId The ID of the guild.

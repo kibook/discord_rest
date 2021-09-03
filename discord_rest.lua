@@ -16,6 +16,7 @@ local routes = {
 	followers      = "/channels/%s/followers",
 	groupDm        = "/channels/%s/recipients/%s",
 	guild          = "/guilds/%s",
+	guildChannels  = "/guilds/%s/channels",
 	guildEmoji     = "/guilds/%s/emojis/%s",
 	guildEmojis    = "/guilds/%s/emojis",
 	guildMember    = "/guilds/%s/members/%s",
@@ -827,6 +828,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild
 function DiscordRest:getGuild(guildId, withCounts, botToken)
 	return self:performAuthorizedRequest(routes.guild, {guildId}, {with_counts = withCounts}, "GET", nil, botToken)
+end
+
+--- Get a list of guild channels.
+-- @param guildId The ID of the guild to get a list of channels for.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of channels.
+-- @usage discord:getGuildChannels("[guild ID]"):next(function(channels) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-channels
+function DiscordRest:getGuildChannels(guildId, botToken)
+	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Get info for a member of a guild.
