@@ -207,7 +207,8 @@ function DiscordRest:new(botToken)
 
 	Citizen.CreateThread(function()
 		while self do
-			Citizen.Wait(self:processQueues() and 50 or 500)
+			self:processQueues()
+			Citizen.Wait(500)
 		end
 	end)
 
@@ -292,8 +293,8 @@ function DiscordRest:enqueueRequest(queue, url, callback, method, data, headers)
 
 		PerformHttpRequest(url,
 			function(status, data, headers)
-				self:handleResponse(queue, url, status, data, headers, callback)
 				p:resolve()
+				self:handleResponse(queue, url, status, data, headers, callback)
 			end,
 			method, data, headers)
 
