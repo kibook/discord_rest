@@ -159,6 +159,18 @@ end
 DiscordRest = {}
 
 --- Discord channel types
+-- @field GUILD_TEXT a text channel within a server
+-- @field DM a direct message between users
+-- @field GUILD_VOICE a voice channel within a server
+-- @field GROUP_DM a direct message between multiple users
+-- @field GUILD_CATEGORY an organizational category that contains up to 50 channels
+-- @field GUILD_NEWS a channel that users can follow and crosspost into their own server
+-- @field GUILD_STORE a channel in which game developers can sell their game on Discord
+-- @field GUILD_NEWS_THREAD a temporary sub-channel within a GUILD_NEWS channel
+-- @field GUILD_PUBLIC_THREAD a temporary sub-channel within a GUILD_TEXT channel
+-- @field GUILD_PRIVATE_THREAD a temporary sub-channel within a GUILD_TEXT channel that is only viewable by those invited and those with the MANAGE_THREADS permission
+-- @field GUILD_STAGE_VOICE a voice channel for hosting events with an audience
+-- @see https://discord.com/developers/docs/resources/channel#channel-object-channel-types
 DiscordRest.channelTypes = {
 	GUILD_TEXT = 0,
 	DM = 1,
