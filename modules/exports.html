@@ -249,12 +249,32 @@
 	<td class="summary">Create a new guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#createGuildChannel">createGuildChannel (guildId, params, botToken)</a></td>
+	<td class="summary">Create a new guild channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#deleteGuild">deleteGuild (guildId, botToken)</a></td>
+	<td class="summary">Delete a guild permanently.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#getGuild">getGuild (guildId, withCounts, botToken)</a></td>
 	<td class="summary">Get info for a given guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#getGuildChannels">getGuildChannels (guildId, botToken)</a></td>
+	<td class="summary">Get a list of guild channels.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#getGuildMember">getGuildMember (guildId, userId, botToken)</a></td>
 	<td class="summary">Get info for a member of a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuildPreview">getGuildPreview (guildId, botToken)</a></td>
+	<td class="summary">Get preview information for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#modifyGuild">modifyGuild (guildId, settings, botToken)</a></td>
+	<td class="summary">Modify a guild's settings.</td>
 	</tr>
 </table>
 <h2><a href="#Invite">Invite </a></h2>
@@ -2022,6 +2042,81 @@
 
 </dd>
     <dt>
+    <a name = "createGuildChannel"></a>
+    <strong>createGuildChannel (guildId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Create a new guild channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to create the channel in.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the new channel.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the new channel.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#create-guild-channel">https://discord.com/developers/docs/resources/guild#create-guild-channel</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:createGuildChannel([<span class="string">"guild ID"</span>], {name = <span class="string">"new-channel"</span>}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "deleteGuild"></a>
+    <strong>deleteGuild (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete a guild permanently.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to delete.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#delete-guild">https://discord.com/developers/docs/resources/guild#delete-guild</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:deleteGuild(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "getGuild"></a>
     <strong>getGuild (guildId, withCounts, botToken)</strong>
     </dt>
@@ -2061,6 +2156,42 @@
 
 </dd>
     <dt>
+    <a name = "getGuildChannels"></a>
+    <strong>getGuildChannels (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of guild channels.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to get a list of channels for.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the list of channels.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-channels">https://discord.com/developers/docs/resources/guild#get-guild-channels</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildChannels(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channels) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "getGuildMember"></a>
     <strong>getGuildMember (guildId, userId, botToken)</strong>
     </dt>
@@ -2096,6 +2227,81 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:getGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(member) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuildPreview"></a>
+    <strong>getGuildPreview (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get preview information for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the preview info for the guild.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-preview">https://discord.com/developers/docs/resources/guild#get-guild-preview</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildPreview(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(preview) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "modifyGuild"></a>
+    <strong>modifyGuild (guildId, settings, botToken)</strong>
+    </dt>
+    <dd>
+    Modify a guild's settings.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to modify.
+        </li>
+        <li><span class="parameter">settings</span>
+         The modified settings for the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated guild.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-guild">https://discord.com/developers/docs/resources/guild#modify-guild</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:modifyGuild(<span class="string">"[guild ID]"</span>, {name = <span class="string">"New guild name"</span>}, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -2301,7 +2507,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-03 02:45:35 </i>
+<i style="float:right;">Last updated 2021-09-03 06:32:42 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
