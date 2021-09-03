@@ -59,7 +59,7 @@ end
 function createSimplePromiseCallback(p)
 	return function(status, data, headers)
 		if isResponseSuccess(status) then
-			p:resolve(json.decode(data))
+			p:resolve(json.decode(data) or status)
 		else
 			p:reject(status)
 		end
