@@ -892,6 +892,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with a list of guild members.
 -- @usage discord:listGuildMembers("[guild ID]", {limit = 5}):next(function(members) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#list-guild-members
 function DiscordRest:listGuildMembers(guildId, options, botToken)
 	return self:performAuthorizedRequest(routes.guildMembers, {guildId}, options, "GET", nil, botToken)
 end

@@ -627,6 +627,7 @@ end)
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with a list of guild members.
 -- @usage exports.discord_rest:listGuildMembers("[guild ID]", {limit = 5}, "[bot token]"):next(function(members) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#list-guild-members
 exports("listGuildMembers", function(guildId, options, botToken)
 	return discordRest:listGuildMembers(guildId, options, botToken)
 end)
