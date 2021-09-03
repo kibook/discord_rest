@@ -529,6 +529,19 @@ end)
 --- Guild
 -- @section guild
 
+--- Adds a user to the guild.
+-- @function addGuildMember
+-- @param guildId The ID of the guild to add the user to.
+-- @param userId The ID of the user to add to the guild.
+-- @param Parameters for adding the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:addGuildMember("[guild ID]", "[user ID]", {access_token = "..."}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#add-guild-member
+exports("addGuildMember", function(guildId, userId, params, botToken)
+	return discordRest:addGuildMember(guildId, userId, params, botToken)
+end)
+
 --- Create a new guild.
 -- @function createGuild
 -- @param params Parameters for the new guild.
