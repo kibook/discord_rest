@@ -51,8 +51,10 @@
 </ul>
 <h2>Examples</h2>
 <ul class="nowrap">
+  <li><a href="../examples/check-player.lua.html">check-player.lua</a></li>
   <li><a href="../examples/class.lua.html">class.lua</a></li>
   <li><a href="../examples/exports.lua.html">exports.lua</a></li>
+  <li><a href="../examples/send-message.lua.html">send-message.lua</a></li>
 </ul>
 
 </div>
@@ -245,6 +247,10 @@
 <h2><a href="#Guild">Guild </a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" nowrap><a href="#addGuildMember">addGuildMember (guildId, userId, Parameters, botToken)</a></td>
+	<td class="summary">Adds a user to the guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#createGuild">createGuild (params, botToken)</a></td>
 	<td class="summary">Create a new guild.</td>
 	</tr>
@@ -273,8 +279,24 @@
 	<td class="summary">Get preview information for a guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#listActiveGuildThreads">listActiveGuildThreads (guildId, botToken)</a></td>
+	<td class="summary">Returns all active threads in the guild, including public and private threads.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#listGuildMembers">listGuildMembers (guildId, options, botToken)</a></td>
+	<td class="summary">Get a list of members in a guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#modifyGuild">modifyGuild (guildId, settings, botToken)</a></td>
 	<td class="summary">Modify a guild's settings.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#modifyGuildChannelPositions">modifyGuildChannelPositions (guildId, channelPositions, botToken)</a></td>
+	<td class="summary">Modify the positions of a set of channels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#searchGuildMembers">searchGuildMembers (guildId, options, botToken)</a></td>
+	<td class="summary">Get a list of guild members whose username or nickname starts with a provided string.</td>
 	</tr>
 </table>
 <h2><a href="#Invite">Invite </a></h2>
@@ -2006,6 +2028,48 @@
 
     <dl class="function">
     <dt>
+    <a name = "addGuildMember"></a>
+    <strong>addGuildMember (guildId, userId, Parameters, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a user to the guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to add the user to.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to add to the guild.
+        </li>
+        <li><span class="parameter">Parameters</span>
+         for adding the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#add-guild-member">https://discord.com/developers/docs/resources/guild#add-guild-member</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:addGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, {access_token = <span class="string">"..."</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "createGuild"></a>
     <strong>createGuild (params, botToken)</strong>
     </dt>
@@ -2267,6 +2331,81 @@
 
 </dd>
     <dt>
+    <a name = "listActiveGuildThreads"></a>
+    <strong>listActiveGuildThreads (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Returns all active threads in the guild, including public and private threads.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the lists of threads and thread members.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#list-active-threads">https://discord.com/developers/docs/resources/guild#list-active-threads</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:listActiveGuildThreads(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(data) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "listGuildMembers"></a>
+    <strong>listGuildMembers (guildId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of members in a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to get a list of members for.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of guild members.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#list-guild-members">https://discord.com/developers/docs/resources/guild#list-guild-members</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:listGuildMembers(<span class="string">"[guild ID]"</span>, {limit = <span class="number">5</span>}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(members) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "modifyGuild"></a>
     <strong>modifyGuild (guildId, settings, botToken)</strong>
     </dt>
@@ -2302,6 +2441,84 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:modifyGuild(<span class="string">"[guild ID]"</span>, {name = <span class="string">"New guild name"</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "modifyGuildChannelPositions"></a>
+    <strong>modifyGuildChannelPositions (guildId, channelPositions, botToken)</strong>
+    </dt>
+    <dd>
+    Modify the positions of a set of channels.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild containing the channels.
+        </li>
+        <li><span class="parameter">channelPositions</span>
+         A set of channel position parameters.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions">https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:modifyGuildChannelPositions(<span class="string">"[guild ID]"</span>, {{id = <span class="string">"[channel 1 ID]"</span>, position = <span class="number">2</span>}, {<span class="string">"[channel 2 ID]"</span>, position = <span class="number">1</span>}}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "searchGuildMembers"></a>
+    <strong>searchGuildMembers (guildId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of guild members whose username or nickname starts with a provided string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to search in.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of guild members that matched the query.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#search-guild-members">https://discord.com/developers/docs/resources/guild#search-guild-members</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:searchGuildMembers(<span class="string">"[guild ID]"</span>, {query = <span class="string">"Po"</span>}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(members) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -2507,7 +2724,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-03 06:32:42 </i>
+<i style="float:right;">Last updated 2021-09-03 16:22:24 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

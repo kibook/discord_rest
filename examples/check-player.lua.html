@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>discord_rest</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+
+
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><strong>check-player.lua</strong></li>
+  <li><a href="../examples/class.lua.html">class.lua</a></li>
+  <li><a href="../examples/exports.lua.html">exports.lua</a></li>
+  <li><a href="../examples/send-message.lua.html">send-message.lua</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/exports.html">exports</a></li>
+</ul>
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/DiscordRest.html">DiscordRest</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+    <h2>check-player.lua</h2>
+<pre>
+<span class="comment">-- Check if a player is in a Discord guild before letting them in the server
+</span>
+<span class="keyword">local</span> botToken = <span class="string">""</span> <span class="comment">-- Discord bot token for API access
+</span><span class="keyword">local</span> guildId = <span class="string">""</span> <span class="comment">-- Discord guild that players must be in
+</span>
+<span class="keyword">local</span> <span class="keyword">function</span> getDiscordId(player)
+        <span class="keyword">for</span> _, identifier <span class="keyword">in</span> <span class="global">ipairs</span>(GetPlayerIdentifiers(player)) <span class="keyword">do</span>
+                <span class="keyword">if</span> identifier:sub(<span class="number">1</span>, <span class="number">8</span>) == <span class="string">"discord:"</span> <span class="keyword">then</span>
+                        <span class="keyword">return</span> identifier:sub(<span class="number">9</span>)
+                <span class="keyword">end</span>
+        <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> <span class="keyword">function</span> getGuildStatus(player)
+        <span class="keyword">local</span> p = promise.new()
+
+        <span class="keyword">local</span> discordId = getDiscordId(player)
+
+        <span class="keyword">if</span> discordId <span class="keyword">then</span>
+                exports.discord_rest:getGuildMember(guildId, discordId, botToken):<span class="global">next</span>(<span class="keyword">function</span>(member)
+                        p:resolve(<span class="keyword">true</span>)
+                <span class="keyword">end</span>, <span class="keyword">function</span>(err)
+                        <span class="keyword">if</span> err == <span class="number">404</span> <span class="keyword">then</span>
+                                p:resolve(<span class="keyword">false</span>)
+                        <span class="keyword">else</span>
+                                p:reject(<span class="string">"Discord REST API error: "</span> .. err)
+                        <span class="keyword">end</span>
+                <span class="keyword">end</span>)
+        <span class="keyword">else</span>
+                p:reject(<span class="string">"No Discord ID, ensure Discord is open or you have linked your Discord account"</span>)
+        <span class="keyword">end</span>
+
+        <span class="keyword">return</span> p
+<span class="keyword">end</span>
+
+AddEventHandler(<span class="string">"playerConnecting"</span>, <span class="keyword">function</span>(name, setKickReason, deferrals)
+        <span class="keyword">local</span> source = source
+
+        deferrals.defer()
+
+        Citizen.Wait(<span class="number">0</span>)
+
+        deferrals.update(<span class="string">"Checking Discord status..."</span>)
+
+        Citizen.Wait(<span class="number">0</span>)
+
+        getGuildStatus(source):<span class="global">next</span>(<span class="keyword">function</span>(isMember)
+                <span class="keyword">if</span> isMember <span class="keyword">then</span>
+                        deferrals.done()
+                <span class="keyword">else</span>
+                        deferrals.done(<span class="string">"You must join the Discord guild to play on this server"</span>)
+                <span class="keyword">end</span>
+        <span class="keyword">end</span>, <span class="keyword">function</span>(err)
+                deferrals.done(<span class="string">"Failed to check guild status: "</span> .. err)
+        <span class="keyword">end</span>)
+<span class="keyword">end</span>)</pre>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2021-09-03 16:22:24 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
