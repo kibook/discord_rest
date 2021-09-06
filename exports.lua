@@ -601,6 +601,18 @@ exports("getGuild", function(guildId, withCounts, botToken)
 	return discordRest:getGuild(guildId, withCounts, botTokens)
 end)
 
+--- Return info on a ban for a specific user in a guild.
+-- @function getGuildBan
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the banned user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the ban info.
+-- @usage exports.discord_rest:getGuildBan("[guild ID]", "[user ID]", "[bot token]"):next(function(ban) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-ban
+exports("getGuildBan", function(guildId, userId, botToken)
+	return discordRest:getGuildBan(guildId, userId, botToken)
+end)
+
 --- Get a list of bans for a guild.
 -- @function getGuildBans
 -- @param guildId The ID of the guild.
