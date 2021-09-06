@@ -618,7 +618,7 @@ end)
 -- @param guildId The ID of the guild.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with a list of bans.
--- @usage exports.discord_get:getGuildBans("[guild ID]"):next(function(bans) ... end)
+-- @usage exports.discord_get:getGuildBans("[guild ID]", "[bot token]"):next(function(bans) ... end)
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-bans
 exports("getGuildBans", function(guildId, botToken)
 	return discordRest:getGuildBans(guildId, botToken)
