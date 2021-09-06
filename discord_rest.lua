@@ -7,6 +7,7 @@ local discordApi = "https://discord.com/api"
 -- Discord REST API routes
 local routes = {
 	activeThreads  = "/channels/%s/threads/active",
+	bans           = "/guilds/%s/bans",
 	bulkDelete     = "/channels/%s/messages/bulk-delete",
 	channel        = "/channels/%s",
 	channelInvites = "/channels/%s/invites",
@@ -878,6 +879,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild
 function DiscordRest:getGuild(guildId, withCounts, botToken)
 	return self:performAuthorizedRequest(routes.guild, {guildId}, {with_counts = withCounts}, "GET", nil, botToken)
+end
+
+--- Get a list of bans for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of bans.
+-- @usage discord:getGuildBans("[guild ID]"):next(function(bans) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-bans
+function DiscordRest:getGuildBans(guildId, botToken)
+	return self:performAuthorizedRequest(routes.bans, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Get a list of guild channels.
