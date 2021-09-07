@@ -260,8 +260,16 @@
 	<td class="summary">Create a new guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#createGuildBan">createGuildBan (guildId, userId, params, botToken)</a></td>
+	<td class="summary">Create a guild ban, and optionally delete previous messages sent by the banned user.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#createGuildChannel">createGuildChannel (guildId, params, botToken)</a></td>
 	<td class="summary">Create a new guild channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#createGuildRole">createGuildRole (guildId, params, botToken)</a></td>
+	<td class="summary">Create a new role for the guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#deleteGuild">deleteGuild (guildId, botToken)</a></td>
@@ -270,6 +278,14 @@
 	<tr>
 	<td class="name" nowrap><a href="#getGuild">getGuild (guildId, withCounts, botToken)</a></td>
 	<td class="summary">Get info for a given guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuildBan">getGuildBan (guildId, userId, botToken)</a></td>
+	<td class="summary">Return info on a ban for a specific user in a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuildBans">getGuildBans (guildId, botToken)</a></td>
+	<td class="summary">Get a list of bans for a guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#getGuildChannels">getGuildChannels (guildId, botToken)</a></td>
@@ -282,6 +298,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#getGuildPreview">getGuildPreview (guildId, botToken)</a></td>
 	<td class="summary">Get preview information for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuildRoles">getGuildRoles (guildId, botToken)</a></td>
+	<td class="summary">Get a list of roles for a guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#listActiveGuildThreads">listActiveGuildThreads (guildId, botToken)</a></td>
@@ -306,6 +326,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#modifyGuildMember">modifyGuildMember (guildId, userId, params, botToken)</a></td>
 	<td class="summary">Modify attributes of a guild member.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeGuildBan">removeGuildBan (guildId, userId, botToken)</a></td>
+	<td class="summary">Remove the ban for a user.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#removeGuildMember">removeGuildMember (guildId, userId, botToken)</a></td>
@@ -2173,6 +2197,48 @@
 
 </dd>
     <dt>
+    <a name = "createGuildBan"></a>
+    <strong>createGuildBan (guildId, userId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Create a guild ban, and optionally delete previous messages sent by the banned user.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to create the ban for.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to ban.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the ban.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#create-guild-ban">https://discord.com/developers/docs/resources/guild#create-guild-ban</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:createGuildBan(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, {reason = <span class="string">"Not following the rules"</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "createGuildChannel"></a>
     <strong>createGuildChannel (guildId, params, botToken)</strong>
     </dt>
@@ -2208,6 +2274,45 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:createGuildChannel([<span class="string">"guild ID"</span>], {name = <span class="string">"new-channel"</span>}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channel) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "createGuildRole"></a>
+    <strong>createGuildRole (guildId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Create a new role for the guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the new role.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the new role.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#create-guild-role">https://discord.com/developers/docs/resources/guild#create-guild-role</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:createGuildRole(<span class="string">"[guild ID]"</span>, {name = <span class="string">"Moderator"</span>, ...}, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(role) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -2283,6 +2388,81 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:getGuild(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(guild) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuildBan"></a>
+    <strong>getGuildBan (guildId, userId, botToken)</strong>
+    </dt>
+    <dd>
+    Return info on a ban for a specific user in a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the banned user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the ban info.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-ban">https://discord.com/developers/docs/resources/guild#get-guild-ban</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildBan(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(ban) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuildBans"></a>
+    <strong>getGuildBans (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of bans for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of bans.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-bans">https://discord.com/developers/docs/resources/guild#get-guild-bans</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_get:getGuildBans(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(bans) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -2394,6 +2574,42 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:getGuildPreview(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(preview) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuildRoles"></a>
+    <strong>getGuildRoles (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of roles for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the list of roles.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-roles">https://discord.com/developers/docs/resources/guild#get-guild-roles</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildRoles(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(roles) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -2628,6 +2844,45 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:modifyGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, {nick = <span class="string">"New nickname"</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removeGuildBan"></a>
+    <strong>removeGuildBan (guildId, userId, botToken)</strong>
+    </dt>
+    <dd>
+    Remove the ban for a user.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to remove the ban for the user from.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user to unban.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#remove-guild-ban">https://discord.com/developers/docs/resources/guild#remove-guild-ban</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:removeGuildBan(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
     </ul>
 
 </dd>
@@ -2992,7 +3247,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-03 21:26:46 </i>
+<i style="float:right;">Last updated 2021-09-07 02:57:00 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
