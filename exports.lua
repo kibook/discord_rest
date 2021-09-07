@@ -566,6 +566,19 @@ exports("createGuild", function(params, botToken)
 	return discordRest:createGuild(params, botToken)
 end)
 
+--- Create a guild ban, and optionally delete previous messages sent by the banned user.
+-- @function createGuildBan
+-- @param guildId The ID of the guild to create the ban for.
+-- @param userId The ID of the user to ban.
+-- @param params Parameters for the ban.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:createGuildBan("[guild ID]", "[user ID]", {reason = "Not following the rules"}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#create-guild-ban
+exports("createGuildBan", function(guildId, userId, params, botToken)
+	return discordRest:createGuildBan(guildId, userId, params, botToken)
+end)
+
 --- Create a new guild channel.
 -- @function createGuildChannel
 -- @param guildId The ID of the guild to create the channel in.

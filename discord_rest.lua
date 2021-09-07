@@ -850,6 +850,18 @@ function DiscordRest:createGuild(params, botToken)
 	return self:performAuthorizedRequest(routes.guilds, nil, nil, "POST", params, botToken)
 end
 
+--- Create a guild ban, and optionally delete previous messages sent by the banned user.
+-- @param guildId The ID of the guild to create the ban for.
+-- @param userId The ID of the user to ban.
+-- @param params Parameters for the ban.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:createGuildBan("[guild ID]", "[user ID]", {reason = "Not following the rules"})
+-- @see https://discord.com/developers/docs/resources/guild#create-guild-ban
+function DiscordRest:createGuildBan(guildId, userId, params, botToken)
+	return self:performAuthorizedRequest(routes.ban, {guildId, userId}, nil, "PUT", params, botToken)
+end
+
 --- Create a new guild channel.
 -- @param guildId The ID of the guild to create the channel in.
 -- @param params Parameters for the new channel.
