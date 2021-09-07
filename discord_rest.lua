@@ -1012,6 +1012,17 @@ function DiscordRest:modifyGuildMember(guildId, userId, params, botToken)
 	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "PATCH", params, botToken)
 end
 
+--- Remove the ban for a user.
+-- @param guildId The ID of the guild to remove the ban for the user from.
+-- @param userId The ID of the user to unban.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:removeGuildBan("[guild ID]", "[user ID]")
+-- @see https://discord.com/developers/docs/resources/guild#remove-guild-ban
+function DiscordRest:removeGuilBan(guildId, userId, botToken)
+	return self:performAuthorizedRequest(routes.ban, {guildId, userId}, nil, "DELETE", nil, botToken)
+end
+
 --- Remove a member from a guild.
 -- @param guildId The ID of the guild to remove the member from.
 -- @param userId The ID of the member to remove from the guild.

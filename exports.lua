@@ -743,6 +743,18 @@ exports("modifyGuildMember", function(guildId, userId, params, botToken)
 	return discordRest:modifyGuildMember(guildId, userId, params, botToken)
 end)
 
+--- Remove the ban for a user.
+-- @function removeGuildBan
+-- @param guildId The ID of the guild to remove the ban for the user from.
+-- @param userId The ID of the user to unban.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removeGuildBan("[guild ID]", "[user ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#remove-guild-ban
+exports("removeGuildBan", function(guildId, userId, botToken)
+	return discordRest:removeGuildBan(guildId, userId, botToken)
+end)
+
 --- Remove a member from a guild.
 -- @function removeGuildMember
 -- @param guildId The ID of the guild to remove the member from.
