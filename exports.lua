@@ -671,6 +671,17 @@ exports("getGuildPreview", function(guildId, botToken)
 	return discordRest:getGuildPreview(guildId, botToken)
 end)
 
+--- Get a list of roles for a guild.
+-- @function getGuildRoles
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of roles.
+-- @usage exports.discord_rest:getGuildRoles("[guild ID]"):next(function(roles) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-roles
+exports("getGuildRoles", function(guildId, botToken)
+	return discordRest:getGuildRoles(guildId, botToken)
+end)
+
 --- Returns all active threads in the guild, including public and private threads.
 -- @function listActiveGuildThreads
 -- @param guildId The ID of the guild.

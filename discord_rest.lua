@@ -40,6 +40,7 @@ local routes = {
 	publicThreads  = "/channels/%s/threads/archived/public",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
+	roles          = "/guilds/%s/roles",
 	searchMembers  = "/guilds/%s/members/search",
 	threadMembers  = "/channels/%s/thread-members",
 	threadSelf     = "/channels/%s/thread-members/@me",
@@ -944,6 +945,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-preview
 function DiscordRest:getGuildPreview(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guildPreview, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get a list of roles for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of roles.
+-- @usage discord:getGuildRoles("[guild ID]"):next(function(roles) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-roles
+function DiscordRest:getGuildRoles(guildId, botToken)
+	return self:performAuthorizedRequest(routes.roles, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Returns all active threads in the guild, including public and private threads.
