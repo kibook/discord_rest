@@ -874,6 +874,17 @@ function DiscordRest:createGuildChannel(guildId, params, botToken)
 	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "POST", params, botToken)
 end
 
+--- Create a new role for the guild.
+-- @param guildId The ID of the guild.
+-- @param params Parameters for the new role.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the new role.
+-- @usage discord:createGuildRole("[guild ID]", {name = "Moderator", ...}):next(function(role) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#create-guild-role
+function DiscordRest:createGuildRole(guildId, params, botToken)
+	return self:performAuthorizedRequest(routes.roles, {guildId}, nil, "POST", params, botToken)
+end
+
 --- Delete a guild permanently.
 -- @param guildId The ID of the guild to delete.
 -- @param botToken Optional bot token to use for authorization.

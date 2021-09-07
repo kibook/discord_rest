@@ -591,6 +591,18 @@ exports("createGuildChannel", function(guildId, params, botToken)
 	return discordRest:createGuildChannel(guildId, params, botToken)
 end)
 
+--- Create a new role for the guild.
+-- @function createGuildRole
+-- @param guildId The ID of the guild.
+-- @param params Parameters for the new role.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the new role.
+-- @usage exports.discord_rest:createGuildRole("[guild ID]", {name = "Moderator", ...}, "[bot token]"):next(function(role) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#create-guild-role
+exports("createGuildRole", function(guildId, params, botToken)
+	return discordRest:createGuildRole(guildId, params, botToken)
+end)
+
 --- Delete a guild permanently.
 -- @function deleteGuild
 -- @param guildId The ID of the guild to delete.
