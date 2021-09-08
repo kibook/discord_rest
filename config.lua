@@ -4,4 +4,4 @@ Config = {}
 Config.botToken = ""
 
 -- Enable debug mode
-Config.debug = true
+Config.debug = false
