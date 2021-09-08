@@ -766,6 +766,19 @@ exports("modifyGuildMember", function(guildId, userId, params, botToken)
 	return discordRest:modifyGuildMember(guildId, userId, params, botToken)
 end)
 
+--- Modify a guild role.
+-- @function modifyGuildRole
+-- @param guildId The ID of the guild.
+-- @param roleId The ID of the role to modify.
+-- @param params Parameters for modifications to the role.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the modified role.
+-- @usage exports.discord_rest:modifyGuildRole("[guild ID]", "[role ID]", {name = "New role name"}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-role
+exports("modifyGuildRole", function(guildId, roleId, params, botToken)
+	return discordRest:modifyGuildRole(guildId, roleId, params, botToken)
+end)
+
 --- Modify the positions of a set of roles for a guild.
 -- @function modifyGuildRolePositions
 -- @param guildId The ID of the guild.

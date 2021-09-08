@@ -40,6 +40,7 @@ local routes = {
 	publicThreads  = "/channels/%s/threads/archived/public",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
+	role           = "/guilds/%s/roles/%s",
 	roles          = "/guilds/%s/roles",
 	searchMembers  = "/guilds/%s/members/search",
 	threadMembers  = "/channels/%s/thread-members",
@@ -1032,6 +1033,18 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#modify-guild-member
 function DiscordRest:modifyGuildMember(guildId, userId, params, botToken)
 	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "PATCH", params, botToken)
+end
+
+--- Modify a guild role.
+-- @param guildId The ID of the guild.
+-- @param roleId The ID of the role to modify.
+-- @param params Parameters for modifications to the role.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the modified role.
+-- @usage discord:modifyGuildRole("[guild ID]", "[role ID]", {name = "New role name"})
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-role
+function DiscordRest:modifyGuildRole(guildId, roleId, params, botToken)
+	return self:performAuthorizedRequest(routes.role, {guildId, roleId}, nil, "PATCH", params, botToken)
 end
 
 --- Modify the positions of a set of roles for a guild.
