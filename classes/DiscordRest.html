@@ -268,6 +268,10 @@
 	<td class="summary">Adds a role to a guild member.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:beginGuildPrune">DiscordRest:beginGuildPrune (guildId, params, botToken)</a></td>
+	<td class="summary">Begin a prune operation.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:createGuild">DiscordRest:createGuild (params, botToken)</a></td>
 	<td class="summary">Create a new guild.</td>
 	</tr>
@@ -288,6 +292,10 @@
 	<td class="summary">Delete a guild permanently.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteGuildRole">DiscordRest:deleteGuildRole (guildId, roleId, botToken)</a></td>
+	<td class="summary">Delete a guild role.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getGuild">DiscordRest:getGuild (guildId, withCounts, botToken)</a></td>
 	<td class="summary">Get info for a given guild.</td>
 	</tr>
@@ -304,6 +312,10 @@
 	<td class="summary">Get a list of guild channels.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildInvites">DiscordRest:getGuildInvites (guildId, botToken)</a></td>
+	<td class="summary">Get a list of invites for a guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getGuildMember">DiscordRest:getGuildMember (guildId, userId, botToken)</a></td>
 	<td class="summary">Get info for a member of a guild.</td>
 	</tr>
@@ -312,8 +324,16 @@
 	<td class="summary">Get preview information for a guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildPruneCount">DiscordRest:getGuildPruneCount (guildId, options, botToken)</a></td>
+	<td class="summary">Get the number of members that would be removed in a prune operation.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getGuildRoles">DiscordRest:getGuildRoles (guildId, botToken)</a></td>
 	<td class="summary">Get a list of roles for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildVoiceRegions">DiscordRest:getGuildVoiceRegions (guildId, botToken)</a></td>
+	<td class="summary">Get a list of voice regions for a guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:listActiveGuildThreads">DiscordRest:listActiveGuildThreads (guildId, botToken)</a></td>
@@ -338,6 +358,14 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildMember">DiscordRest:modifyGuildMember (guildId, userId, params, botToken)</a></td>
 	<td class="summary">Modify attributes of a guild member.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyGuildRole">DiscordRest:modifyGuildRole (guildId, roleId, params, botToken)</a></td>
+	<td class="summary">Modify a guild role.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyGuildRolePositions">DiscordRest:modifyGuildRolePositions (guildId, params, botToken)</a></td>
+	<td class="summary">Modify the positions of a set of roles for a guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:removeGuilBan">DiscordRest:removeGuilBan (guildId, userId, botToken)</a></td>
@@ -2263,6 +2291,45 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:beginGuildPrune"></a>
+    <strong>DiscordRest:beginGuildPrune (guildId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Begin a prune operation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to prune.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for pruning.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the number of members that were pruned.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#begin-guild-prune">https://discord.com/developers/docs/resources/guild#begin-guild-prune</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:beginGuildPrune(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(pruned) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:createGuild"></a>
     <strong>DiscordRest:createGuild (params, botToken)</strong>
     </dt>
@@ -2455,6 +2522,45 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:deleteGuildRole"></a>
+    <strong>DiscordRest:deleteGuildRole (guildId, roleId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete a guild role.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role that will be deleted.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#delete-guild-role">https://discord.com/developers/docs/resources/guild#delete-guild-role</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteGuildRole(<span class="string">"[guild ID]"</span>, <span class="string">"[role ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getGuild"></a>
     <strong>DiscordRest:getGuild (guildId, withCounts, botToken)</strong>
     </dt>
@@ -2605,6 +2711,42 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:getGuildInvites"></a>
+    <strong>DiscordRest:getGuildInvites (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of invites for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the list of invites.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-invites">https://discord.com/developers/docs/resources/guild#get-guild-invites</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildInvites(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(invites) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getGuildMember"></a>
     <strong>DiscordRest:getGuildMember (guildId, userId, botToken)</strong>
     </dt>
@@ -2680,6 +2822,45 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:getGuildPruneCount"></a>
+    <strong>DiscordRest:getGuildPruneCount (guildId, options, botToken)</strong>
+    </dt>
+    <dd>
+    Get the number of members that would be removed in a prune operation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild that would be pruned.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the number of users that would be pruned.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-prune-count">https://discord.com/developers/docs/resources/guild#get-guild-prune-count</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildPruneCount(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(pruned) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getGuildRoles"></a>
     <strong>DiscordRest:getGuildRoles (guildId, botToken)</strong>
     </dt>
@@ -2712,6 +2893,42 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:getGuildRoles(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(roles) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildVoiceRegions"></a>
+    <strong>DiscordRest:getGuildVoiceRegions (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of voice regions for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the list of voice regions.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-voice-regions">https://discord.com/developers/docs/resources/guild#get-guild-voice-regions</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildVoiceRegions(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(regions) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -2946,6 +3163,87 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:modifyGuildMember(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, {nick = <span class="string">"New nickname"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyGuildRole"></a>
+    <strong>DiscordRest:modifyGuildRole (guildId, roleId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify a guild role.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role to modify.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for modifications to the role.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the modified role.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-guild-role">https://discord.com/developers/docs/resources/guild#modify-guild-role</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyGuildRole(<span class="string">"[guild ID]"</span>, <span class="string">"[role ID]"</span>, {name = <span class="string">"New role name"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyGuildRolePositions"></a>
+    <strong>DiscordRest:modifyGuildRolePositions (guildId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify the positions of a set of roles for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">params</span>
+         A list of roles and their new positions.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of all guild roles.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-guild-role-positions">https://discord.com/developers/docs/resources/guild#modify-guild-role-positions</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyGuildRolePositions(<span class="string">"[guild ID]"</span>, {{<span class="string">"[role ID 1]"</span>, <span class="number">2</span>}, {<span class="string">"[role ID 2]"</span>, <span class="number">3</span>}, ...})</pre>
     </ul>
 
 </dd>
@@ -3349,7 +3647,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-07 02:57:00 </i>
+<i style="float:right;">Last updated 2021-09-08 20:01:49 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
