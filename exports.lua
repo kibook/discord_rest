@@ -684,6 +684,17 @@ exports("getGuildChannels", function(guildId, botToken)
 	return discordRest:getGuildChannels(guildId, botToken)
 end)
 
+--- Get a list of integrations for a guild.
+-- @function getGuildIntegrations
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of integrations.
+-- @usage exports.discord_rest:getGuildIntegrations("[guild ID]", "[bot token]"):next(function(integrations) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-integrations
+exports("getGuildIntegrations", function(guildId, botToken)
+	return discordRest:getGuildIntegrations(guildId, botToken)
+end)
+
 --- Get a list of invites for a guild.
 -- @function getGuildInvites
 -- @param guildId The ID of the guild.

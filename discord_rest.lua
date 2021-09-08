@@ -27,6 +27,7 @@ local routes = {
 	guildPreview   = "/guilds/%s/preview",
 	guilds         = "/guilds",
 	guildThreads   = "/guilds/%s/threads/active",
+	integrations   = "/guilds/%s/integrations",
 	invite         = "/invites/%s",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
 	memberRole     = "/guilds/%s/members/%s/roles/%s",
@@ -951,6 +952,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-channels
 function DiscordRest:getGuildChannels(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get a list of integrations for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of integrations.
+-- @usage discord:getGuildIntegrations("[guild ID]"):next(function(integrations) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-integrations
+function DiscordRest:getGuildIntegrations(guildId, botToken)
+	return self:performAuthorizedRequest(routes.integrations, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Get a list of invites for a guild.
