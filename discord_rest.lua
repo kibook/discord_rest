@@ -843,6 +843,19 @@ function DiscordRest:addGuildMemberRole(guildId, userId, roleId, botToken)
 	return self:performAuthorizedRequest(routes.memberRole, {guildId, userId, roleId}, nil, "PUT", nil, botToken)
 end
 
+--- Begin a prune operation.
+-- @param guildId The ID of the guild to prune.
+-- @param params Parameters for pruning.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the number of members that were pruned.
+-- @usage discord:beginGuildPrune("[guild ID]"):next(function(pruned) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#begin-guild-prune
+function DiscordRest:beginGuildPrune(guildId, params, botToken)
+	return self:performAuthorizedRequest(routes.prune, {guildId}, nil, "POST", params, botToken):next(function(data)
+		return data.pruned
+	end)
+end
+
 --- Create a new guild.
 -- @param params Parameters for the new guild.
 -- @param botToken Optional bot token to use for authorization.
