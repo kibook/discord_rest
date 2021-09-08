@@ -1034,6 +1034,17 @@ function DiscordRest:modifyGuildMember(guildId, userId, params, botToken)
 	return self:performAuthorizedRequest(routes.guildMember, {guildId, userId}, nil, "PATCH", params, botToken)
 end
 
+--- Modify the positions of a set of roles for a guild.
+-- @param guildId The ID of the guild.
+-- @param params A list of roles and their new positions.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of all guild roles.
+-- @usage discord:modifyGuildRolePositions("[guild ID]", {{"[role ID 1]", 2}, {"[role ID 2]", 3}, ...})
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-role-positions
+function DiscordRest:modifyGuildRolePositions(guildId, params, botToken)
+	return self:performAuthorizedRequest(routes.roles, {guildId}, nil, "PATCH", params, botToken)
+end
+
 --- Remove the ban for a user.
 -- @param guildId The ID of the guild to remove the ban for the user from.
 -- @param userId The ID of the user to unban.

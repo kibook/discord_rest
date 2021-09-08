@@ -766,6 +766,18 @@ exports("modifyGuildMember", function(guildId, userId, params, botToken)
 	return discordRest:modifyGuildMember(guildId, userId, params, botToken)
 end)
 
+--- Modify the positions of a set of roles for a guild.
+-- @function modifyGuildRolePositions
+-- @param guildId The ID of the guild.
+-- @param params A list of roles and their new positions.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of all guild roles.
+-- @usage exports.discord_rest:modifyGuildRolePositions("[guild ID]", {{"[role ID 1]", 2}, {"[role ID 2]", 3}, ...}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-role-positions
+exports("modifyGuildRolePositions", function(guildId, params, botToken)
+	return discordRest:modifyGuildRolePositions(guildId, params, botToken)
+end)
+
 --- Remove the ban for a user.
 -- @function removeGuildBan
 -- @param guildId The ID of the guild to remove the ban for the user from.
