@@ -626,6 +626,18 @@ exports("deleteGuild", function(guildId, botToken)
 	return discordRest:deleteGuild(guildId, botToken)
 end)
 
+--- Delete an integration for a guild.
+-- @function deleteGuildIntegration
+-- @param guildId The ID of the guild
+-- @param integrationId The ID of the integration to delete.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteGuildIntegration("[guild ID]", "[integration ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#delete-guild-integration
+exports("deleteGuildIntegration", function(guildId, integrationId, botToken)
+	return discordRest:deleteGuildIntegration(guildId, integrationId, botToken)
+end)
+
 --- Delete a guild role.
 -- @function deleteGuildRole
 -- @param guildId The ID of the guild.

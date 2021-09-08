@@ -27,6 +27,7 @@ local routes = {
 	guildPreview   = "/guilds/%s/preview",
 	guilds         = "/guilds",
 	guildThreads   = "/guilds/%s/threads/active",
+	integration    = "/guilds/%s/integrations/%",
 	integrations   = "/guilds/%s/integrations",
 	invite         = "/invites/%s",
 	joinedThreads  = "/channels/%s/users/@me/threads/archived/private",
@@ -899,6 +900,17 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#delete-guild
 function DiscordRest:deleteGuild(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guild, {guildId}, nil, "DELETE", nil, botToken)
+end
+
+--- Delete an integration for a guild.
+-- @param guildId The ID of the guild
+-- @param integrationId The ID of the integration to delete.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteGuildIntegration("[guild ID]", "[integration ID]")
+-- @see https://discord.com/developers/docs/resources/guild#delete-guild-integration
+function DiscordRest:deleteGuildIntegration(guildId, integrationId, botToken)
+	return self:performAuthorizedRequest(routes.integration, {guildId, integrationId}, nil, "DELETE", nil, botToken)
 end
 
 --- Delete a guild role.
