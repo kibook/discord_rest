@@ -614,6 +614,18 @@ exports("deleteGuild", function(guildId, botToken)
 	return discordRest:deleteGuild(guildId, botToken)
 end)
 
+--- Delete a guild role.
+-- @function deleteGuildRole
+-- @param guildId The ID of the guild.
+-- @param roleId The ID of the role that will be deleted.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteGuildRole("[guild ID]", "[role ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#delete-guild-role
+exports("deleteGuildRole", function(guildId, roleId, botToken)
+	return discordRest:deleteGuildRole(guildId, roleId, botToken)
+end)
+
 --- Get info for a given guild.
 -- @function getGuild
 -- @param guildId The ID of the guild.

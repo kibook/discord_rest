@@ -896,6 +896,17 @@ function DiscordRest:deleteGuild(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guild, {guildId}, nil, "DELETE", nil, botToken)
 end
 
+--- Delete a guild role.
+-- @param guildId The ID of the guild.
+-- @param roleId The ID of the role that will be deleted.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteGuildRole("[guild ID]", "[role ID]")
+-- @see https://discord.com/developers/docs/resources/guild#delete-guild-role
+function DiscordRest:deleteGuildRole(guildId, roleId, botToken)
+	return self:performAuthorizedRequest(routes.role, {guildId, roleId}, nil, "DELETE", nil, botToken)
+end
+
 --- Get info for a given guild.
 -- @param guildId The ID of the guild.
 -- @param withCounts Whether to include approximate member and presence counts in the returned info.
