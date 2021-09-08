@@ -37,6 +37,7 @@ local routes = {
 	pinMessage     = "/channels/%s/pins/%s",
 	pins           = "/channels/%s/pins",
 	privateThreads = "/channels/%s/threads/archived/private",
+	prune          = "/guilds/%s/prune",
 	publicThreads  = "/channels/%s/threads/archived/public",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
@@ -968,6 +969,19 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-preview
 function DiscordRest:getGuildPreview(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guildPreview, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get the number of members that would be removed in a prune operation.
+-- @param guildId The ID of the guild that would be pruned.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the number of users that would be pruned.
+-- @usage discord:getGuildPruneCount("[guild ID]"):next(function(pruned) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-prune-count
+function DiscordRest:getGuildPruneCount(guildId, options, botToken)
+	return self:performAuthorizedRequest(routes.prune, {guildId}, options, "GET", nil, botToken):next(function(data)
+		return data.pruned
+	end)
 end
 
 --- Get a list of roles for a guild.

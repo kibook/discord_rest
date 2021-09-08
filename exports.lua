@@ -695,6 +695,18 @@ exports("getGuildPreview", function(guildId, botToken)
 	return discordRest:getGuildPreview(guildId, botToken)
 end)
 
+--- Get the number of members that would be removed in a prune operation.
+-- @function getGuildPruneCount
+-- @param guildId The ID of the guild that would be pruned.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the number of users that would be pruned.
+-- @usage exports.discord_rest:getGuildPruneCount("[guild ID]", nil, "[bot token]"):next(function(pruned) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-prune-count
+exports("getGuildPruneCount", function(guildId, options, botToken)
+	return discordRest:getGuildPruneCount(guildId, options, botToken)
+end)
+
 --- Get a list of roles for a guild.
 -- @function getGuildRoles
 -- @param guildId The ID of the guild.
