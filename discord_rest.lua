@@ -41,6 +41,7 @@ local routes = {
 	publicThreads  = "/channels/%s/threads/archived/public",
 	reaction       = "/channels/%s/messages/%s/reactions/%s",
 	reactions      = "/channels/%s/messages/%s/reactions",
+	regions        = "/guilds/%s/regions",
 	role           = "/guilds/%s/roles/%s",
 	roles          = "/guilds/%s/roles",
 	searchMembers  = "/guilds/%s/members/search",
@@ -1005,6 +1006,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-roles
 function DiscordRest:getGuildRoles(guildId, botToken)
 	return self:performAuthorizedRequest(routes.roles, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get a list of voice regions for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of voice regions.
+-- @usage discord:getGuildVoiceRegions("[guild ID]"):next(function(regions) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+function DiscordRest:getGuildVoiceRegions(guildId, botToken)
+	return self:performAuthorizedRequest(routes.regions, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Returns all active threads in the guild, including public and private threads.

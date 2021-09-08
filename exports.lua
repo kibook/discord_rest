@@ -730,6 +730,17 @@ exports("getGuildRoles", function(guildId, botToken)
 	return discordRest:getGuildRoles(guildId, botToken)
 end)
 
+--- Get a list of voice regions for a guild.
+-- @function getGuildVoiceRegions
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the list of voice regions.
+-- @usage exports.discord_rest:getGuildVoiceRegions("[guild ID]", "[bot token]"):next(function(regions) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
+exports("getGuildVoiceRegions", function(guildId, botToken)
+	return discordRest:getGuildVoiceRegions(guildId, botToken)
+end)
+
 --- Returns all active threads in the guild, including public and private threads.
 -- @function listActiveGuildThreads
 -- @param guildId The ID of the guild.
