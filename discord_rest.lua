@@ -1123,6 +1123,17 @@ function DiscordRest:listGuildMembers(guildId, options, botToken)
 	return self:performAuthorizedRequest(routes.guildMembers, {guildId}, options, "GET", nil, botToken)
 end
 
+--- Modifies the nickname of the current user in a guild.
+-- @param guildId The ID of the guild.
+-- @param nick The value to set the user's nickname to.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:modifyCurrentUserNick("[guild ID]", "New nickname")
+-- @see https://discord.com/developers/docs/resources/guild#modify-current-user-nick
+function DiscordRest:modifyCurrentUserNick(guildId, nick, botToken)
+	return self:performAuthorizedRequest(routes.nick, {guildId}, {nick = nick}, "PATCH", nil, botToken)
+end
+
 --- Modify a guild's settings.
 -- @param guildId The ID of the guild to modify.
 -- @param settings The modified settings for the guild.
@@ -1143,28 +1154,6 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#modify-guild-channel-positions
 function DiscordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
 	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "PATCH", channelPositions, botToken)
-end
-
---- Modify a guild widget.
--- @param guildId The ID of the guild.
--- @param widget The modified widget attributes.
--- @param botToken Optional bot token to use for authorization.
--- @return A new promise which is resolved with the updated widget.
--- @usage discord:modifyGuildWidget("[guild ID]", {...}):next(function(widget) ... end)
--- @see https://discord.com/developers/docs/resources/guild#modify-guild-widget
-function DiscordRest:modifyGuildWidget(guildId, widget, botToken)
-	return self:performAuthorizedRequest(routes.widget, {guildId}, nil, "PATCH", widget, botToken)
-end
-
---- Modifies the nickname of the current user in a guild.
--- @param guildId The ID of the guild.
--- @param nick The value to set the user's nickname to.
--- @param botToken Optional bot token to use for authorization.
--- @return A new promise.
--- @usage discord:modifyCurrentUserNick("[guild ID]", "New nickname")
--- @see https://discord.com/developers/docs/resources/guild#modify-current-user-nick
-function DiscordRest:modifyCurrentUserNick(guildId, nick, botToken)
-	return self:performAuthorizedRequest(routes.nick, {guildId}, {nick = nick}, "PATCH", nil, botToken)
 end
 
 --- Modify guild membership attributes of a user.
@@ -1211,6 +1200,17 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen
 function DiscordRest:modifyGuildWelcomeScreen(guildId, params, botToken)
 	return self:performAuthorizedRequest(routes.welcomeScreen, {guildId}, nil, "PATCH", params, botToken)
+end
+
+--- Modify a guild widget.
+-- @param guildId The ID of the guild.
+-- @param widget The modified widget attributes.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated widget.
+-- @usage discord:modifyGuildWidget("[guild ID]", {...}):next(function(widget) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-widget
+function DiscordRest:modifyGuildWidget(guildId, widget, botToken)
+	return self:performAuthorizedRequest(routes.widget, {guildId}, nil, "PATCH", widget, botToken)
 end
 
 --- Remove a guild ban for a user.
