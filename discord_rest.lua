@@ -814,7 +814,7 @@ end
 --- Adds a user to the guild.
 -- @param guildId The ID of the guild to add the user to.
 -- @param userId The ID of the user to add to the guild.
--- @param Parameters for adding the user.
+-- @param params Parameters for adding the user.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:addGuildMember("[guild ID]", "[user ID]", {access_token = "..."})
@@ -1285,7 +1285,7 @@ end
 --- Adds a player to a guild.
 -- @param guildId The ID of the guild to add the user to.
 -- @param player The server ID of the player to add to the guild.
--- @param Parameters for adding the user.
+-- @param params Parameters for adding the user.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:addPlayerToGuild("[guild ID]", 1, {access_token = "..."})

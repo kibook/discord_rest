@@ -533,7 +533,7 @@ end)
 -- @function addGuildMember
 -- @param guildId The ID of the guild to add the user to.
 -- @param userId The ID of the user to add to the guild.
--- @param Parameters for adding the user.
+-- @param param Parameters for adding the user.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:addGuildMember("[guild ID]", "[user ID]", {access_token = "..."}, "[bot token]")
@@ -1019,7 +1019,7 @@ end)
 -- @function addPlayerToGuild
 -- @param guildId The ID of the guild to add the user to.
 -- @param player The server ID of the player to add to the guild.
--- @param Parameters for adding the user.
+-- @param params Parameters for adding the user.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:addPlayerToGuild("[guild ID]", 1, {access_token = "..."}, "[bot token]")
