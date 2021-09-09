@@ -447,8 +447,28 @@
 	<td class="summary">Create a new DM channel with a user.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getCurrentUser">DiscordRest:getCurrentUser (botToken)</a></td>
+	<td class="summary">Get the current user's information.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getCurrentUserGuilds">DiscordRest:getCurrentUserGuilds (options, botToken)</a></td>
+	<td class="summary">Get the current user's guilds.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getUser">DiscordRest:getUser (userId, botToken)</a></td>
 	<td class="summary">Get user information.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getUserConnections">DiscordRest:getUserConnections (botToken)</a></td>
+	<td class="summary">Get a list of the current user's connections.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:leaveGuild">DiscordRest:leaveGuild (guildId, botToken)</a></td>
+	<td class="summary">Leave a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyCurrentUser">DiscordRest:modifyCurrentUser (params, botToken)</a></td>
+	<td class="summary">Modify the requester's user account settings.</td>
 	</tr>
 </table>
 <h2><a href="#Webhook">Webhook </a></h2>
@@ -460,6 +480,30 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:executeWebhookUrl">DiscordRest:executeWebhookUrl (url, data)</a></td>
 	<td class="summary">Execute a webhook, using the full URL.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getChannelWebhooks">DiscordRest:getChannelWebhooks (channelId, botToken)</a></td>
+	<td class="summary">Get a list of webhooks for a channel.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildWebhooks">DiscordRest:getGuildWebhooks (guildId, botToken)</a></td>
+	<td class="summary">Get a list of webhooks for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getWebhook">DiscordRest:getWebhook (webhookId, botToken)</a></td>
+	<td class="summary">Get information for a webhook.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getWebhookWithToken">DiscordRest:getWebhookWithToken (webhookId, webhookToken)</a></td>
+	<td class="summary">Get information for a webhook, using its token for authorization instead of a bot token.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getWebhookWithUrl">DiscordRest:getWebhookWithUrl (url)</a></td>
+	<td class="summary">Get information for a webhook, using its full URL for authorization instead of a bot token.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyWebhook">DiscordRest:modifyWebhook (webhookId, params, botToken)</a></td>
+	<td class="summary">Modify a webhook.</td>
 	</tr>
 </table>
 <h2><a href="#Player">Player </a></h2>
@@ -4053,6 +4097,75 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:getCurrentUser"></a>
+    <strong>DiscordRest:getCurrentUser (botToken)</strong>
+    </dt>
+    <dd>
+    Get the current user's information.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the user's information.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#get-current-user">https://discord.com/developers/docs/resources/user#get-current-user</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getCurrentUser():<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getCurrentUserGuilds"></a>
+    <strong>DiscordRest:getCurrentUserGuilds (options, botToken)</strong>
+    </dt>
+    <dd>
+    Get the current user's guilds.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">options</span>
+         Options for the query.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of guilds.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#get-current-user-guilds">https://discord.com/developers/docs/resources/user#get-current-user-guilds</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getCurrentUserGuilds({limit = <span class="number">10</span>}):<span class="global">next</span>(<span class="keyword">function</span>(guilds) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getUser"></a>
     <strong>DiscordRest:getUser (userId, botToken)</strong>
     </dt>
@@ -4085,6 +4198,111 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:getUser(<span class="string">"[user ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getUserConnections"></a>
+    <strong>DiscordRest:getUserConnections (botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of the current user's connections.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of connections.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#get-user-connections">https://discord.com/developers/docs/resources/user#get-user-connections</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getUserConnections():<span class="global">next</span>(<span class="keyword">function</span>(connections) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:leaveGuild"></a>
+    <strong>DiscordRest:leaveGuild (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Leave a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to leave.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#leave-guild">https://discord.com/developers/docs/resources/user#leave-guild</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:leaveGuild(<span class="string">"[guild ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyCurrentUser"></a>
+    <strong>DiscordRest:modifyCurrentUser (params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify the requester's user account settings.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">params</span>
+         Parameters to modify.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the modified user.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/user#modify-current-user">https://discord.com/developers/docs/resources/user#modify-current-user</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyCurrentUser({username = <span class="string">"New Username"</span>}):<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -4164,6 +4382,222 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:executeWebhookUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>, {content = <span class="string">"Hello, world!"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getChannelWebhooks"></a>
+    <strong>DiscordRest:getChannelWebhooks (channelId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of webhooks for a channel.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of webhooks.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#get-channel-webhooks">https://discord.com/developers/docs/resources/webhook#get-channel-webhooks</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getChannelWebhooks(<span class="string">"[channel ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(webhooks) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildWebhooks"></a>
+    <strong>DiscordRest:getGuildWebhooks (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of webhooks for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with a list of webhooks.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#get-guild-webhooks">https://discord.com/developers/docs/resources/webhook#get-guild-webhooks</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildWebhooks(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(webhooks) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getWebhook"></a>
+    <strong>DiscordRest:getWebhook (webhookId, botToken)</strong>
+    </dt>
+    <dd>
+    Get information for a webhook.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the webhook.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#get-webhook">https://discord.com/developers/docs/resources/webhook#get-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getWebhook(<span class="string">"[webhook ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getWebhookWithToken"></a>
+    <strong>DiscordRest:getWebhookWithToken (webhookId, webhookToken)</strong>
+    </dt>
+    <dd>
+    Get information for a webhook, using its token for authorization instead of a bot token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the webhook.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-with-token">https://discord.com/developers/docs/resources/webhook#get-webhook-with-token</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getWebhookWithToken(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getWebhookWithUrl"></a>
+    <strong>DiscordRest:getWebhookWithUrl (url)</strong>
+    </dt>
+    <dd>
+    Get information for a webhook, using its full URL for authorization instead of a bot token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The webhook URL.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the webhook.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-with-token">https://discord.com/developers/docs/resources/webhook#get-webhook-with-token</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getWebhookWithUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyWebhook"></a>
+    <strong>DiscordRest:modifyWebhook (webhookId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify a webhook.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters to modify.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated webhook.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#modify-webhook">https://discord.com/developers/docs/resources/webhook#modify-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyWebhook(<span class="string">"[webhook ID]"</span>, {name = <span class="string">"New name"</span>}):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -4859,7 +5293,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-09 19:40:04 </i>
+<i style="float:right;">Last updated 2021-09-09 21:00:38 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
