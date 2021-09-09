@@ -1094,6 +1094,17 @@ function DiscordRest:modifyGuildChannelPositions(guildId, channelPositions, botT
 	return self:performAuthorizedRequest(routes.guildChannels, {guildId}, nil, "PATCH", channelPositions, botToken)
 end
 
+--- Modify a guild widget.
+-- @param guildId The ID of the guild.
+-- @param widget The modified widget attributes.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated widget.
+-- @usage discord:modifyGuildWidget("[guild ID]", {...}):next(function(widget) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-widget
+function DiscordRest:modifyGuildWidget(guildId, widget, botToken)
+	return self:performAuthorizedRequest(routes.widget, {guildId}, nil, "PATCH", widget, botToken)
+end
+
 --- Modifies the nickname of the current user in a guild.
 -- @param guildId The ID of the guild.
 -- @param nick The value to set the user's nickname to.

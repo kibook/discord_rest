@@ -833,6 +833,18 @@ exports("modifyGuildChannelPositions", function(guildId, channelPositions, botTo
 	return discordRest:modifyGuildChannelPositions(guildId, channelPositions, botToken)
 end)
 
+--- Modify a guild widget.
+-- @function modifyGuildWidget
+-- @param guildId The ID of the guild.
+-- @param widget The modified widget attributes.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated widget.
+-- @usage exports.discord_rest:modifyGuildWidget("[guild ID]", {...}, "[bot token]"):next(function(widget) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-widget
+exports("modifyGuildWidget", function(guildId, widget, botToken)
+	return discordRest:modifyGuildWidget(guildId, widget, botToken)
+end)
+
 --- Modifies the nickname of the current user in a guild.
 -- @function modifyCurrentUserNick
 -- @param guildId The ID of the guild.
