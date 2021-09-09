@@ -62,6 +62,7 @@ local routes = {
 	userVoiceState = "/guilds/%s/voice-states/%s",
 	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
+	webhooks       = "/channels/%s/webhooks",
 	welcomeScreen  = "/guilds/%s/welcome-screen",
 	widget         = "/guilds/%s/widget",
 	widgetImage    = "/guilds/%s/widget.png",
@@ -1407,6 +1408,16 @@ function DiscordRest:executeWebhookUrl(url, data)
 	local p = promise.new()
 	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), "POST", data)
 	return p
+end
+
+--- Get a list of webhooks for a channel.
+-- @param channelId The ID of the channel.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of webhooks.
+-- @usage discord:getChannelWebhooks("[channel ID]"):next(function(webhooks) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-channel-webhooks
+function DiscordRest:getChannelWebhooks(channelId, botToken)
+	return self:performAuthorizedRequest(routes.webhooks, {channelId}, nil, "GET", nil, botToken)
 end
 
 --- Player.
