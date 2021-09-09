@@ -1100,6 +1100,16 @@ exports("getUser", function(userId, botToken)
 	return discordRest:getUser(userId, botToken)
 end)
 
+--- Get a list of the current user's connections.
+-- @function getUserConnections
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of connections.
+-- @usage exports.discord_rest:getUserConnections("[bot token]"):next(function(connections) ... end)
+-- @see https://discord.com/developers/docs/resources/user#get-user-connections
+exports("getUserConnections", function(botToken)
+	return discordRest:getUserConnections(botToken)
+end)
+
 --- Leave a guild.
 -- @function leaveGuild
 -- @param guildId The ID of the guild to leave.
