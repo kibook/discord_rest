@@ -341,8 +341,28 @@
 	<td class="summary">Get a list of roles for a guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildVanityUrl">DiscordRest:getGuildVanityUrl (guildId, botToken)</a></td>
+	<td class="summary">Get the vanity URL for a guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getGuildVoiceRegions">DiscordRest:getGuildVoiceRegions (guildId, botToken)</a></td>
 	<td class="summary">Get a list of voice regions for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildWelcomeScreen">DiscordRest:getGuildWelcomeScreen (guildId, botToken)</a></td>
+	<td class="summary">Get the welcome screen for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildWidget">DiscordRest:getGuildWidget (guildId)</a></td>
+	<td class="summary">Get the widget for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildWidgetImage">DiscordRest:getGuildWidgetImage (guildId, style)</a></td>
+	<td class="summary">Get the widget image for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildWidgetSettings">DiscordRest:getGuildWidgetSettings (guildId, botToken)</a></td>
+	<td class="summary">Get guild widget settings.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:listActiveGuildThreads">DiscordRest:listActiveGuildThreads (guildId, botToken)</a></td>
@@ -353,16 +373,20 @@
 	<td class="summary">Get a list of members in a guild.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyCurrentUserNick">DiscordRest:modifyCurrentUserNick (guildId, nick, botToken)</a></td>
+	<td class="summary">Modifies the nickname of the current user in a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyCurrentUserVoiceState">DiscordRest:modifyCurrentUserVoiceState (guildId, params, botToken)</a></td>
+	<td class="summary">Updates the current user's voice state.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuild">DiscordRest:modifyGuild (guildId, settings, botToken)</a></td>
 	<td class="summary">Modify a guild's settings.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildChannelPositions">DiscordRest:modifyGuildChannelPositions (guildId, channelPositions, botToken)</a></td>
 	<td class="summary">Modify the positions of a set of channels.</td>
-	</tr>
-	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:modifyCurrentUserNick">DiscordRest:modifyCurrentUserNick (guildId, nick, botToken)</a></td>
-	<td class="summary">Modifies the nickname of the current user in a guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildMember">DiscordRest:modifyGuildMember (guildId, userId, params, botToken)</a></td>
@@ -375,6 +399,18 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildRolePositions">DiscordRest:modifyGuildRolePositions (guildId, params, botToken)</a></td>
 	<td class="summary">Modify the positions of a set of roles for a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyGuildWelcomeScreen">DiscordRest:modifyGuildWelcomeScreen (guildId, params, botToken)</a></td>
+	<td class="summary">Modify a guild's welcome screen.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyGuildWidget">DiscordRest:modifyGuildWidget (guildId, widget, botToken)</a></td>
+	<td class="summary">Modify a guild widget.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyUserVoiceState">DiscordRest:modifyUserVoiceState (guildId, userId, params, botToken)</a></td>
+	<td class="summary">Updates another user's voice state.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:removeGuildBan">DiscordRest:removeGuildBan (guildId, userId, botToken)</a></td>
@@ -475,6 +511,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildMemberForPlayer">DiscordRest:modifyGuildMemberForPlayer (guildId, player, params, botToken)</a></td>
 	<td class="summary">Modify guild membership attributes of a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyPlayerVoiceState">DiscordRest:modifyPlayerVoiceState (guildId, player, params, botToken)</a></td>
+	<td class="summary">Updates a player's voice state.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:removeGuildBanForPlayer">DiscordRest:removeGuildBanForPlayer (guildId, player, botToken)</a></td>
@@ -3048,6 +3088,42 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:getGuildVanityUrl"></a>
+    <strong>DiscordRest:getGuildVanityUrl (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get the vanity URL for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the vanity URL.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-vanity-url">https://discord.com/developers/docs/resources/guild#get-guild-vanity-url</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildVanityUrl(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(vanityUrl) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getGuildVoiceRegions"></a>
     <strong>DiscordRest:getGuildVoiceRegions (guildId, botToken)</strong>
     </dt>
@@ -3080,6 +3156,147 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:getGuildVoiceRegions(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(regions) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildWelcomeScreen"></a>
+    <strong>DiscordRest:getGuildWelcomeScreen (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get the welcome screen for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the welcome screen.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen">https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildWelcomeScreen(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(welcomeScreen) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildWidget"></a>
+    <strong>DiscordRest:getGuildWidget (guildId)</strong>
+    </dt>
+    <dd>
+    Get the widget for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the widget.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-widget">https://discord.com/developers/docs/resources/guild#get-guild-widget</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildWidget(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(widget) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildWidgetImage"></a>
+    <strong>DiscordRest:getGuildWidgetImage (guildId, style)</strong>
+    </dt>
+    <dd>
+    Get the widget image for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">style</span>
+         Style of the widget image returned.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the widget image.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-widget-image">https://discord.com/developers/docs/resources/guild#get-guild-widget-image</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildWidgetImage(<span class="string">"[guild ID]"</span>, <span class="string">"shield"</span>):<span class="global">next</span>(<span class="keyword">function</span>(image) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildWidgetSettings"></a>
+    <strong>DiscordRest:getGuildWidgetSettings (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get guild widget settings.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the widget settings.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-widget-settings">https://discord.com/developers/docs/resources/guild#get-guild-widget-settings</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildWidgetSettings(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(settings) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -3159,6 +3376,84 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:modifyCurrentUserNick"></a>
+    <strong>DiscordRest:modifyCurrentUserNick (guildId, nick, botToken)</strong>
+    </dt>
+    <dd>
+    Modifies the nickname of the current user in a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">nick</span>
+         The value to set the user's nickname to.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-nick">https://discord.com/developers/docs/resources/guild#modify-current-user-nick</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyCurrentUserNick(<span class="string">"[guild ID]"</span>, <span class="string">"New nickname"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyCurrentUserVoiceState"></a>
+    <strong>DiscordRest:modifyCurrentUserVoiceState (guildId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Updates the current user's voice state.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to modify voice state in.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for modifying the voice state.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state">https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyCurrentUserVoiceState(<span class="string">"[guild ID]"</span>, {...})</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:modifyGuild"></a>
     <strong>DiscordRest:modifyGuild (guildId, settings, botToken)</strong>
     </dt>
@@ -3233,45 +3528,6 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:modifyGuildChannelPositions(<span class="string">"[guild ID]"</span>, {{id = <span class="string">"[channel 1 ID]"</span>, position = <span class="number">2</span>}, {<span class="string">"[channel 2 ID]"</span>, position = <span class="number">1</span>}})</pre>
-    </ul>
-
-</dd>
-    <dt>
-    <a name = "DiscordRest:modifyCurrentUserNick"></a>
-    <strong>DiscordRest:modifyCurrentUserNick (guildId, nick, botToken)</strong>
-    </dt>
-    <dd>
-    Modifies the nickname of the current user in a guild.
-
-
-    <h3>Parameters:</h3>
-    <ul>
-        <li><span class="parameter">guildId</span>
-         The ID of the guild.
-        </li>
-        <li><span class="parameter">nick</span>
-         The value to set the user's nickname to.
-        </li>
-        <li><span class="parameter">botToken</span>
-         Optional bot token to use for authorization.
-        </li>
-    </ul>
-
-    <h3>Returns:</h3>
-    <ol>
-
-        A new promise.
-    </ol>
-
-
-    <h3>See also:</h3>
-    <ul>
-         <a href="https://discord.com/developers/docs/resources/guild#modify-current-user-nick">https://discord.com/developers/docs/resources/guild#modify-current-user-nick</a>
-    </ul>
-
-    <h3>Usage:</h3>
-    <ul>
-        <pre class="example">discord:modifyCurrentUserNick(<span class="string">"[guild ID]"</span>, <span class="string">"New nickname"</span>)</pre>
     </ul>
 
 </dd>
@@ -3395,6 +3651,126 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:modifyGuildRolePositions(<span class="string">"[guild ID]"</span>, {{<span class="string">"[role ID 1]"</span>, <span class="number">2</span>}, {<span class="string">"[role ID 2]"</span>, <span class="number">3</span>}, ...})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyGuildWelcomeScreen"></a>
+    <strong>DiscordRest:modifyGuildWelcomeScreen (guildId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify a guild's welcome screen.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for modifying the welcome screen.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated welcome screen.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen">https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyGuildWelcomeScreen(<span class="string">"[guild ID]"</span>, {enabled = <span class="keyword">true</span>}):<span class="global">next</span>(<span class="keyword">function</span>(welcomeScreen) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyGuildWidget"></a>
+    <strong>DiscordRest:modifyGuildWidget (guildId, widget, botToken)</strong>
+    </dt>
+    <dd>
+    Modify a guild widget.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">widget</span>
+         The modified widget attributes.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated widget.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-guild-widget">https://discord.com/developers/docs/resources/guild#modify-guild-widget</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyGuildWidget(<span class="string">"[guild ID]"</span>, {...}):<span class="global">next</span>(<span class="keyword">function</span>(widget) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyUserVoiceState"></a>
+    <strong>DiscordRest:modifyUserVoiceState (guildId, userId, params, botToken)</strong>
+    </dt>
+    <dd>
+    Updates another user's voice state.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">userId</span>
+         The ID of the user.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for modifying the voice state.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#modify-user-voice-state">https://discord.com/developers/docs/resources/guild#modify-user-voice-state</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyUserVoiceState(<span class="string">"[guild ID]"</span>, <span class="string">"[user ID]"</span>, {...})</pre>
     </ul>
 
 </dd>
@@ -4276,6 +4652,48 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:modifyPlayerVoiceState"></a>
+    <strong>DiscordRest:modifyPlayerVoiceState (guildId, player, params, botToken)</strong>
+    </dt>
+    <dd>
+    Updates a player's voice state.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for modifying the voice state.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:modifyUserVoiceState">DiscordRest:modifyUserVoiceState</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyPlayerVoiceState(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, {...})</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:removeGuildBanForPlayer"></a>
     <strong>DiscordRest:removeGuildBanForPlayer (guildId, player, botToken)</strong>
     </dt>
@@ -4441,7 +4859,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-09 04:18:01 </i>
+<i style="float:right;">Last updated 2021-09-09 19:40:04 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
