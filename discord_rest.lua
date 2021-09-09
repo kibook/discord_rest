@@ -56,6 +56,7 @@ local routes = {
 	user           = "/users/%s",
 	webhook        = "/webhooks/%s/%s",
 	widget         = "/guilds/%s/widget",
+	widgetJson     = "/guilds/%s/widget.json",
 }
 
 -- Check if an HTTP status code indicates an error
@@ -1041,11 +1042,21 @@ function DiscordRest:getGuildVoiceRegions(guildId, botToken)
 	return self:performAuthorizedRequest(routes.regions, {guildId}, nil, "GET", nil, botToken)
 end
 
+--- Get the widget for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the widget.
+-- @usage discord:getGuildWidget("[guild ID]"):next(function(widget) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-widget
+function DiscordRest:getGuildWidget(guildId, botToken)
+	return self:performAuthorizedRequest(routes.widgetJson, {guildId}, nil, "GET", nil, botToken)
+end
+
 --- Get guild widget settings.
 -- @param guildId The ID of the guild.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with the widget settings.
--- @usage discord:getGuildWidgetSettings("[guild ID]"):next(function(widget) ... end)
+-- @usage discord:getGuildWidgetSettings("[guild ID]"):next(function(settings) ... end)
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-widget-settings
 function DiscordRest:getGuildWidgetSettings(guildId, botToken)
 	return self:performAuthorizedRequest(routes.widget, {guildId}, nil, "GET", nil, botToken)

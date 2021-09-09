@@ -775,12 +775,23 @@ exports("getGuildVoiceRegions", function(guildId, botToken)
 	return discordRest:getGuildVoiceRegions(guildId, botToken)
 end)
 
+--- Get the widget for a guild.
+-- @function getGuildWidget
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the widget.
+-- @usage exports.discord_rest:getGuildWidget("[guild ID]", "[bot token]"):next(function(widget) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-widget
+exports("getGuildWidget", function(guildId, botToken)
+	return discordRest:getGuildWidget(guildId, botToken)
+end)
+
 --- Get guild widget settings.
 -- @function getGuildWidgetSettings
 -- @param guildId The ID of the guild.
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with the widget settings.
--- @usage exports.discord_rest:getGuildWidgetSettings("[guild ID]", "[bot token]"):next(function(widget) ... end)
+-- @usage exports.discord_rest:getGuildWidgetSettings("[guild ID]", "[bot token]"):next(function(settings) ... end)
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-widget-settings
 exports("getGuildWidgetSettings", function(guildId, botToken)
 	return discordRest:getGuildWidgetSettings(guildId, botToken)
