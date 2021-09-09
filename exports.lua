@@ -789,12 +789,11 @@ end)
 --- Get the widget for a guild.
 -- @function getGuildWidget
 -- @param guildId The ID of the guild.
--- @param botToken Optional bot token to use for authorization.
 -- @return A new promise which is resolved with the widget.
--- @usage exports.discord_rest:getGuildWidget("[guild ID]", "[bot token]"):next(function(widget) ... end)
+-- @usage exports.discord_rest:getGuildWidget("[guild ID]"):next(function(widget) ... end)
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-widget
-exports("getGuildWidget", function(guildId, botToken)
-	return discordRest:getGuildWidget(guildId, botToken)
+exports("getGuildWidget", function(guildId)
+	return discordRest:getGuildWidget(guildId)
 end)
 
 --[[
