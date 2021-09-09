@@ -54,6 +54,7 @@ local routes = {
 	typing         = "/channels/%s/typing",
 	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
 	user           = "/users/%s",
+	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
 	widget         = "/guilds/%s/widget",
 	widgetJson     = "/guilds/%s/widget.json",
@@ -1030,6 +1031,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-roles
 function DiscordRest:getGuildRoles(guildId, botToken)
 	return self:performAuthorizedRequest(routes.roles, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get the vanity URL for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the vanity URL.
+-- @usage discord:getGuildVanityUrl("[guild ID]"):next(function(vanityUrl) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-vanity-url
+function DiscordRest:getGuildVanityUrl(guildId, botToken)
+	return self:performAuthorizedRequest(routes.vanityUrl, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Get a list of voice regions for a guild.

@@ -764,6 +764,17 @@ exports("getGuildRoles", function(guildId, botToken)
 	return discordRest:getGuildRoles(guildId, botToken)
 end)
 
+--- Get the vanity URL for a guild.
+-- @function getGuildVanityUrl
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the vanity URL.
+-- @usage exports.discord_rest:getGuildVanityUrl("[guild ID]", "[bot token]"):next(function(vanityUrl) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-vanity-url
+exports("getGuildVanityUrl", function(guildId, botToken)
+	return discordRest:getGuildVanityUrl(guildId, botToken)
+end)
+
 --- Get a list of voice regions for a guild.
 -- @function getGuildVoiceRegions
 -- @param guildId The ID of the guild.
