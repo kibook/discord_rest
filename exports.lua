@@ -786,6 +786,17 @@ exports("getGuildVoiceRegions", function(guildId, botToken)
 	return discordRest:getGuildVoiceRegions(guildId, botToken)
 end)
 
+--- Get the welcome screen for a guild.
+-- @function getGuildWelcomeScreen
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the welcome screen.
+-- @usage exports.discord_rest:getGuildWelcomeScreen("[guild ID]", "[bot token]"):next(function(welcomeScreen) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen
+exports("getGuildWelcomeScreen", function(guildId, botToken)
+	return discordRest:getGuildWelcomeScreen(guildId, botToken)
+end)
+
 --- Get the widget for a guild.
 -- @function getGuildWidget
 -- @param guildId The ID of the guild.

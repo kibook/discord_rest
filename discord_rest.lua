@@ -56,6 +56,7 @@ local routes = {
 	user           = "/users/%s",
 	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
+	welcomeScreen  = "/guilds/%s/welcome-screen",
 	widget         = "/guilds/%s/widget",
 	widgetImage    = "/guilds/%s/widget.png",
 	widgetJson     = "/guilds/%s/widget.json",
@@ -1056,6 +1057,16 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#get-guild-voice-regions
 function DiscordRest:getGuildVoiceRegions(guildId, botToken)
 	return self:performAuthorizedRequest(routes.regions, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get the welcome screen for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the welcome screen.
+-- @usage discord:getGuildWelcomeScreen("[guild ID]"):next(function(welcomeScreen) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-welcome-screen
+function DiscordRest:getGuildWelcomeScreen(guildId, botToken)
+	return self:performAuthorizedRequest(routes.welcomeScreen, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Get the widget for a guild.
