@@ -1100,6 +1100,17 @@ exports("getUser", function(userId, botToken)
 	return discordRest:getUser(userId, botToken)
 end)
 
+--- Leave a guild.
+-- @function leaveGuild
+-- @param guildId The ID of the guild to leave.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:leaveGuild("[guild ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/user#leave-guild
+exports("leaveGuild", function(guildId, botToken)
+	return discordRest:leaveGuild(guildId, botToken)
+end)
+
 --- Modify the requester's user account settings.
 -- @function modifyCurrentUser
 -- @param params Parameters to modify.

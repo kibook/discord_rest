@@ -36,6 +36,7 @@ local routes = {
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	messageThreads = "/channels/%s/messages/%s/threads",
+	myGuild        = "/users/@me/guilds/%s",
 	myGuilds       = "/users/@me/guilds",
 	myVoiceState   = "/guilds/%s/voice-states/@me",
 	nick           = "/guilds/%s/members/@me/nick",
@@ -1349,6 +1350,16 @@ end
 -- @see https://discord.com/developers/docs/resources/user#get-user
 function DiscordRest:getUser(userId, botToken)
 	return self:performAuthorizedRequest(routes.user, {userId}, nil, "GET", nil, botToken)
+end
+
+--- Leave a guild.
+-- @param guildId The ID of the guild to leave.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:leaveGuild("[guild ID]")
+-- @see https://discord.com/developers/docs/resources/user#leave-guild
+function DiscordRest:leaveGuild(guildId, botToken)
+	return self:performAuthorizedRequest(routes.myGuild, {guildId}, nil, "DELETE", nil, botToken)
 end
 
 --- Modify the requester's user account settings.
