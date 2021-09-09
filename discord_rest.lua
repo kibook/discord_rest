@@ -36,6 +36,7 @@ local routes = {
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	messageThreads = "/channels/%s/messages/%s/threads",
+	myGuilds       = "/users/@me/guilds",
 	myVoiceState   = "/guilds/%s/voice-states/@me",
 	nick           = "/guilds/%s/members/@me/nick",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
@@ -1328,6 +1329,16 @@ end
 -- @see https://discord.com/developers/docs/resources/user#get-current-user
 function DiscordRest:getCurrentUser(botToken)
 	return self:performAuthorizedRequest(routes.currentUser, nil, nil, "GET", nil, botToken)
+end
+
+--- Get the current user's guilds.
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of guilds.
+-- @usage discord:getCurrentUserGuilds({limit = 10}):next(function(guilds) ... end)
+-- @see https://discord.com/developers/docs/resources/user#get-current-user-guilds
+function DiscordRest:getCurrentUserGuilds(options, botToken)
+	return self:performAuthorizedRequest(routes.myGuilds, nil, options, "GET", nil, botToken)
 end
 
 --- Get user information.

@@ -1078,6 +1078,17 @@ exports("getCurrentUser", function(botToken)
 	return discordRest:getCurrentUser(botToken)
 end)
 
+--- Get the current user's guilds.
+-- @function getCurrentUserGuilds
+-- @param options Options for the query.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of guilds.
+-- @usage exports.discord_rest:getCurrentUserGuilds({limit = 10}, "[bot token]"):next(function(guilds) ... end)
+-- @see https://discord.com/developers/docs/resources/user#get-current-user-guilds
+exports("getCurrentUserGuilds", function(options, botToken)
+	return discordRest:getCurrentUserGuilds(options, botToken)
+end)
+
 --- Get user information.
 -- @function getUser
 -- @param userId The ID of the user.
