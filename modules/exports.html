@@ -38,6 +38,8 @@
 <li><a href="#Invite">Invite </a></li>
 <li><a href="#User">User </a></li>
 <li><a href="#Webhook">Webhook </a></li>
+<li><a href="#Player__Wrappers_that_take_a_player_server_ID_instead_of_a_Discord_user_ID">Player
+ Wrappers that take a player server ID instead of a Discord user ID </a></li>
 </ul>
 
 
@@ -280,6 +282,10 @@
 	<td class="summary">Delete a guild permanently.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#deleteGuildIntegration">deleteGuildIntegration (guildId, integrationId, botToken)</a></td>
+	<td class="summary">Delete an integration for a guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#deleteGuildRole">deleteGuildRole (guildId, roleId, botToken)</a></td>
 	<td class="summary">Delete a guild role.</td>
 	</tr>
@@ -298,6 +304,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#getGuildChannels">getGuildChannels (guildId, botToken)</a></td>
 	<td class="summary">Get a list of guild channels.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuildIntegrations">getGuildIntegrations (guildId, botToken)</a></td>
+	<td class="summary">Get a list of integrations for a guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#getGuildInvites">getGuildInvites (guildId, botToken)</a></td>
@@ -403,6 +413,74 @@
 	<tr>
 	<td class="name" nowrap><a href="#executeWebhookUrl">executeWebhookUrl (url, data)</a></td>
 	<td class="summary">Execute a webhook, using the full URL.</td>
+	</tr>
+</table>
+<h2><a href="#Player__Wrappers_that_take_a_player_server_ID_instead_of_a_Discord_user_ID">Player
+ Wrappers that take a player server ID instead of a Discord user ID </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#addGuildMemberRoleToPlayer">addGuildMemberRoleToPlayer (guildId, player, roleId, botToken)</a></td>
+	<td class="summary">Adds a guild role to a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addPlayerToGuild">addPlayerToGuild (guildId, player, Parameters, botToken)</a></td>
+	<td class="summary">Adds a player to a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#addPlayerToThread">addPlayerToThread (channelId, player, botToken)</a></td>
+	<td class="summary">Adds a player to a thread.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#createGuildBanForPlayer">createGuildBanForPlayer (guildId, player, params, botToken)</a></td>
+	<td class="summary">Create a guild ban for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#deletePlayerReaction">deletePlayerReaction (channelId, messageId, emoji, player, botToken)</a></td>
+	<td class="summary">Remove a player's reaction from a message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuildBanForPlayer">getGuildBanForPlayer (guildId, player, botToken)</a></td>
+	<td class="summary">Return info on a ban for a player in a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getGuildMemberForPlayer">getGuildMemberForPlayer (guildId, player, botToken)</a></td>
+	<td class="summary">Get guild membership info for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getUserForPlayer">getUserForPlayer (player, botToken)</a></td>
+	<td class="summary">Get user information for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#getUserId">getUserId (player)</a></td>
+	<td class="summary">Get the Discord user ID of a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#groupDmAddPlayer">groupDmAddPlayer (channelId, player, params, botToken)</a></td>
+	<td class="summary">Adds a player to a Group DM.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#groupDmRemovePlayer">groupDmRemovePlayer (channelId, player, botToken)</a></td>
+	<td class="summary">Removes a player from a Group DM.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#modifyGuildMemberForPlayer">modifyGuildMemberForPlayer (guildId, player, params, botToken)</a></td>
+	<td class="summary">Modify guild membership attributes of a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeGuildBanForPlayer">removeGuildBanForPlayer (guildId, player, botToken)</a></td>
+	<td class="summary">Remove a guild ban for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removeGuildMemberRoleFromPlayer">removeGuildMemberRoleFromPlayer (guildId, player, roleId, botToken)</a></td>
+	<td class="summary">Removes a guild role from a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removePlayerFromGuild">removePlayerFromGuild (guildId, player, botToken)</a></td>
+	<td class="summary">Remove a player from a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#removePlayerFromThread">removePlayerFromThread (channelId, player, botToken)</a></td>
+	<td class="summary">Remove a player from a thread.</td>
 	</tr>
 </table>
 
@@ -2420,6 +2498,45 @@
 
 </dd>
     <dt>
+    <a name = "deleteGuildIntegration"></a>
+    <strong>deleteGuildIntegration (guildId, integrationId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete an integration for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild
+        </li>
+        <li><span class="parameter">integrationId</span>
+         The ID of the integration to delete.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#delete-guild-integration">https://discord.com/developers/docs/resources/guild#delete-guild-integration</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:deleteGuildIntegration(<span class="string">"[guild ID]"</span>, <span class="string">"[integration ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "deleteGuildRole"></a>
     <strong>deleteGuildRole (guildId, roleId, botToken)</strong>
     </dt>
@@ -2605,6 +2722,42 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">exports.discord_rest:getGuildChannels(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(channels) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuildIntegrations"></a>
+    <strong>getGuildIntegrations (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of integrations for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the list of integrations.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-integrations">https://discord.com/developers/docs/resources/guild#get-guild-integrations</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildIntegrations(<span class="string">"[guild ID]"</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(integrations) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -3539,13 +3692,653 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Player__Wrappers_that_take_a_player_server_ID_instead_of_a_Discord_user_ID"></a>Player
+ Wrappers that take a player server ID instead of a Discord user ID </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "addGuildMemberRoleToPlayer"></a>
+    <strong>addGuildMemberRoleToPlayer (guildId, player, roleId, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a guild role to a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add the role to.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role to add to the member.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#addGuildMemberRole">addGuildMemberRole</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:addGuildMemberRoleToPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[role ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "addPlayerToGuild"></a>
+    <strong>addPlayerToGuild (guildId, player, Parameters, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a player to a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to add the user to.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add to the guild.
+        </li>
+        <li><span class="parameter">Parameters</span>
+         for adding the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#addGuildMember">addGuildMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:addPlayerToGuild(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, {access_token = <span class="string">"..."</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "addPlayerToThread"></a>
+    <strong>addPlayerToThread (channelId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a player to a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add to the thread.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#addThreadMember">addThreadMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:addPlayerToThread(<span class="string">"[channel ID]"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "createGuildBanForPlayer"></a>
+    <strong>createGuildBanForPlayer (guildId, player, params, botToken)</strong>
+    </dt>
+    <dd>
+    Create a guild ban for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to create the ban for.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to ban.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the ban.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#createGuildBan">createGuildBan</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:createGuildBanForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, {reason = <span class="string">"Not following the rules"</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "deletePlayerReaction"></a>
+    <strong>deletePlayerReaction (channelId, messageId, emoji, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a player's reaction from a message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The message to remove the reaction from.
+        </li>
+        <li><span class="parameter">emoji</span>
+         The emoji of the reaction to remove.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player whose reaction will be removed.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#deleteUserReaction">deleteUserReaction</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:deletePlayerReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuildBanForPlayer"></a>
+    <strong>getGuildBanForPlayer (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Return info on a ban for a player in a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the banned player.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the ban info.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#getGuildBan">getGuildBan</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildBanForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(ban) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getGuildMemberForPlayer"></a>
+    <strong>getGuildMemberForPlayer (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Get guild membership info for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with the info of the member if they are in the guild.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#getGuildMember">getGuildMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getGuildMemberForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(member) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getUserForPlayer"></a>
+    <strong>getUserForPlayer (player, botToken)</strong>
+    </dt>
+    <dd>
+    Get user information for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#getUser">getUser</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getUserForPlayer(<span class="number">1</span>, <span class="string">"[bot token]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "getUserId"></a>
+    <strong>getUserId (player)</strong>
+    </dt>
+    <dd>
+    Get the Discord user ID of a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the player's Discord user ID, if they have one.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:getUserId(<span class="number">1</span>):<span class="global">next</span>(<span class="keyword">function</span>(userId) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "groupDmAddPlayer"></a>
+    <strong>groupDmAddPlayer (channelId, player, params, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a player to a Group DM.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the group DM channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for adding the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#groupDmAddRecipient">groupDmAddRecipient</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:groupDmAddPlayer(<span class="string">"[channel ID]"</span>, <span class="number">1</span>, {access_token = <span class="string">"..."</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "groupDmRemovePlayer"></a>
+    <strong>groupDmRemovePlayer (channelId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Removes a player from a Group DM.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the group DM channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#groupDmRemoveRecipient">groupDmRemoveRecipient</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:groupDmRemovePlayer(<span class="string">"[channel ID]"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "modifyGuildMemberForPlayer"></a>
+    <strong>modifyGuildMemberForPlayer (guildId, player, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify guild membership attributes of a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+        <li><span class="parameter">params</span>
+         The parameters to modify.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the modified guild member.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#modifyGuildMember">modifyGuildMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:modifyGuildMemberForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, {nick = <span class="string">"New nickname"</span>}, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removeGuildBanForPlayer"></a>
+    <strong>removeGuildBanForPlayer (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a guild ban for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to remove the ban for the user from.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the user to unban.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#removeGuildBan">removeGuildBan</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:removeGuildBanForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removeGuildMemberRoleFromPlayer"></a>
+    <strong>removeGuildMemberRoleFromPlayer (guildId, player, roleId, botToken)</strong>
+    </dt>
+    <dd>
+    Removes a guild role from a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove the role from.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role to remove from the member.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#removeGuildMemberRole">removeGuildMemberRole</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:removeGuildMemberRoleFromPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[role ID]"</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removePlayerFromGuild"></a>
+    <strong>removePlayerFromGuild (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a player from a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to remove the member from.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove from the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#removePlayerFromGuild">removePlayerFromGuild</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:removePlayerFromGuild(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "removePlayerFromThread"></a>
+    <strong>removePlayerFromThread (channelId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a player from a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove from the thread.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../modules/exports.html#removeThreadMember">removeThreadMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">exports.discord_rest:removePlayerFromThread(<span class="string">"[channel ID]"</span>, <span class="number">1</span>, <span class="string">"[bot token]"</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-08 20:02:39 </i>
+<i style="float:right;">Last updated 2021-09-09 00:41:59 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>

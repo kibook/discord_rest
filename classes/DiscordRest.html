@@ -39,6 +39,8 @@
 <li><a href="#Invite">Invite </a></li>
 <li><a href="#User">User </a></li>
 <li><a href="#Webhook">Webhook </a></li>
+<li><a href="#Player__Wrappers_that_take_a_player_server_ID_instead_of_a_Discord_user_ID">Player
+ Wrappers that take a player server ID instead of a Discord user ID </a></li>
 </ul>
 
 
@@ -292,6 +294,10 @@
 	<td class="summary">Delete a guild permanently.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteGuildIntegration">DiscordRest:deleteGuildIntegration (guildId, integrationId, botToken)</a></td>
+	<td class="summary">Delete an integration for a guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:deleteGuildRole">DiscordRest:deleteGuildRole (guildId, roleId, botToken)</a></td>
 	<td class="summary">Delete a guild role.</td>
 	</tr>
@@ -312,12 +318,16 @@
 	<td class="summary">Get a list of guild channels.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildIntegrations">DiscordRest:getGuildIntegrations (guildId, botToken)</a></td>
+	<td class="summary">Get a list of integrations for a guild.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getGuildInvites">DiscordRest:getGuildInvites (guildId, botToken)</a></td>
 	<td class="summary">Get a list of invites for a guild.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getGuildMember">DiscordRest:getGuildMember (guildId, userId, botToken)</a></td>
-	<td class="summary">Get info for a member of a guild.</td>
+	<td class="summary">Get guild membership info for a user.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getGuildPreview">DiscordRest:getGuildPreview (guildId, botToken)</a></td>
@@ -357,7 +367,7 @@
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildMember">DiscordRest:modifyGuildMember (guildId, userId, params, botToken)</a></td>
-	<td class="summary">Modify attributes of a guild member.</td>
+	<td class="summary">Modify guild membership attributes of a user.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyGuildRole">DiscordRest:modifyGuildRole (guildId, roleId, params, botToken)</a></td>
@@ -368,8 +378,8 @@
 	<td class="summary">Modify the positions of a set of roles for a guild.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:removeGuilBan">DiscordRest:removeGuilBan (guildId, userId, botToken)</a></td>
-	<td class="summary">Remove the ban for a user.</td>
+	<td class="name" nowrap><a href="#DiscordRest:removeGuildBan">DiscordRest:removeGuildBan (guildId, userId, botToken)</a></td>
+	<td class="summary">Remove a guild ban for a user.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:removeGuildMember">DiscordRest:removeGuildMember (guildId, userId, botToken)</a></td>
@@ -415,6 +425,74 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:executeWebhookUrl">DiscordRest:executeWebhookUrl (url, data)</a></td>
 	<td class="summary">Execute a webhook, using the full URL.</td>
+	</tr>
+</table>
+<h2><a href="#Player__Wrappers_that_take_a_player_server_ID_instead_of_a_Discord_user_ID">Player
+ Wrappers that take a player server ID instead of a Discord user ID </a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getUserId">DiscordRest:getUserId (player)</a></td>
+	<td class="summary">Get the Discord user ID of a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:addGuildMemberRoleToPlayer">DiscordRest:addGuildMemberRoleToPlayer (guildId, player, roleId, botToken)</a></td>
+	<td class="summary">Adds a guild role to a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:addPlayerToGuild">DiscordRest:addPlayerToGuild (guildId, player, Parameters, botToken)</a></td>
+	<td class="summary">Adds a player to a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:addPlayerToThread">DiscordRest:addPlayerToThread (channelId, player, botToken)</a></td>
+	<td class="summary">Adds a player to a thread.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:createGuildBanForPlayer">DiscordRest:createGuildBanForPlayer (guildId, player, params, botToken)</a></td>
+	<td class="summary">Create a guild ban for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deletePlayerReaction">DiscordRest:deletePlayerReaction (channelId, messageId, emoji, player, botToken)</a></td>
+	<td class="summary">Remove a player's reaction from a message.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildBanForPlayer">DiscordRest:getGuildBanForPlayer (guildId, player, botToken)</a></td>
+	<td class="summary">Return info on a ban for a player in a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getGuildMemberForPlayer">DiscordRest:getGuildMemberForPlayer (guildId, player, botToken)</a></td>
+	<td class="summary">Get guild membership info for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getUserForPlayer">DiscordRest:getUserForPlayer (player, botToken)</a></td>
+	<td class="summary">Get user information for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:groupDmAddPlayer">DiscordRest:groupDmAddPlayer (channelId, player, params, botToken)</a></td>
+	<td class="summary">Adds a player to a Group DM.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:groupDmRemovePlayer">DiscordRest:groupDmRemovePlayer (channelId, player, botToken)</a></td>
+	<td class="summary">Removes a player from a Group DM.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyGuildMemberForPlayer">DiscordRest:modifyGuildMemberForPlayer (guildId, player, params, botToken)</a></td>
+	<td class="summary">Modify guild membership attributes of a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:removeGuildBanForPlayer">DiscordRest:removeGuildBanForPlayer (guildId, player, botToken)</a></td>
+	<td class="summary">Remove a guild ban for a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:removeGuildMemberRoleFromPlayer">DiscordRest:removeGuildMemberRoleFromPlayer (guildId, player, roleId, botToken)</a></td>
+	<td class="summary">Removes a guild role from a player.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:removePlayerFromGuild">DiscordRest:removePlayerFromGuild (guildId, player, botToken)</a></td>
+	<td class="summary">Remove a player from a guild.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:removePlayerFromThread">DiscordRest:removePlayerFromThread (channelId, player, botToken)</a></td>
+	<td class="summary">Remove a player from a thread.</td>
 	</tr>
 </table>
 
@@ -2522,6 +2600,45 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:deleteGuildIntegration"></a>
+    <strong>DiscordRest:deleteGuildIntegration (guildId, integrationId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete an integration for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild
+        </li>
+        <li><span class="parameter">integrationId</span>
+         The ID of the integration to delete.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#delete-guild-integration">https://discord.com/developers/docs/resources/guild#delete-guild-integration</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteGuildIntegration(<span class="string">"[guild ID]"</span>, <span class="string">"[integration ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:deleteGuildRole"></a>
     <strong>DiscordRest:deleteGuildRole (guildId, roleId, botToken)</strong>
     </dt>
@@ -2711,6 +2828,42 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:getGuildIntegrations"></a>
+    <strong>DiscordRest:getGuildIntegrations (guildId, botToken)</strong>
+    </dt>
+    <dd>
+    Get a list of integrations for a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the list of integrations.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/guild#get-guild-integrations">https://discord.com/developers/docs/resources/guild#get-guild-integrations</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildIntegrations(<span class="string">"[guild ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(integrations) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:getGuildInvites"></a>
     <strong>DiscordRest:getGuildInvites (guildId, botToken)</strong>
     </dt>
@@ -2751,7 +2904,7 @@
     <strong>DiscordRest:getGuildMember (guildId, userId, botToken)</strong>
     </dt>
     <dd>
-    Get info for a member of a guild.
+    Get guild membership info for a user.
 
 
     <h3>Parameters:</h3>
@@ -3129,7 +3282,7 @@
     <strong>DiscordRest:modifyGuildMember (guildId, userId, params, botToken)</strong>
     </dt>
     <dd>
-    Modify attributes of a guild member.
+    Modify guild membership attributes of a user.
 
 
     <h3>Parameters:</h3>
@@ -3248,11 +3401,11 @@
 
 </dd>
     <dt>
-    <a name = "DiscordRest:removeGuilBan"></a>
-    <strong>DiscordRest:removeGuilBan (guildId, userId, botToken)</strong>
+    <a name = "DiscordRest:removeGuildBan"></a>
+    <strong>DiscordRest:removeGuildBan (guildId, userId, botToken)</strong>
     </dt>
     <dd>
-    Remove the ban for a user.
+    Remove a guild ban for a user.
 
 
     <h3>Parameters:</h3>
@@ -3641,13 +3794,653 @@
 
 </dd>
 </dl>
+    <h2 class="section-header "><a name="Player__Wrappers_that_take_a_player_server_ID_instead_of_a_Discord_user_ID"></a>Player
+ Wrappers that take a player server ID instead of a Discord user ID </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "DiscordRest:getUserId"></a>
+    <strong>DiscordRest:getUserId (player)</strong>
+    </dt>
+    <dd>
+    Get the Discord user ID of a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the player's Discord user ID, if they have one.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getUserId(<span class="number">1</span>):<span class="global">next</span>(<span class="keyword">function</span>(userId) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:addGuildMemberRoleToPlayer"></a>
+    <strong>DiscordRest:addGuildMemberRoleToPlayer (guildId, player, roleId, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a guild role to a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add the role to.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role to add to the member.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:addGuildMemberRole">DiscordRest:addGuildMemberRole</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:addGuildMemberRoleToPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[role ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:addPlayerToGuild"></a>
+    <strong>DiscordRest:addPlayerToGuild (guildId, player, Parameters, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a player to a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to add the user to.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add to the guild.
+        </li>
+        <li><span class="parameter">Parameters</span>
+         for adding the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:addGuildMember">DiscordRest:addGuildMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:addPlayerToGuild(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, {access_token = <span class="string">"..."</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:addPlayerToThread"></a>
+    <strong>DiscordRest:addPlayerToThread (channelId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a player to a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add to the thread.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:addThreadMember">DiscordRest:addThreadMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:addPlayerToThread(<span class="string">"[channel ID]"</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:createGuildBanForPlayer"></a>
+    <strong>DiscordRest:createGuildBanForPlayer (guildId, player, params, botToken)</strong>
+    </dt>
+    <dd>
+    Create a guild ban for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to create the ban for.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to ban.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for the ban.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:createGuildBan">DiscordRest:createGuildBan</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:createGuildBanForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, {reason = <span class="string">"Not following the rules"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:deletePlayerReaction"></a>
+    <strong>DiscordRest:deletePlayerReaction (channelId, messageId, emoji, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a player's reaction from a message.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the channel containing the message.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The message to remove the reaction from.
+        </li>
+        <li><span class="parameter">emoji</span>
+         The emoji of the reaction to remove.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player whose reaction will be removed.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:deleteUserReaction">DiscordRest:deleteUserReaction</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deletePlayerReaction(<span class="string">"[channel ID]"</span>, <span class="string">"[message ID]"</span>, <span class="string">"💗"</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildBanForPlayer"></a>
+    <strong>DiscordRest:getGuildBanForPlayer (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Return info on a ban for a player in a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the banned player.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the ban info.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:getGuildBan">DiscordRest:getGuildBan</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildBanForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>):<span class="global">next</span>(<span class="keyword">function</span>(ban) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getGuildMemberForPlayer"></a>
+    <strong>DiscordRest:getGuildMemberForPlayer (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Get guild membership info for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise that resolves with the info of the member if they are in the guild.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:getGuildMember">DiscordRest:getGuildMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getGuildMember(<span class="string">"[guild ID]"</span>, <span class="number">1</span>):<span class="global">next</span>(<span class="keyword">function</span>(member) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getUserForPlayer"></a>
+    <strong>DiscordRest:getUserForPlayer (player, botToken)</strong>
+    </dt>
+    <dd>
+    Get user information for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:getUser">DiscordRest:getUser</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getUserForPlayer(<span class="number">1</span>):<span class="global">next</span>(<span class="keyword">function</span>(user) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:groupDmAddPlayer"></a>
+    <strong>DiscordRest:groupDmAddPlayer (channelId, player, params, botToken)</strong>
+    </dt>
+    <dd>
+    Adds a player to a Group DM.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the group DM channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to add.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters for adding the user.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:groupDmAddRecipient">DiscordRest:groupDmAddRecipient</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:groupDmAddPlayer(<span class="string">"[channel ID]"</span>, <span class="number">1</span>, {access_token = <span class="string">"..."</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:groupDmRemovePlayer"></a>
+    <strong>DiscordRest:groupDmRemovePlayer (channelId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Removes a player from a Group DM.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the group DM channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:groupDmRemoveRecipient">DiscordRest:groupDmRemoveRecipient</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:groupDmRemovePlayer(<span class="string">"[channel ID]"</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyGuildMemberForPlayer"></a>
+    <strong>DiscordRest:modifyGuildMemberForPlayer (guildId, player, params, botToken)</strong>
+    </dt>
+    <dd>
+    Modify guild membership attributes of a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player.
+        </li>
+        <li><span class="parameter">params</span>
+         The parameters to modify.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the modified guild member.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:modifyGuildMember">DiscordRest:modifyGuildMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyGuildMember(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, {nick = <span class="string">"New nickname"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:removeGuildBanForPlayer"></a>
+    <strong>DiscordRest:removeGuildBanForPlayer (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a guild ban for a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to remove the ban for the user from.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the user to unban.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:removeGuildBan">DiscordRest:removeGuildBan</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:removeGuildBanForPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:removeGuildMemberRoleFromPlayer"></a>
+    <strong>DiscordRest:removeGuildMemberRoleFromPlayer (guildId, player, roleId, botToken)</strong>
+    </dt>
+    <dd>
+    Removes a guild role from a player.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove the role from.
+        </li>
+        <li><span class="parameter">roleId</span>
+         The ID of the role to remove from the member.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:removeGuildMemberRole">DiscordRest:removeGuildMemberRole</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:removeGuildMemberRoleFromPlayer(<span class="string">"[guild ID]"</span>, <span class="number">1</span>, <span class="string">"[role ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:removePlayerFromGuild"></a>
+    <strong>DiscordRest:removePlayerFromGuild (guildId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a player from a guild.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">guildId</span>
+         The ID of the guild to remove the member from.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove from the guild.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:removePlayerFromGuild">DiscordRest:removePlayerFromGuild</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:removePlayerFromGuild(<span class="string">"[guild ID]"</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:removePlayerFromThread"></a>
+    <strong>DiscordRest:removePlayerFromThread (channelId, player, botToken)</strong>
+    </dt>
+    <dd>
+    Remove a player from a thread.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">channelId</span>
+         The ID of the thread channel.
+        </li>
+        <li><span class="parameter">player</span>
+         The server ID of the player to remove from the thread.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/DiscordRest.html#DiscordRest:removeThreadMember">DiscordRest:removeThreadMember</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:removePlayerFromThread(<span class="string">"[channel ID]"</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+</dd>
+</dl>
 
 
 </div> <!-- id="content" -->
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-08 20:02:39 </i>
+<i style="float:right;">Last updated 2021-09-09 00:41:59 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
