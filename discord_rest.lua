@@ -63,6 +63,7 @@ local routes = {
 	userVoiceState = "/guilds/%s/voice-states/%s",
 	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
+	webhookId      = "/webhooks/%s",
 	webhooks       = "/channels/%s/webhooks",
 	welcomeScreen  = "/guilds/%s/welcome-screen",
 	widget         = "/guilds/%s/widget",
@@ -1429,6 +1430,16 @@ end
 -- @see https://discord.com/developers/docs/resources/webhook#get-guild-webhooks
 function DiscordRest:getGuildWebhooks(guildId, botToken)
 	return self:performAuthorizedRequest(routes.guildWebhooks, {guildId}, nil, "GET", nil, botToken)
+end
+
+--- Get information for a webhook.
+-- @param webhookId The ID of the webhook.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the webhook.
+-- @usage discord:getWebhook("[webhook ID]"):next(function(webhook) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-webhook
+function DiscordRest:getWebhook(webhookId, botToken)
+	return self:performAuthorizedRequest(routes.webhookId, {webhookId}, nil, "GET", nil, botToken)
 end
 
 --- Player.
