@@ -28,6 +28,7 @@ local routes = {
 	guildPreview   = "/guilds/%s/preview",
 	guilds         = "/guilds",
 	guildThreads   = "/guilds/%s/threads/active",
+	guildWebhooks  = "/guilds/%s/webhooks",
 	integration    = "/guilds/%s/integrations/%",
 	integrations   = "/guilds/%s/integrations",
 	invite         = "/invites/%s",
@@ -1418,6 +1419,16 @@ end
 -- @see https://discord.com/developers/docs/resources/webhook#get-channel-webhooks
 function DiscordRest:getChannelWebhooks(channelId, botToken)
 	return self:performAuthorizedRequest(routes.webhooks, {channelId}, nil, "GET", nil, botToken)
+end
+
+--- Get a list of webhooks for a guild.
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of webhooks.
+-- @usage discord:getGuildWebhooks("[guild ID]"):next(function(webhooks) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-guild-webhooks
+function DiscordRest:getGuildWebhooks(guildId, botToken)
+	return self:performAuthorizedRequest(routes.guildWebhooks, {guildId}, nil, "GET", nil, botToken)
 end
 
 --- Player.

@@ -1169,6 +1169,17 @@ exports("getChannelWebhooks", function(channelId, botToken)
 	return discordRest:getChannelWebhooks(channelId, botToken)
 end)
 
+--- Get a list of webhooks for a guild.
+-- @function getGuildWebhooks
+-- @param guildId The ID of the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with a list of webhooks.
+-- @usage exports.discord_rest:getGuildWebhooks("[guild ID]", "[bot token]"):next(function(webhooks) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-guild-webhooks
+exports("getGuildWebhooks", function(guildId, botToken)
+	return discordRest:getGuildWebhooks(guildId, botToken)
+end)
+
 --- Player.
 -- Wrapper functions that allow you to use a player's server ID in place of a Discord user ID.
 -- @section player
