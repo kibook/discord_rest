@@ -1442,6 +1442,28 @@ function DiscordRest:getWebhook(webhookId, botToken)
 	return self:performAuthorizedRequest(routes.webhookId, {webhookId}, nil, "GET", nil, botToken)
 end
 
+--- Get information for a webhook, using its token for authorization instead of a bot token.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @return A new promise which is resolved with the webhook.
+-- @usage discord:getWebhookWithToken("[webhook ID]", "[webhook token]"):next(function(webhook) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-webhook-with-token
+function DiscordRest:getWebhookWithToken(webhookId, webhookToken)
+	return self:getWebhookWithUrl(formatRoute(routes.webhook, {webhookId, webhookToken}))
+end
+
+--- Get information for a webhook, using its full URL for authorization instead of a bot token.
+-- @param url The webhook URL.
+-- @return A new promise which is resolved with the webhook.
+-- @usage discord:getWebhookWithUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]"):next(function(webhook) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-webhook-with-token
+function DiscordRest:getWebhookWithUrl(url)
+	local queue = self:getQueue(url)
+	local p = promise.new()
+	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), "GET")
+	return p
+end
+
 --- Player.
 -- Wrapper functions that allow you to use a player's server ID in place of a Discord user ID.
 -- @section player
