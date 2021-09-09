@@ -1249,7 +1249,6 @@ function DiscordRest:executeWebhookUrl(url, data)
 end
 
 --- Player
--- Wrappers that take a player server ID instead of a Discord user ID.
 -- @section player
 
 --- Get the Discord user ID of a player.
@@ -1450,7 +1449,7 @@ end
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage discord:removePlayerFromGuild("[guild ID]", 1)
--- @see DiscordRest:removePlayerFromGuild
+-- @see DiscordRest:removeGuildMember
 function DiscordRest:removePlayerFromGuild(guildId, player, botToken)
 	return self:getUserId(player):next(function(userId)
 		return self:removeGuildMember(guildId, userId, botToken)

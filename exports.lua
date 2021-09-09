@@ -999,7 +999,6 @@ exports("executeWebhookUrl", function(url, data)
 end)
 
 --- Player
--- Wrappers that take a player server ID instead of a Discord user ID.
 -- @section player
 
 --- Adds a guild role to a player.
@@ -1181,7 +1180,7 @@ end)
 -- @param botToken Optional bot token to use for authorization.
 -- @return A new promise.
 -- @usage exports.discord_rest:removePlayerFromGuild("[guild ID]", 1, "[bot token]")
--- @see removePlayerFromGuild
+-- @see removeGuildMember
 exports("removePlayerFromGuild", function(guildId, player, botToken)
         return discordRest:removePlayerFromGuild(guildId, player, botToken)
 end)
