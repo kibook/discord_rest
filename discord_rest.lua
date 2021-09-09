@@ -15,6 +15,7 @@ local routes = {
 	channelThreads = "/channels/%s/threads",
 	createDm       = "/users/@me/channels",
 	crosspost      = "/channels/%s/messages/%s/crosspost",
+	currentUser    = "/users/@me",
 	followers      = "/channels/%s/followers",
 	groupDm        = "/channels/%s/recipients/%s",
 	guild          = "/guilds/%s",
@@ -1318,6 +1319,15 @@ end
 -- @see https://discord.com/developers/docs/resources/user#create-dm
 function DiscordRest:createDm(recipientId, botToken)
 	return self:performAuthorizedRequest(routes.createDm, nil, nil, "POST", {recipient_id = recipientId}, botToken)
+end
+
+--- Get the current user's information.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the user's information.
+-- @usage discord:getCurrentUser():next(function(user) ... end)
+-- @see https://discord.com/developers/docs/resources/user#get-current-user
+function DiscordRest:getCurrentUser(botToken)
+	return self:performAuthorizedRequest(routes.currentUser, nil, nil, "GET", nil, botToken)
 end
 
 --- Get user information.

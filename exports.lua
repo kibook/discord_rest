@@ -1068,6 +1068,16 @@ exports("createDm", function(recipientId, botToken)
 	return discordRest:createDm(recipientId, botToken)
 end)
 
+--- Get the current user's information.
+-- @function getCurrentUser
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the user's information.
+-- @usage exports.discord_rest:getCurrentUser("[bot token]"):next(function(user) ... end)
+-- @see https://discord.com/developers/docs/resources/user#get-current-user
+exports("getCurrentUser", function(botToken)
+	return discordRest:getCurrentUser(botToken)
+end)
+
 --- Get user information.
 -- @function getUser
 -- @param userId The ID of the user.
