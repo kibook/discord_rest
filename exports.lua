@@ -942,6 +942,18 @@ exports("modifyGuildRolePositions", function(guildId, params, botToken)
 	return discordRest:modifyGuildRolePositions(guildId, params, botToken)
 end)
 
+--- Modify a guild's welcome screen.
+-- @function modifyGuildWelcomeScreen
+-- @param guildId The ID of the guild.
+-- @param params Parameters for modifying the welcome screen.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated welcome screen.
+-- @usage exports.discord_rest:modifyGuildWelcomeScreen("[guild ID]", {enabled = true}, "[bot token]"):next(function(welcomeScreen) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#modify-guild-welcome-screen
+exports("modifyGuildWelcomeScreen", function(guildId, params, botToken)
+	return discordRest:modifyGuildWelcomeScreen(guildId, params, botToken)
+end)
+
 --- Remove the ban for a user.
 -- @function removeGuildBan
 -- @param guildId The ID of the guild to remove the ban for the user from.
