@@ -868,6 +868,18 @@ exports("modifyCurrentUserNick", function(guildId, nick, botToken)
 	return discordRest:modifyCurrentUserNick(guildId, nick, botToken)
 end)
 
+--- Updates the current user's voice state.
+-- @function modifyCurrentUserVoiceState
+-- @param guildId The ID of the guild to modify voice state in.
+-- @param params Parameters for modifying the voice state.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:modifyCurrentUserVoiceState("[guild ID]", {...}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state
+exports("modifyCurrentUserVoiceState", function(guildId, params, botToken)
+	return discordRest:modifyCurrentUserVoiceState(guildId, params, botToken)
+end)
+
 --- Modify a guild's settings.
 -- @function modifyGuild
 -- @param guildId The ID of the guild to modify.

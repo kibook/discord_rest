@@ -35,6 +35,7 @@ local routes = {
 	message        = "/channels/%s/messages/%s",
 	messages       = "/channels/%s/messages",
 	messageThreads = "/channels/%s/messages/%s/threads",
+	myVoiceState   = "/guilds/%s/voice-states/@me",
 	nick           = "/guilds/%s/members/@me/nick",
 	ownReaction    = "/channels/%s/messages/%s/reactions/%s/@me",
 	pinMessage     = "/channels/%s/pins/%s",
@@ -52,8 +53,8 @@ local routes = {
 	threadSelf     = "/channels/%s/thread-members/@me",
 	threadUser     = "/channels/%s/thread-members/%s",
 	typing         = "/channels/%s/typing",
-	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
 	user           = "/users/%s",
+	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
 	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
 	welcomeScreen  = "/guilds/%s/welcome-screen",
@@ -1132,6 +1133,17 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#modify-current-user-nick
 function DiscordRest:modifyCurrentUserNick(guildId, nick, botToken)
 	return self:performAuthorizedRequest(routes.nick, {guildId}, {nick = nick}, "PATCH", nil, botToken)
+end
+
+--- Updates the current user's voice state.
+-- @param guildId The ID of the guild to modify voice state in.
+-- @param params Parameters for modifying the voice state.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:modifyCurrentUserVoiceState("[guild ID]", {...})
+-- @see https://discord.com/developers/docs/resources/guild#modify-current-user-voice-state
+function DiscordRest:modifyCurrentUserVoiceState(guildId, params, botToken)
+	return self:performAuthorizedRequest(routes.myVoiceState, {guildId}, nil, "PATCH", params, botToken)
 end
 
 --- Modify a guild's settings.
