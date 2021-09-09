@@ -8,7 +8,7 @@ Discord REST API utility for FiveM and RedM.
 - Promise-based asynchronous export functions.
 - Actions are handled in a queue to prevent rate limiting.
 
-# Examples 
+# Examples
 
 ## Execute a webhook
 
@@ -33,12 +33,9 @@ end)
 ```lua
 -- Get a player's name on Discord
 local playerName = GetPlayerName(player)
-local discordId = getPlayerDiscordId(player) -- returns the player's Discord ID from their identifiers, if they have one
-if discordId then
-	exports.discord_rest:getUser(discordId):next(function(user)
-		print(playerName .. " is called " .. user.username .. " on Discord")
-	end)
-else
+exports.discord_rest:getUserForPlayer(player):next(function(user)
+	print(playerName .. " is called " .. user.username .. " on Discord")
+end, function(err)
 	print(playerName .. " does not have Discord connected")
-end
+end)
 ```
