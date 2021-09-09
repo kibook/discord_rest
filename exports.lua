@@ -966,6 +966,19 @@ exports("modifyGuildWidget", function(guildId, widget, botToken)
 	return discordRest:modifyGuildWidget(guildId, widget, botToken)
 end)
 
+--- Updates another user's voice state.
+-- @function modifyUserVoiceState
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user.
+-- @param params Parameters for modifying the voice state.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:modifyUserVoiceState("[guild ID]", "[user ID]", {...}, "[bot token]")
+-- @see https://discord.com/developers/docs/resources/guild#modify-user-voice-state
+exports("modifyUserVoiceState", function(guildId, userId, params, botToken)
+	return discordRest:modifyUserVoiceState(guildId, userId, params, botToken)
+end)
+
 --- Remove the ban for a user.
 -- @function removeGuildBan
 -- @param guildId The ID of the guild to remove the ban for the user from.

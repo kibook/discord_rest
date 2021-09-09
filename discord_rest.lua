@@ -55,6 +55,7 @@ local routes = {
 	typing         = "/channels/%s/typing",
 	user           = "/users/%s",
 	userReaction   = "/channels/%s/messages/%s/reactions/%s/%s",
+	userVoiceState = "/guilds/%s/voice-states/%s",
 	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
 	welcomeScreen  = "/guilds/%s/welcome-screen",
@@ -1223,6 +1224,18 @@ end
 -- @see https://discord.com/developers/docs/resources/guild#modify-guild-widget
 function DiscordRest:modifyGuildWidget(guildId, widget, botToken)
 	return self:performAuthorizedRequest(routes.widget, {guildId}, nil, "PATCH", widget, botToken)
+end
+
+--- Updates another user's voice state.
+-- @param guildId The ID of the guild.
+-- @param userId The ID of the user.
+-- @param params Parameters for modifying the voice state.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:modifyUserVoiceState("[guild ID]", "[user ID]", {...})
+-- @see https://discord.com/developers/docs/resources/guild#modify-user-voice-state
+function DiscordRest:modifyUserVoiceState(guildId, userId, params, botToken)
+	return self:performAuthorizedRequest(routes.userVoiceState, {guildId, userId}, nil, "PATCH", params, botToken)
 end
 
 --- Remove a guild ban for a user.
