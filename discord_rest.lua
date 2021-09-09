@@ -1248,7 +1248,8 @@ function DiscordRest:executeWebhookUrl(url, data)
 	return p
 end
 
---- Player
+--- Player.
+-- Wrapper functions that allow you to use a player's server ID in place of a Discord user ID.
 -- @section player
 
 --- Get the Discord user ID of a player.

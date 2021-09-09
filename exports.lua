@@ -998,7 +998,8 @@ exports("executeWebhookUrl", function(url, data)
 	return discordRest:executeWebhookUrl(url, data)
 end)
 
---- Player
+--- Player.
+-- Wrapper functions that allow you to use a player's server ID in place of a Discord user ID.
 -- @section player
 
 --- Adds a guild role to a player.
