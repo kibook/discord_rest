@@ -1526,6 +1526,20 @@ function DiscordRest:modifyGuildMemberForPlayer(guildId, player, params, botToke
 	end)
 end
 
+--- Updates a player's voice state.
+-- @param guildId The ID of the guild.
+-- @param player The server ID of the player.
+-- @param params Parameters for modifying the voice state.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:modifyPlayerVoiceState("[guild ID]", 1, {...})
+-- @see DiscordRest:modifyUserVoiceState
+function DiscordRest:modifyPlayerVoiceState(guildId, player, params, botToken)
+	return self:getUserId(player):next(function(userId)
+		return self:modifyUserVoiceState(guildId, userId, params, botToken)
+	end)
+end
+
 --- Remove a guild ban for a player.
 -- @param guildId The ID of the guild to remove the ban for the user from.
 -- @param player The server ID of the user to unban.
