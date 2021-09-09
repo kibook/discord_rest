@@ -797,6 +797,21 @@ exports("getGuildWidget", function(guildId, botToken)
 	return discordRest:getGuildWidget(guildId, botToken)
 end)
 
+--[[
+This method can't be implemented as PerformHttpRequest does not work with binary data.
+
+--- Get the widget image for a guild.
+-- @function getGuildWidgetImage
+-- @param guildId The ID of the guild.
+-- @param style Style of the widget image returned.
+-- @return A new promise which is resolved with the widget image.
+-- @usage exports.discord_rest:getGuildWidgetImage("[guild ID]", "shield"):next(function(image) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-widget-image
+exports("getGuildWidgetImage", function(guildId, style)
+	return discordRest:getGuildWidgetImage(guildId, style)
+end)
+]]
+
 --- Get guild widget settings.
 -- @function getGuildWidgetSettings
 -- @param guildId The ID of the guild.

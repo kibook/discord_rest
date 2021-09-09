@@ -57,6 +57,7 @@ local routes = {
 	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
 	widget         = "/guilds/%s/widget",
+	widgetImage    = "/guilds/%s/widget.png",
 	widgetJson     = "/guilds/%s/widget.json",
 }
 
@@ -74,7 +75,11 @@ end
 function createSimplePromiseCallback(p)
 	return function(status, data, headers)
 		if isResponseSuccess(status) then
-			p:resolve(json.decode(data) or status)
+			if headers["content-type"] == "application/json" then
+				p:resolve(json.decode(data))
+			else
+				p:resolve(status)
+			end
 		else
 			p:reject(status)
 		end
@@ -1062,6 +1067,20 @@ end
 function DiscordRest:getGuildWidget(guildId, botToken)
 	return self:performAuthorizedRequest(routes.widgetJson, {guildId}, nil, "GET", nil, botToken)
 end
+
+--[[
+This method can't be implemented as PerformHttpRequest does not work with binary data.
+
+--- Get the widget image for a guild.
+-- @param guildId The ID of the guild.
+-- @param style Style of the widget image returned.
+-- @return A new promise which is resolved with the widget image.
+-- @usage discord:getGuildWidgetImage("[guild ID]", "shield"):next(function(image) ... end)
+-- @see https://discord.com/developers/docs/resources/guild#get-guild-widget-image
+function DiscordRest:getGuildWidgetImage(guildId, style)
+	return self:performRequest(routes.widgetImage, {guildId}, options, "GET", nil)
+end
+]]
 
 --- Get guild widget settings.
 -- @param guildId The ID of the guild.
