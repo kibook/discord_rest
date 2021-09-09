@@ -997,3 +997,203 @@ end)
 exports("executeWebhookUrl", function(url, data)
 	return discordRest:executeWebhookUrl(url, data)
 end)
+
+--- Player
+-- Wrappers that take a player server ID instead of a Discord user ID.
+-- @section player
+
+--- Adds a guild role to a player.
+-- @function addGuildMemberRoleToPlayer
+-- @param guildId The ID of the guild.
+-- @param player The server ID of the player to add the role to.
+-- @param roleId The ID of the role to add to the member.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:addGuildMemberRoleToPlayer("[guild ID]", 1, "[role ID]", "[bot token]")
+-- @see addGuildMemberRole
+exports("addGuildMemberRoleToPlayer", function(guildId, player, roleId, botToken)
+        return discordRest:addGuildMemberRoleToPlayer(guildId, player, roleId, botToken)
+end)
+
+--- Adds a player to a guild.
+-- @function addPlayerToGuild
+-- @param guildId The ID of the guild to add the user to.
+-- @param player The server ID of the player to add to the guild.
+-- @param Parameters for adding the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:addPlayerToGuild("[guild ID]", 1, {access_token = "..."}, "[bot token]")
+-- @see addGuildMember
+exports("addPlayerToGuild", function(guildId, player, params, botToken)
+        return discordRest:addPlayerToGuild(guildId, player, params, botToken)
+end)
+
+--- Adds a player to a thread.
+-- @function addPlayerToThread
+-- @param channelId The ID of the thread channel.
+-- @param player The server ID of the player to add to the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:addPlayerToThread("[channel ID]", 1, "[bot token]")
+-- @see addThreadMember
+exports("addPlayerToThread", function(channelId, player, botToken)
+        return discordRest:addPlayerToThread(channelId, player, botToken)
+end)
+
+--- Create a guild ban for a player.
+-- @function createGuildBanForPlayer
+-- @param guildId The ID of the guild to create the ban for.
+-- @param player The server ID of the player to ban.
+-- @param params Parameters for the ban.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:createGuildBanForPlayer("[guild ID]", 1, {reason = "Not following the rules"}, "[bot token]")
+-- @see createGuildBan
+exports("createGuildBanForPlayer", function(guildId, player, params, botToken)
+        return discordRest:createGuildBanForPlayer(guildId, player, params, botToken)
+end)
+
+--- Remove a player's reaction from a message.
+-- @function deletePlayerReaction
+-- @param channelId The ID of the channel containing the message.
+-- @param messageId The message to remove the reaction from.
+-- @param emoji The emoji of the reaction to remove.
+-- @param player The server ID of the player whose reaction will be removed.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deletePlayerReaction("[channel ID]", "[message ID]", "💗", 1, "[bot token]")
+-- @see deleteUserReaction
+exports("deletePlayerReaction", function(channelId, messageId, emoji, player, botToken)
+        return discordRest:deletePlayerReaction(channelId, messageId, emoji, player, botToken)
+end)
+
+--- Return info on a ban for a player in a guild.
+-- @function getGuildBanForPlayer
+-- @param guildId The ID of the guild.
+-- @param player The server ID of the banned player.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the ban info.
+-- @usage exports.discord_rest:getGuildBanForPlayer("[guild ID]", 1, "[bot token]"):next(function(ban) ... end)
+-- @see getGuildBan
+exports("getGuildBanForPlayer", function(guildId, player, botToken)
+        return discordRest:getGuildBanForPlayer(guildId, player, botToken)
+end)
+
+--- Get guild membership info for a player.
+-- @function getGuildMemberForPlayer
+-- @param guildId The ID of the guild.
+-- @param player The server ID of the player.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise that resolves with the info of the member if they are in the guild.
+-- @usage exports.discord_rest:getGuildMemberForPlayer("[guild ID]", 1, "[bot token]"):next(function(member) ... end)
+-- @see getGuildMember
+exports("getGuildMemberForPlayer", function(guildId, player, botToken)
+        return discordRest:getGuildMemberForPlayer(guildId, player, botToken)
+end)
+
+--- Get user information for a player.
+-- @function getUserForPlayer
+-- @param player The server ID of the player.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:getUserForPlayer(1, "[bot token]"):next(function(user) ... end)
+-- @see getUser
+exports("getUserForPlayer", function(player, botToken)
+        return discordRest:getUserForPlayer(player, botToken)
+end)
+
+--- Get the Discord user ID of a player.
+-- @function getUserId
+-- @param player The server ID of the player.
+-- @return A new promise which is resolved with the player's Discord user ID, if they have one.
+-- @usage exports.discord_rest:getUserId(1):next(function(userId) ... end)
+exports("getUserId", function(player)
+        return discordRest:getUserId(player)
+end)
+
+--- Adds a player to a Group DM.
+-- @function groupDmAddPlayer
+-- @param channelId The ID of the group DM channel.
+-- @param player The server ID of the player to add.
+-- @param params Parameters for adding the user.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:groupDmAddPlayer("[channel ID]", 1, {access_token = "..."}, "[bot token]")
+-- @see groupDmAddRecipient
+exports("groupDmAddPlayer", function(channelId, player, params, botToken)
+        return discordRest:groupDmAddPlayer(channelId, player, params, botToken)
+end)
+
+--- Removes a player from a Group DM.
+-- @function groupDmRemovePlayer
+-- @param channelId The ID of the group DM channel.
+-- @param player The server ID of the player to remove.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:groupDmRemovePlayer("[channel ID]", 1, "[bot token]")
+-- @see groupDmRemoveRecipient
+exports("groupDmRemovePlayer", function(channelId, player, botToken)
+        return discordRest:groupDmRemovePlayer(channelId, player, botToken)
+end)
+
+--- Modify guild membership attributes of a player.
+-- @function modifyGuildMemberForPlayer
+-- @param guildId The ID of the guild.
+-- @param player The server ID of the player.
+-- @param params The parameters to modify.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the modified guild member.
+-- @usage exports.discord_rest:modifyGuildMemberForPlayer("[guild ID]", 1, {nick = "New nickname"}, "[bot token]")
+-- @see modifyGuildMember
+exports("modifyGuildMemberForPlayer", function(guildId, player, params, botToken)
+        return discordRest:modifyGuildMemberForPlayer(guildId, player, params, botToken)
+end)
+
+--- Remove a guild ban for a player.
+-- @function removeGuildBanForPlayer
+-- @param guildId The ID of the guild to remove the ban for the user from.
+-- @param player The server ID of the user to unban.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removeGuildBanForPlayer("[guild ID]", 1, "[bot token]")
+-- @see removeGuildBan
+exports("removeGuildBanForPlayer", function(guildId, player, botToken)
+        return discordRest:removeGuildBanForPlayer(guildId, player, botToken)
+end)
+
+--- Removes a guild role from a player.
+-- @function removeGuildMemberRoleFromPlayer
+-- @param guildId The ID of the guild.
+-- @param player The server ID of the player to remove the role from.
+-- @param roleId The ID of the role to remove from the member.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removeGuildMemberRoleFromPlayer("[guild ID]", 1, "[role ID]", "[bot token]")
+-- @see removeGuildMemberRole
+exports("removeGuildMemberRoleFromPlayer", function(guildId, player, roleId, botToken)
+        return discordRest:removeGuildMemberRoleFromPlayer(guildId, player, roleId, botToken)
+end)
+
+--- Remove a player from a guild.
+-- @function removePlayerFromGuild
+-- @param guildId The ID of the guild to remove the member from.
+-- @param player The server ID of the player to remove from the guild.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removePlayerFromGuild("[guild ID]", 1, "[bot token]")
+-- @see removePlayerFromGuild
+exports("removePlayerFromGuild", function(guildId, player, botToken)
+        return discordRest:removePlayerFromGuild(guildId, player, botToken)
+end)
+
+--- Remove a player from a thread.
+-- @function removePlayerFromThread
+-- @param channelId The ID of the thread channel.
+-- @param player The server ID of the player to remove from the thread.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:removePlayerFromThread("[channel ID]", 1, "[bot token]")
+-- @see removeThreadMember
+exports("removePlayerFromThread", function(channelId, player, botToken)
+        return discordRest:removePlayerFromThread(channelId, player, botToken)
+end)
