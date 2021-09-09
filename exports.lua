@@ -1089,6 +1089,17 @@ exports("getUser", function(userId, botToken)
 	return discordRest:getUser(userId, botToken)
 end)
 
+--- Modify the requester's user account settings.
+-- @function modifyCurrentUser
+-- @param params Parameters to modify.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the modified user.
+-- @usage exports.discord_rest:modifyCurrentUser({username = "New Username"}, "[bot token]"):next(function(user) ... end)
+-- @see https://discord.com/developers/docs/resources/user#modify-current-user
+exports("modifyCurrentUser", function(params, botToken)
+	return discordRest:modifyCurrentUser(params, botToken)
+end)
+
 --- Webhook
 -- @section Webhook
 

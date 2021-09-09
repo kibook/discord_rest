@@ -1340,6 +1340,16 @@ function DiscordRest:getUser(userId, botToken)
 	return self:performAuthorizedRequest(routes.user, {userId}, nil, "GET", nil, botToken)
 end
 
+--- Modify the requester's user account settings.
+-- @param params Parameters to modify.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the modified user.
+-- @usage discord:modifyCurrentUser({username = "New Username"}):next(function(user) ... end)
+-- @see https://discord.com/developers/docs/resources/user#modify-current-user
+function DiscordRest:modifyCurrentUser(params, botToken)
+	return self:performAuthorizedRequest(routes.currentUser, nil, nil, "PATCH", params, botToken)
+end
+
 --- Webhook
 -- @section webhook
 
