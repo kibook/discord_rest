@@ -1464,6 +1464,17 @@ function DiscordRest:getWebhookWithUrl(url)
 	return p
 end
 
+--- Modify a webhook.
+-- @param webhookId The ID of the webhook.
+-- @param params Parameters to modify.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise which is resolved with the updated webhook.
+-- @usage discord:modifyWebhook("[webhook ID]", {name = "New name"}):next(function(webhook) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#modify-webhook
+function DiscordRest:modifyWebhook(webhookId, params, botToken)
+	return self:performAuthorizedRequest(routes.webhookId, {webhookId}, nil, "PATCH", params, botToken)
+end
+
 --- Player.
 -- Wrapper functions that allow you to use a player's server ID in place of a Discord user ID.
 -- @section player
