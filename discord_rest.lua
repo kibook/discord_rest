@@ -1428,9 +1428,10 @@ end
 --- Execute a webhook.
 -- @param webhookId The ID of the webhook.
 -- @param webhookToken The token for the webhook.
+-- @param options Options for the webhook execution.
 -- @param data The data to send.
 -- @return A new promise.
--- @usage discord:executeWebhook("[webhook ID]", "[webhook token]", {content = "Hello, world!"})
+-- @usage discord:executeWebhook("[webhook ID]", "[webhook token]", {wait = true}, {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
 function DiscordRest:executeWebhook(webhookId, webhookToken, options, data)
 	return self:executeWebhookUrl(formatRoute(routes.webhook, {webhookId, webhookToken}, options), data)
