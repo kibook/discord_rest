@@ -1167,6 +1167,30 @@ exports("deleteWebhookWithUrl", function(url)
 	return discordRest:deleteWebhookWithUrl(url)
 end)
 
+--- Execute a GitHub webhook.
+-- @function executeGitHubCompatibleWebhook
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param options Options for the webhook execution.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage exports.discord_rest:executeGitHubCompatibleWebhook("[webhook ID]", "[webhook token]", {wait = true}, {...})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook
+exports("executeGitHubCompatibleWebhook", function(webhookId, webhookToken, options, data)
+	return discordRest:executeGitHubCompatibleWebhook(webhookId, webhookToken, options, data)
+end)
+
+--- Execute a GitHub webhook, using the full URL.
+-- @function executeGitHubCompatibleWebhookUrl
+-- @param url The URL of the webhook.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage exports.discord_rest:executeGitHubCompatibleWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]/github", {wait = true}, {...})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook
+exports("executeGitHubCompatibleWebhookUrl", function(url, data)
+	return discordRest:executeGitHubCompatibleWebhookUrl(url, data)
+end)
+
 --- Execute a Slack webhook.
 -- @function executeSlackCompatibleWebhook
 -- @param webhookId The ID of the webhook.

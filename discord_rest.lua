@@ -17,6 +17,7 @@ local routes = {
 	crosspost      = "/channels/%s/messages/%s/crosspost",
 	currentUser    = "/users/@me",
 	followers      = "/channels/%s/followers",
+	github         = "/webhooks/%s/%s/github",
 	groupDm        = "/channels/%s/recipients/%s",
 	guild          = "/guilds/%s",
 	guildChannels  = "/guilds/%s/channels",
@@ -1424,6 +1425,28 @@ end
 -- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
 function DiscordRest:deleteWebhookWithUrl(url)
 	return self:performRequestToUrl(url, "DELETE")
+end
+
+--- Execute a GitHub webhook.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param options Options for the webhook execution.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage discord:executeGitHubCompatibleWebhook("[webhook ID]", "[webhook token]", {wait = true}, {...})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook
+function DiscordRest:executeGitHubCompatibleWebhook(webhookId, webhookToken, options, data)
+	return self:executeGitHubCompatibleWebhookUrl(formatRoute(routes.github, {webhookId, webhookToken}, options), data)
+end
+
+--- Execute a GitHub webhook, using the full URL.
+-- @param url The URL of the webhook.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage discord:executeGitHubCompatibleWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]/github", {wait = true}, {...})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook
+function DiscordRest:executeGitHubCompatibleWebhookUrl(url, data)
+	return self:performRequestToUrl(url, "POST", data)
 end
 
 --- Execute a Slack webhook.
