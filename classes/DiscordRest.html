@@ -474,6 +474,18 @@
 <h2><a href="#Webhook">Webhook </a></h2>
 <table class="function_list">
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteWebhook">DiscordRest:deleteWebhook (webhookId, botToken)</a></td>
+	<td class="summary">Delete a webhook.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteWebhookWithToken">DiscordRest:deleteWebhookWithToken (webhookId, webhookToken)</a></td>
+	<td class="summary">Delete a webhook, using its token for authorization instead of a bot token.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteWebhookWithUrl">DiscordRest:deleteWebhookWithUrl (url)</a></td>
+	<td class="summary">Delete a webhook, using its full URL for authorization instead of a bot token.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:executeWebhook">DiscordRest:executeWebhook (webhookId, webhookToken, data)</a></td>
 	<td class="summary">Execute a webhook.</td>
 	</tr>
@@ -504,6 +516,14 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:modifyWebhook">DiscordRest:modifyWebhook (webhookId, params, botToken)</a></td>
 	<td class="summary">Modify a webhook.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyWebhookWithToken">DiscordRest:modifyWebhookWithToken (webhookId, webhookToken, params)</a></td>
+	<td class="summary">Modify a webhook, using its token for authorization instead of a bot token.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:modifyWebhookWithUrl">DiscordRest:modifyWebhookWithUrl (url, params)</a></td>
+	<td class="summary">Modify a webhook, using its full URL for authorization instead of a bot token.</td>
 	</tr>
 </table>
 <h2><a href="#Player">Player </a></h2>
@@ -4311,6 +4331,111 @@
 
     <dl class="function">
     <dt>
+    <a name = "DiscordRest:deleteWebhook"></a>
+    <strong>DiscordRest:deleteWebhook (webhookId, botToken)</strong>
+    </dt>
+    <dd>
+    Delete a webhook.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">botToken</span>
+         Optional bot token to use for authorization.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#delete-webhook">https://discord.com/developers/docs/resources/webhook#delete-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteWebhook(<span class="string">"[webhook ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:deleteWebhookWithToken"></a>
+    <strong>DiscordRest:deleteWebhookWithToken (webhookId, webhookToken)</strong>
+    </dt>
+    <dd>
+    Delete a webhook, using its token for authorization instead of a bot token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token">https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteWebhookWithToken(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:deleteWebhookWithUrl"></a>
+    <strong>DiscordRest:deleteWebhookWithUrl (url)</strong>
+    </dt>
+    <dd>
+    Delete a webhook, using its full URL for authorization instead of a bot token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The URL of the webhook.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token">https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteWebhookWithUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:executeWebhook"></a>
     <strong>DiscordRest:executeWebhook (webhookId, webhookToken, data)</strong>
     </dt>
@@ -4598,6 +4723,81 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:modifyWebhook(<span class="string">"[webhook ID]"</span>, {name = <span class="string">"New name"</span>}):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyWebhookWithToken"></a>
+    <strong>DiscordRest:modifyWebhookWithToken (webhookId, webhookToken, params)</strong>
+    </dt>
+    <dd>
+    Modify a webhook, using its token for authorization instead of a bot token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters to modify.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated webhook.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token">https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyWebhookWithToken(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {name = <span class="string">"New name"</span>}):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:modifyWebhookWithUrl"></a>
+    <strong>DiscordRest:modifyWebhookWithUrl (url, params)</strong>
+    </dt>
+    <dd>
+    Modify a webhook, using its full URL for authorization instead of a bot token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The URL of the webhook.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters to modify.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated webhook.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token">https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:modifyWebhookWithUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>, {name = <span class="string">"New name"</span>}):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -5293,7 +5493,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-09 21:00:38 </i>
+<i style="float:right;">Last updated 2021-09-10 01:38:24 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
