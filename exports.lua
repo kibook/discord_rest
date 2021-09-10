@@ -1272,6 +1272,18 @@ exports("getWebhook", function(webhookId, botToken)
 	return discordRest:getWebhook(webhookId, botToken)
 end)
 
+--- Returns a previously-sent webhook message from the same token.
+-- @function getWebhookMessage
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param messageId The ID of the message.
+-- @return A new promise which is resolved with the message.
+-- @usage exports.discord_rest:getWebhookMessage("[webhook ID]", "[webhook token]", "[message ID]"):next(function(message) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-webhook-message
+exports("getWebhookMessage", function(webhookId, webhookToken, messageId)
+	return discordRest:getWebhookMessage(webhookId, webhookToken, messageId)
+end)
+
 --- Get information for a webhook, using its token for authorization instead of a bot token.
 -- @function getWebhookWithToken
 -- @param webhookId The ID of the webhook.

@@ -66,6 +66,7 @@ local routes = {
 	vanityUrl      = "/guilds/%s/vanity-url",
 	webhook        = "/webhooks/%s/%s",
 	webhookId      = "/webhooks/%s",
+	webhookMessage = "/webhooks/%s/%s/messages/%s",
 	webhooks       = "/channels/%s/webhooks",
 	welcomeScreen  = "/guilds/%s/welcome-screen",
 	widget         = "/guilds/%s/widget",
@@ -1521,6 +1522,17 @@ end
 -- @see https://discord.com/developers/docs/resources/webhook#get-webhook
 function DiscordRest:getWebhook(webhookId, botToken)
 	return self:performAuthorizedRequest(routes.webhookId, {webhookId}, nil, "GET", nil, botToken)
+end
+
+--- Returns a previously-sent webhook message from the same token.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param messageId The ID of the message.
+-- @return A new promise which is resolved with the message.
+-- @usage discord:getWebhookMessage("[webhook ID]", "[webhook token]", "[message ID]"):next(function(message) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#get-webhook-message
+function DiscordRest:getWebhookMessage(webhookId, webhookToken, messageId)
+	return self:performRequest(routes.webhookMessage, {webhookId, webhookToken, messageId}, nil, "GET", nil, botToken)
 end
 
 --- Get information for a webhook, using its token for authorization instead of a bot token.
