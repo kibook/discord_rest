@@ -326,6 +326,14 @@ function DiscordRest:performRequest(route, parameters, options, method, data, he
 	return p
 end
 
+-- Perform a request to a full REST API url
+function DiscordRest:performRequestToUrl(url, method, data, headers)
+	local queue = self:getQueue(url)
+	local p = promise.new()
+	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), method, data, headers)
+	return p
+end
+
 -- Perform an authorized request to a REST API route
 function DiscordRest:performAuthorizedRequest(route, parameters, options, method, data, botToken)
 	return self:performRequest(route, parameters, options, method, data, {
@@ -1406,10 +1414,7 @@ end
 -- @usage discord:executeWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
 function DiscordRest:executeWebhookUrl(url, data)
-	local queue = self:getQueue(url)
-	local p = promise.new()
-	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), "POST", data)
-	return p
+	return self:performRequestToUrl(url, "POST", data)
 end
 
 --- Get a list of webhooks for a channel.
@@ -1458,10 +1463,7 @@ end
 -- @usage discord:getWebhookWithUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]"):next(function(webhook) ... end)
 -- @see https://discord.com/developers/docs/resources/webhook#get-webhook-with-token
 function DiscordRest:getWebhookWithUrl(url)
-	local queue = self:getQueue(url)
-	local p = promise.new()
-	self:enqueueRequest(queue, url, createSimplePromiseCallback(p), "GET")
-	return p
+	return self:performRequestToUrl(url, "GET")
 end
 
 --- Modify a webhook.
