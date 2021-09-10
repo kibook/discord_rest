@@ -478,12 +478,36 @@
 	<td class="summary">Delete a webhook.</td>
 	</tr>
 	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:deleteWebhookMessage">DiscordRest:deleteWebhookMessage (webhookId, webhookToken, messageId)</a></td>
+	<td class="summary">Deletes a message that was created by the webhook.</td>
+	</tr>
+	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:deleteWebhookWithToken">DiscordRest:deleteWebhookWithToken (webhookId, webhookToken)</a></td>
 	<td class="summary">Delete a webhook, using its token for authorization instead of a bot token.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:deleteWebhookWithUrl">DiscordRest:deleteWebhookWithUrl (url)</a></td>
 	<td class="summary">Delete a webhook, using its full URL for authorization instead of a bot token.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:editWebhookMessage">DiscordRest:editWebhookMessage (webhookId, webhookToken, messageId, params)</a></td>
+	<td class="summary">Edits a previously-sent webhook message from the same token.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:executeGitHubCompatibleWebhook">DiscordRest:executeGitHubCompatibleWebhook (webhookId, webhookToken, options, data)</a></td>
+	<td class="summary">Execute a GitHub webhook.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:executeGitHubCompatibleWebhookUrl">DiscordRest:executeGitHubCompatibleWebhookUrl (url, data)</a></td>
+	<td class="summary">Execute a GitHub webhook, using the full URL.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:executeSlackCompatibleWebhook">DiscordRest:executeSlackCompatibleWebhook (webhookId, webhookToken, options, data)</a></td>
+	<td class="summary">Execute a Slack webhook.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:executeSlackCompatibleWebhookUrl">DiscordRest:executeSlackCompatibleWebhookUrl (url, data)</a></td>
+	<td class="summary">Execute a Slack webhook, using the full URL.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:executeWebhook">DiscordRest:executeWebhook (webhookId, webhookToken, options, data)</a></td>
@@ -504,6 +528,10 @@
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getWebhook">DiscordRest:getWebhook (webhookId, botToken)</a></td>
 	<td class="summary">Get information for a webhook.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#DiscordRest:getWebhookMessage">DiscordRest:getWebhookMessage (webhookId, webhookToken, messageId)</a></td>
+	<td class="summary">Returns a previously-sent webhook message from the same token.</td>
 	</tr>
 	<tr>
 	<td class="name" nowrap><a href="#DiscordRest:getWebhookWithToken">DiscordRest:getWebhookWithToken (webhookId, webhookToken)</a></td>
@@ -4367,6 +4395,45 @@
 
 </dd>
     <dt>
+    <a name = "DiscordRest:deleteWebhookMessage"></a>
+    <strong>DiscordRest:deleteWebhookMessage (webhookId, webhookToken, messageId)</strong>
+    </dt>
+    <dd>
+    Deletes a message that was created by the webhook.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#delete-webhook-message">https://discord.com/developers/docs/resources/webhook#delete-webhook-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:deleteWebhookMessage(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, <span class="string">"[message ID]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
     <a name = "DiscordRest:deleteWebhookWithToken"></a>
     <strong>DiscordRest:deleteWebhookWithToken (webhookId, webhookToken)</strong>
     </dt>
@@ -4432,6 +4499,204 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:deleteWebhookWithUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]"</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:editWebhookMessage"></a>
+    <strong>DiscordRest:editWebhookMessage (webhookId, webhookToken, messageId, params)</strong>
+    </dt>
+    <dd>
+    Edits a previously-sent webhook message from the same token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message.
+        </li>
+        <li><span class="parameter">params</span>
+         Parameters to modify.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the updated message.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#edit-webhook-message">https://discord.com/developers/docs/resources/webhook#edit-webhook-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:editWebhookMessage(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, <span class="string">"[message ID]"</span>, {content = <span class="string">"New content"</span>}):<span class="global">next</span>(<span class="keyword">function</span>(message) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:executeGitHubCompatibleWebhook"></a>
+    <strong>DiscordRest:executeGitHubCompatibleWebhook (webhookId, webhookToken, options, data)</strong>
+    </dt>
+    <dd>
+    Execute a GitHub webhook.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
+        </li>
+        <li><span class="parameter">data</span>
+         The data to send.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook">https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:executeGitHubCompatibleWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {wait = <span class="keyword">true</span>}, {...})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:executeGitHubCompatibleWebhookUrl"></a>
+    <strong>DiscordRest:executeGitHubCompatibleWebhookUrl (url, data)</strong>
+    </dt>
+    <dd>
+    Execute a GitHub webhook, using the full URL.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The URL of the webhook.
+        </li>
+        <li><span class="parameter">data</span>
+         The data to send.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook">https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:executeGitHubCompatibleWebhookUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]/github"</span>, {wait = <span class="keyword">true</span>}, {...})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:executeSlackCompatibleWebhook"></a>
+    <strong>DiscordRest:executeSlackCompatibleWebhook (webhookId, webhookToken, options, data)</strong>
+    </dt>
+    <dd>
+    Execute a Slack webhook.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
+        </li>
+        <li><span class="parameter">data</span>
+         The data to send.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook">https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:executeSlackCompatibleWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {wait = <span class="keyword">true</span>}, {text = <span class="string">"hello"</span>})</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:executeSlackCompatibleWebhookUrl"></a>
+    <strong>DiscordRest:executeSlackCompatibleWebhookUrl (url, data)</strong>
+    </dt>
+    <dd>
+    Execute a Slack webhook, using the full URL.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">url</span>
+         The webhook URL.
+        </li>
+        <li><span class="parameter">data</span>
+         The data to send.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook">https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:executeSlackCompatibleWebhookUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]/slack"</span>, {text = <span class="string">"hello"</span>})</pre>
     </ul>
 
 </dd>
@@ -4618,6 +4883,45 @@
     <h3>Usage:</h3>
     <ul>
         <pre class="example">discord:getWebhook(<span class="string">"[webhook ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(webhook) ... <span class="keyword">end</span>)</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "DiscordRest:getWebhookMessage"></a>
+    <strong>DiscordRest:getWebhookMessage (webhookId, webhookToken, messageId)</strong>
+    </dt>
+    <dd>
+    Returns a previously-sent webhook message from the same token.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">webhookId</span>
+         The ID of the webhook.
+        </li>
+        <li><span class="parameter">webhookToken</span>
+         The token of the webhook.
+        </li>
+        <li><span class="parameter">messageId</span>
+         The ID of the message.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        A new promise which is resolved with the message.
+    </ol>
+
+
+    <h3>See also:</h3>
+    <ul>
+         <a href="https://discord.com/developers/docs/resources/webhook#get-webhook-message">https://discord.com/developers/docs/resources/webhook#get-webhook-message</a>
+    </ul>
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">discord:getWebhookMessage(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, <span class="string">"[message ID]"</span>):<span class="global">next</span>(<span class="keyword">function</span>(message) ... <span class="keyword">end</span>)</pre>
     </ul>
 
 </dd>
@@ -5496,7 +5800,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-10 01:46:16 </i>
+<i style="float:right;">Last updated 2021-09-10 02:14:55 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
