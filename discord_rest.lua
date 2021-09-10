@@ -54,6 +54,7 @@ local routes = {
 	role           = "/guilds/%s/roles/%s",
 	roles          = "/guilds/%s/roles",
 	searchMembers  = "/guilds/%s/members/search",
+	slack          = "/webhooks/%s/%s/slack",
 	threadMembers  = "/channels/%s/thread-members",
 	threadSelf     = "/channels/%s/thread-members/@me",
 	threadUser     = "/channels/%s/thread-members/%s",
@@ -1423,6 +1424,28 @@ end
 -- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
 function DiscordRest:deleteWebhookWithUrl(url)
 	return self:performRequestToUrl(url, "DELETE")
+end
+
+--- Execute a Slack webhook.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param options Options for the webhook execution.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage discord:executeSlackCompatibleWebhook("[webhook ID]", "[webhook token]", {wait = true}, {text = "hello"})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook
+function DiscordRest:executeSlackCompatibleWebhook(webhookId, webhookToken, options, data)
+	return self:executeSlackCompatibleWebhookUrl(formatRoute(routes.slack, {webhookId, webhookToken}, options), data)
+end
+
+--- Execute a Slack webhook, using the full URL.
+-- @param url The webhook URL.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage discord:executeSlackCompatibleWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]/slack", {text = "hello"})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook
+function DiscordRest:executeSlackCompatibleWebhookUrl(url, data)
+	return self:performRequestToUrl(url, "POST", data)
 end
 
 --- Execute a webhook.

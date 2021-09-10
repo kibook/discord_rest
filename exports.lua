@@ -1167,6 +1167,30 @@ exports("deleteWebhookWithUrl", function(url)
 	return discordRest:deleteWebhookWithUrl(url)
 end)
 
+--- Execute a Slack webhook.
+-- @function executeSlackCompatibleWebhook
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param options Options for the webhook execution.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage exports.discord_rest:executeSlackCompatibleWebhook("[webhook ID]", "[webhook token]", {wait = true}, {text = "hello"})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook
+exports("executeSlackCompatibleWebhook", function(webhookId, webhookToken, options, data)
+	return discordRest:executeSlackCompatibleWebhook(webhookId, webhookToken, options, data)
+end)
+
+--- Execute a Slack webhook, using the full URL.
+-- @function executeSlackCompatibleWebhookUrl
+-- @param url The webhook URL.
+-- @param data The data to send.
+-- @return A new promise.
+-- @usage exports.discord_rest:executeSlackCompatibleWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]/slack", {text = "hello"})
+-- @see https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook
+exports("executeSlackCompatibleWebhookUrl", function(url, data)
+	return discordRest:executeSlackCompatibleWebhookUrl(url, data)
+end)
+
 --- Execute a webhook.
 -- @function executeWebhook
 -- @param webhookId The ID of the webhook.
