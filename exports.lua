@@ -1146,6 +1146,18 @@ exports("deleteWebhook", function(webhookId, botToken)
 	return discordRest:deleteWebhook(webhookId, botToken)
 end)
 
+--- Deletes a message that was created by the webhook.
+-- @function deleteWebhookMessage
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param messageId The ID of the message.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteWebhookMessage("[webhook ID]", "[webhook token]", "[message ID]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-message
+exports("deleteWebhookMessage", function(webhookId, webhookToken, messageId)
+	return discordRest:deleteWebhookMessage(webhookId, webhookToken, messageId)
+end)
+
 --- Delete a webhook, using its token for authorization instead of a bot token.
 -- @function deleteWebhookWithToken
 -- @param webhookId The ID of the webhook.

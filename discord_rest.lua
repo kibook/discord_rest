@@ -1409,6 +1409,17 @@ function DiscordRest:deleteWebhook(webhookId, botToken)
 	return self:performAuthorizedRequest(routes.webhookId, {webhookId}, nil, "DELETE", nil, botToken)
 end
 
+--- Deletes a message that was created by the webhook.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param messageId The ID of the message.
+-- @return A new promise.
+-- @usage discord:deleteWebhookMessage("[webhook ID]", "[webhook token]", "[message ID]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-message
+function DiscordRest:deleteWebhookMessage(webhookId, webhookToken, messageId)
+	return self:performRequest(routes.webhookMessage, {webhookId, webhookToken, messageId}, nil, "DELETE")
+end
+
 --- Delete a webhook, using its token for authorization instead of a bot token.
 -- @param webhookId The ID of the webhook.
 -- @param webhookToken The token of the webhook.
