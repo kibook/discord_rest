@@ -1135,6 +1135,38 @@ end)
 --- Webhook
 -- @section Webhook
 
+--- Delete a webhook.
+-- @function deleteWebhook
+-- @param webhookId The ID of the webhook.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteWebhook("[webhook ID]", "[bot token]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook
+exports("deleteWebhook", function(webhookId, botToken)
+	return discordRest:deleteWebhook(webhookId, botToken)
+end)
+
+--- Delete a webhook, using its token for authorization instead of a bot token.
+-- @function deleteWebhookWithToken
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteWebhookWithToken("[webhook ID]", "[webhook token]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
+exports("deleteWebhookWithToken", function(webhookId, webhookToken)
+	return discordRest:deleteWebhookWithToken(webhookId, webhookToken)
+end)
+
+--- Delete a webhook, using its full URL for authorization instead of a bot token.
+-- @function deleteWebhookWithUrl
+-- @param url The URL of the webhook.
+-- @return A new promise.
+-- @usage exports.discord_rest:deleteWebhookWithUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
+exports("deleteWebhookWithUrl", function(url)
+	return discordRest:deleteWebhookWithUrl(url)
+end)
+
 --- Execute a webhook.
 -- @function executeWebhook
 -- @param webhookId The ID of the webhook.

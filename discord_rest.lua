@@ -1396,6 +1396,35 @@ end
 --- Webhook
 -- @section webhook
 
+--- Delete a webhook.
+-- @param webhookId The ID of the webhook.
+-- @param botToken Optional bot token to use for authorization.
+-- @return A new promise.
+-- @usage discord:deleteWebhook("[webhook ID]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook
+function DiscordRest:deleteWebhook(webhookId, botToken)
+	return self:performAuthorizedRequest(routes.webhookId, {webhookId}, nil, "DELETE", nil, botToken)
+end
+
+--- Delete a webhook, using its token for authorization instead of a bot token.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @return A new promise.
+-- @usage discord:deleteWebhookWithToken("[webhook ID]", "[webhook token]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
+function DiscordRest:deleteWebhookWithToken(webhookId, webhookToken)
+	return self:deleteWebhookWithUrl(formatRoute(routes.webhook, {webhookId, webhookToken}))
+end
+
+--- Delete a webhook, using its full URL for authorization instead of a bot token.
+-- @param url The URL of the webhook.
+-- @return A new promise.
+-- @usage discord:deleteWebhookWithUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]")
+-- @see https://discord.com/developers/docs/resources/webhook#delete-webhook-with-token
+function DiscordRest:deleteWebhookWithUrl(url)
+	return self:performRequestToUrl(url, "DELETE")
+end
+
 --- Execute a webhook.
 -- @param webhookId The ID of the webhook.
 -- @param webhookToken The token for the webhook.
