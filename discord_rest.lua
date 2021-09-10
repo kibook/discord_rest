@@ -1432,8 +1432,8 @@ end
 -- @return A new promise.
 -- @usage discord:executeWebhook("[webhook ID]", "[webhook token]", {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
-function DiscordRest:executeWebhook(webhookId, webhookToken, data)
-	return self:executeWebhookUrl(formatRoute(routes.webhook, {webhookId, webhookToken}), data)
+function DiscordRest:executeWebhook(webhookId, webhookToken, options, data)
+	return self:executeWebhookUrl(formatRoute(routes.webhook, {webhookId, webhookToken}, options), data)
 end
 
 --- Execute a webhook, using the full URL.
