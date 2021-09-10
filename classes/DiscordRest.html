@@ -494,27 +494,27 @@
 	<td class="summary">Edits a previously-sent webhook message from the same token.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:executeGitHubCompatibleWebhook">DiscordRest:executeGitHubCompatibleWebhook (webhookId, webhookToken, options, data)</a></td>
+	<td class="name" nowrap><a href="#DiscordRest:executeGitHubCompatibleWebhook">DiscordRest:executeGitHubCompatibleWebhook (webhookId, webhookToken, data, options)</a></td>
 	<td class="summary">Execute a GitHub webhook.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:executeGitHubCompatibleWebhookUrl">DiscordRest:executeGitHubCompatibleWebhookUrl (url, data)</a></td>
+	<td class="name" nowrap><a href="#DiscordRest:executeGitHubCompatibleWebhookUrl">DiscordRest:executeGitHubCompatibleWebhookUrl (url, data, options)</a></td>
 	<td class="summary">Execute a GitHub webhook, using the full URL.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:executeSlackCompatibleWebhook">DiscordRest:executeSlackCompatibleWebhook (webhookId, webhookToken, options, data)</a></td>
+	<td class="name" nowrap><a href="#DiscordRest:executeSlackCompatibleWebhook">DiscordRest:executeSlackCompatibleWebhook (webhookId, webhookToken, data, options)</a></td>
 	<td class="summary">Execute a Slack webhook.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:executeSlackCompatibleWebhookUrl">DiscordRest:executeSlackCompatibleWebhookUrl (url, data)</a></td>
+	<td class="name" nowrap><a href="#DiscordRest:executeSlackCompatibleWebhookUrl">DiscordRest:executeSlackCompatibleWebhookUrl (url, data, options)</a></td>
 	<td class="summary">Execute a Slack webhook, using the full URL.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:executeWebhook">DiscordRest:executeWebhook (webhookId, webhookToken, options, data)</a></td>
+	<td class="name" nowrap><a href="#DiscordRest:executeWebhook">DiscordRest:executeWebhook (webhookId, webhookToken, data, options)</a></td>
 	<td class="summary">Execute a webhook.</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#DiscordRest:executeWebhookUrl">DiscordRest:executeWebhookUrl (url, data)</a></td>
+	<td class="name" nowrap><a href="#DiscordRest:executeWebhookUrl">DiscordRest:executeWebhookUrl (url, data, options)</a></td>
 	<td class="summary">Execute a webhook, using the full URL.</td>
 	</tr>
 	<tr>
@@ -4546,7 +4546,7 @@
 </dd>
     <dt>
     <a name = "DiscordRest:executeGitHubCompatibleWebhook"></a>
-    <strong>DiscordRest:executeGitHubCompatibleWebhook (webhookId, webhookToken, options, data)</strong>
+    <strong>DiscordRest:executeGitHubCompatibleWebhook (webhookId, webhookToken, data, options)</strong>
     </dt>
     <dd>
     Execute a GitHub webhook.
@@ -4560,11 +4560,11 @@
         <li><span class="parameter">webhookToken</span>
          The token of the webhook.
         </li>
-        <li><span class="parameter">options</span>
-         Options for the webhook execution.
-        </li>
         <li><span class="parameter">data</span>
          The data to send.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
         </li>
     </ul>
 
@@ -4582,13 +4582,13 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:executeGitHubCompatibleWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {wait = <span class="keyword">true</span>}, {...})</pre>
+        <pre class="example">discord:executeGitHubCompatibleWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {...})</pre>
     </ul>
 
 </dd>
     <dt>
     <a name = "DiscordRest:executeGitHubCompatibleWebhookUrl"></a>
-    <strong>DiscordRest:executeGitHubCompatibleWebhookUrl (url, data)</strong>
+    <strong>DiscordRest:executeGitHubCompatibleWebhookUrl (url, data, options)</strong>
     </dt>
     <dd>
     Execute a GitHub webhook, using the full URL.
@@ -4602,6 +4602,9 @@
         <li><span class="parameter">data</span>
          The data to send.
         </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
+        </li>
     </ul>
 
     <h3>Returns:</h3>
@@ -4618,13 +4621,13 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:executeGitHubCompatibleWebhookUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]/github"</span>, {wait = <span class="keyword">true</span>}, {...})</pre>
+        <pre class="example">discord:executeGitHubCompatibleWebhookUrl(<span class="string">"https://discord.com/api/webhooks/[webhook ID]/[webhook token]/github"</span>, {...})</pre>
     </ul>
 
 </dd>
     <dt>
     <a name = "DiscordRest:executeSlackCompatibleWebhook"></a>
-    <strong>DiscordRest:executeSlackCompatibleWebhook (webhookId, webhookToken, options, data)</strong>
+    <strong>DiscordRest:executeSlackCompatibleWebhook (webhookId, webhookToken, data, options)</strong>
     </dt>
     <dd>
     Execute a Slack webhook.
@@ -4638,11 +4641,11 @@
         <li><span class="parameter">webhookToken</span>
          The token of the webhook.
         </li>
-        <li><span class="parameter">options</span>
-         Options for the webhook execution.
-        </li>
         <li><span class="parameter">data</span>
          The data to send.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
         </li>
     </ul>
 
@@ -4660,13 +4663,13 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:executeSlackCompatibleWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {wait = <span class="keyword">true</span>}, {text = <span class="string">"hello"</span>})</pre>
+        <pre class="example">discord:executeSlackCompatibleWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {text = <span class="string">"hello"</span>})</pre>
     </ul>
 
 </dd>
     <dt>
     <a name = "DiscordRest:executeSlackCompatibleWebhookUrl"></a>
-    <strong>DiscordRest:executeSlackCompatibleWebhookUrl (url, data)</strong>
+    <strong>DiscordRest:executeSlackCompatibleWebhookUrl (url, data, options)</strong>
     </dt>
     <dd>
     Execute a Slack webhook, using the full URL.
@@ -4679,6 +4682,9 @@
         </li>
         <li><span class="parameter">data</span>
          The data to send.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
         </li>
     </ul>
 
@@ -4702,7 +4708,7 @@
 </dd>
     <dt>
     <a name = "DiscordRest:executeWebhook"></a>
-    <strong>DiscordRest:executeWebhook (webhookId, webhookToken, options, data)</strong>
+    <strong>DiscordRest:executeWebhook (webhookId, webhookToken, data, options)</strong>
     </dt>
     <dd>
     Execute a webhook.
@@ -4716,11 +4722,11 @@
         <li><span class="parameter">webhookToken</span>
          The token for the webhook.
         </li>
-        <li><span class="parameter">options</span>
-         Options for the webhook execution.
-        </li>
         <li><span class="parameter">data</span>
          The data to send.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
         </li>
     </ul>
 
@@ -4738,13 +4744,13 @@
 
     <h3>Usage:</h3>
     <ul>
-        <pre class="example">discord:executeWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {wait = <span class="keyword">true</span>}, {content = <span class="string">"Hello, world!"</span>})</pre>
+        <pre class="example">discord:executeWebhook(<span class="string">"[webhook ID]"</span>, <span class="string">"[webhook token]"</span>, {content = <span class="string">"Hello, world!"</span>})</pre>
     </ul>
 
 </dd>
     <dt>
     <a name = "DiscordRest:executeWebhookUrl"></a>
-    <strong>DiscordRest:executeWebhookUrl (url, data)</strong>
+    <strong>DiscordRest:executeWebhookUrl (url, data, options)</strong>
     </dt>
     <dd>
     Execute a webhook, using the full URL.
@@ -4757,6 +4763,9 @@
         </li>
         <li><span class="parameter">data</span>
          The data to send.
+        </li>
+        <li><span class="parameter">options</span>
+         Options for the webhook execution.
         </li>
     </ul>
 
@@ -5800,7 +5809,7 @@
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-10 14:04:30 </i>
+<i style="float:right;">Last updated 2021-09-10 18:34:43 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
