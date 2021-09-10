@@ -1428,6 +1428,18 @@ function DiscordRest:deleteWebhookWithUrl(url)
 	return self:performRequestToUrl(url, "DELETE")
 end
 
+--- Edits a previously-sent webhook message from the same token.
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param messageId The ID of the message.
+-- @param params Parameters to modify.
+-- @return A new promise which is resolved with the updated message.
+-- @usage discord:editWebhookMessage("[webhook ID]", "[webhook token]", "[message ID]", {content = "New content"}):next(function(message) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#edit-webhook-message
+function DiscordRest:editWebhookMessage(webhookId, webhookToken, messageId, params)
+	return self:performRequest(routes.webhookMessage, {webhookId, webhookToken, messageId}, nil, "PATCH", params)
+end
+
 --- Execute a GitHub webhook.
 -- @param webhookId The ID of the webhook.
 -- @param webhookToken The token of the webhook.
