@@ -1224,6 +1224,29 @@ exports("modifyWebhook", function(webhookId, params, botToken)
 	return discordRest:modifyWebhook(webhookId, params, botToken)
 end)
 
+--- Modify a webhook, using its token for authorization instead of a bot token.
+-- @function modifyWebhookWithToken
+-- @param webhookId The ID of the webhook.
+-- @param webhookToken The token of the webhook.
+-- @param params Parameters to modify.
+-- @return A new promise which is resolved with the updated webhook.
+-- @usage exports.discord_rest:modifyWebhookWithToken("[webhook ID]", "[webhook token]", {name = "New name"}):next(function(webhook) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token
+exports("modifyWebhookWithToken", function(webhookId, webhookToken, params)
+	return discordRest:modifyWebhookWithToken(webhookId, webhookToken, params)
+end)
+
+--- Modify a webhook, using its full URL for authorization instead of a bot token.
+-- @function modifyWebhookWithUrl
+-- @param url The URL of the webhook.
+-- @param params Parameters to modify.
+-- @return A new promise which is resolved with the updated webhook.
+-- @usage exports.discord_rest:modifyWebhookWithUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {name = "New name"}):next(function(webhook) ... end)
+-- @see https://discord.com/developers/docs/resources/webhook#modify-webhook-with-token
+exports("modifyWebhookWithUrl", function(url, params)
+	return discordRest:modifyWebhookWithUrl(url, params)
+end)
+
 --- Player.
 -- Wrapper functions that allow you to use a player's server ID in place of a Discord user ID.
 -- @section player
