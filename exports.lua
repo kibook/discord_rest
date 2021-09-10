@@ -1196,72 +1196,75 @@ end)
 -- @function executeGitHubCompatibleWebhook
 -- @param webhookId The ID of the webhook.
 -- @param webhookToken The token of the webhook.
--- @param options Options for the webhook execution.
 -- @param data The data to send.
+-- @param options Options for the webhook execution.
 -- @return A new promise.
--- @usage exports.discord_rest:executeGitHubCompatibleWebhook("[webhook ID]", "[webhook token]", {wait = true}, {...})
+-- @usage exports.discord_rest:executeGitHubCompatibleWebhook("[webhook ID]", "[webhook token]", {...})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook
-exports("executeGitHubCompatibleWebhook", function(webhookId, webhookToken, options, data)
-	return discordRest:executeGitHubCompatibleWebhook(webhookId, webhookToken, options, data)
+exports("executeGitHubCompatibleWebhook", function(webhookId, webhookToken, data, options)
+	return discordRest:executeGitHubCompatibleWebhook(webhookId, webhookToken, data, options)
 end)
 
 --- Execute a GitHub webhook, using the full URL.
 -- @function executeGitHubCompatibleWebhookUrl
 -- @param url The URL of the webhook.
 -- @param data The data to send.
+-- @param options Options for the webhook execution.
 -- @return A new promise.
--- @usage exports.discord_rest:executeGitHubCompatibleWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]/github", {wait = true}, {...})
+-- @usage exports.discord_rest:executeGitHubCompatibleWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]/github", {...})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-githubcompatible-webhook
-exports("executeGitHubCompatibleWebhookUrl", function(url, data)
-	return discordRest:executeGitHubCompatibleWebhookUrl(url, data)
+exports("executeGitHubCompatibleWebhookUrl", function(url, data, options)
+	return discordRest:executeGitHubCompatibleWebhookUrl(url, data, options)
 end)
 
 --- Execute a Slack webhook.
 -- @function executeSlackCompatibleWebhook
 -- @param webhookId The ID of the webhook.
 -- @param webhookToken The token of the webhook.
--- @param options Options for the webhook execution.
 -- @param data The data to send.
+-- @param options Options for the webhook execution.
 -- @return A new promise.
--- @usage exports.discord_rest:executeSlackCompatibleWebhook("[webhook ID]", "[webhook token]", {wait = true}, {text = "hello"})
+-- @usage exports.discord_rest:executeSlackCompatibleWebhook("[webhook ID]", "[webhook token]", {text = "hello"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook
-exports("executeSlackCompatibleWebhook", function(webhookId, webhookToken, options, data)
-	return discordRest:executeSlackCompatibleWebhook(webhookId, webhookToken, options, data)
+exports("executeSlackCompatibleWebhook", function(webhookId, webhookToken, data, options)
+	return discordRest:executeSlackCompatibleWebhook(webhookId, webhookToken, data, options)
 end)
 
 --- Execute a Slack webhook, using the full URL.
 -- @function executeSlackCompatibleWebhookUrl
 -- @param url The webhook URL.
 -- @param data The data to send.
+-- @param options Options for the webhook execution.
 -- @return A new promise.
 -- @usage exports.discord_rest:executeSlackCompatibleWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]/slack", {text = "hello"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-slackcompatible-webhook
-exports("executeSlackCompatibleWebhookUrl", function(url, data)
-	return discordRest:executeSlackCompatibleWebhookUrl(url, data)
+exports("executeSlackCompatibleWebhookUrl", function(url, data, options)
+	return discordRest:executeSlackCompatibleWebhookUrl(url, data, options)
 end)
 
 --- Execute a webhook.
 -- @function executeWebhook
 -- @param webhookId The ID of the webhook.
 -- @param webhookToken The token for the webhook.
--- @param options Options for the webhook execution.
 -- @param data The data to send.
+-- @param options Options for the webhook execution.
 -- @return A new promise.
--- @usage exports.discord_rest:executeWebhook("[webhook ID]", "[webhook token]", {wait = true}, {content = "Hello, world!"})
+-- @usage exports.discord_rest:executeWebhook("[webhook ID]", "[webhook token]", {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
-exports("executeWebhook", function(webhookId, webhookToken, options, data)
-	return discordRest:executeWebhook(webhookId, webhookToken, options, data)
+exports("executeWebhook", function(webhookId, webhookToken, data, options)
+	return discordRest:executeWebhook(webhookId, webhookToken, data, options)
 end)
 
 --- Execute a webhook, using the full URL.
 -- @function executeWebhookUrl
 -- @param url The webhook URL.
 -- @param data The data to send.
+-- @param options Options for the webhook execution.
 -- @return A new promise.
 -- @usage exports.discord_rest:executeWebhookUrl("https://discord.com/api/webhooks/[webhook ID]/[webhook token]", {content = "Hello, world!"})
 -- @see https://discord.com/developers/docs/resources/webhook#execute-webhook
-exports("executeWebhookUrl", function(url, data)
-	return discordRest:executeWebhookUrl(url, data)
+exports("executeWebhookUrl", function(url, data, options)
+	return discordRest:executeWebhookUrl(url, data, options)
 end)
 
 --- Get a list of webhooks for a channel.
