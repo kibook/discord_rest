@@ -246,7 +246,7 @@ function DiscordRest:new(botToken)
 
 	Citizen.CreateThread(function()
 		while self do
-			Citizen.Wait(self:processQueues() and 50 or 500)
+			Citizen.Wait(self:processQueues() and 0 or 500)
 		end
 	end)
 
@@ -264,14 +264,17 @@ end
 
 -- Process message while respecting the rate limit
 function DiscordRest:processQueues()
+	local processedQueue = false
+
 	for route, queue in pairs(self.queues) do
 		if queue:isReady() then
 			queue:dequeue()
-			return true
+			processedQueue = true
+			Citizen.Wait(50)
 		end
 	end
 
-	return false
+	return processedQueue
 end
 
 -- Get the bot authorization string
