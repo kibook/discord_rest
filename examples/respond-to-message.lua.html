@@ -62,67 +62,59 @@
 </span>
 <span class="comment">-- Respond to a message
 </span><span class="keyword">local</span> <span class="keyword">function</span> respondToMessage(channel, message, content)
-        <span class="keyword">return</span> exports.discord_rest:createMessage(channel.id, {
-                message_reference = {
-                        message_id = message.id
-                },
-                content = content
-        }, botToken)
+	<span class="keyword">return</span> exports.discord_rest:createMessage(channel.id, {
+		message_reference = {
+			message_id = message.id
+		},
+		content = content
+	}, botToken)
 <span class="keyword">end</span>
 
 <span class="comment">-- Read messages in a watched channel, print them to console, and respond as necessary
 </span><span class="keyword">local</span> <span class="keyword">function</span> respondToMessagesInChannel(channel)
-        <span class="keyword">return</span> exports.discord_rest:getChannelMessages(channel.id, {after = channel.last_message_id}, botToken):<span class="global">next</span>(<span class="keyword">function</span>(messages)
-                <span class="keyword">local</span> promises = {}
+	<span class="keyword">return</span> exports.discord_rest:getChannelMessages(channel.id, {after = channel.last_message_id}, botToken):<span class="global">next</span>(<span class="keyword">function</span>(messages)
+		<span class="keyword">if</span> #messages == <span class="number">0</span> <span class="keyword">then</span>
+			<span class="keyword">return</span>
+		<span class="keyword">end</span>
 
-                <span class="keyword">if</span> #messages == <span class="number">0</span> <span class="keyword">then</span>
-                        <span class="keyword">return</span>
-                <span class="keyword">end</span>
+		<span class="keyword">local</span> promises = {}
 
-                <span class="keyword">for</span> _, message <span class="keyword">in</span> <span class="global">ipairs</span>(messages) <span class="keyword">do</span>
-                        <span class="global">print</span>((<span class="string">"#%s: %s: %s"</span>):format(channel.name, message.author.username, message.content))
+		<span class="keyword">for</span> _, message <span class="keyword">in</span> <span class="global">ipairs</span>(messages) <span class="keyword">do</span>
+			<span class="global">print</span>((<span class="string">"#%s: %s: %s"</span>):format(channel.name, message.author.username, message.content))
 
-                        <span class="keyword">if</span> message.content == <span class="string">"!players"</span> <span class="keyword">then</span>
-                                <span class="global">table</span>.insert(promises, respondToMessage(channel, message, <span class="string">"Players on server: "</span> .. #GetPlayers()))
-                        <span class="keyword">end</span>
-                <span class="keyword">end</span>
+			<span class="keyword">if</span> message.content == <span class="string">"!players"</span> <span class="keyword">then</span>
+				<span class="global">table</span>.insert(promises, respondToMessage(channel, message, <span class="string">"Players on server: "</span> .. #GetPlayers()))
+			<span class="keyword">end</span>
+		<span class="keyword">end</span>
 
-                channel.last_message_id = messages[#messages].id
+		channel.last_message_id = messages[#messages].id
 
-                <span class="keyword">return</span> promise.all(promises)
-        <span class="keyword">end</span>)
+		<span class="keyword">return</span> promise.all(promises)
+	<span class="keyword">end</span>)
 <span class="keyword">end</span>
 
 <span class="comment">-- Handle messages in all channels being watched
 </span><span class="keyword">local</span> <span class="keyword">function</span> respondToMessages(channels)
-        <span class="keyword">local</span> promises = {}
-
-        <span class="keyword">for</span> _, channel <span class="keyword">in</span> <span class="global">ipairs</span>(channels) <span class="keyword">do</span>
-                <span class="global">table</span>.insert(promises, respondToMessagesInChannel(channel))
-        <span class="keyword">end</span>
-
-        <span class="keyword">return</span> promise.all(promises)
+	<span class="keyword">return</span> promise.map(channels, <span class="keyword">function</span>(channel)
+		<span class="keyword">return</span> respondToMessagesInChannel(channel)
+	<span class="keyword">end</span>)
 <span class="keyword">end</span>
 
 <span class="comment">-- Get info for all channels being watched
 </span><span class="keyword">local</span> <span class="keyword">function</span> getChannels(channelIds)
-        <span class="keyword">local</span> promises = {}
-
-        <span class="keyword">for</span> _, channelId <span class="keyword">in</span> <span class="global">ipairs</span>(channelIds) <span class="keyword">do</span>
-                <span class="global">table</span>.insert(promises, exports.discord_rest:getChannel(channelId, botToken))
-        <span class="keyword">end</span>
-
-        <span class="keyword">return</span> promise.all(promises)
+	<span class="keyword">return</span> promise.map(channelIds, <span class="keyword">function</span>(channelId)
+		<span class="keyword">return</span> exports.discord_rest:getChannel(channelId, botToken)
+	<span class="keyword">end</span>)
 <span class="keyword">end</span>
 
 getChannels(channelIds):<span class="global">next</span>(<span class="keyword">function</span>(channels)
-        Citizen.CreateThread(<span class="keyword">function</span>()
-                <span class="keyword">while</span> <span class="keyword">true</span> <span class="keyword">do</span>
-                        Citizen.Await(respondToMessages(channels))
-                <span class="keyword">end</span>
-        <span class="keyword">end</span>)
+	Citizen.CreateThread(<span class="keyword">function</span>()
+		<span class="keyword">while</span> <span class="keyword">true</span> <span class="keyword">do</span>
+			Citizen.Await(respondToMessages(channels))
+		<span class="keyword">end</span>
+	<span class="keyword">end</span>)
 <span class="keyword">end</span>, <span class="keyword">function</span>(err)
-        <span class="global">print</span>(<span class="string">"An error occured: "</span> .. err)
+	<span class="global">print</span>(<span class="string">"An error occured: "</span> .. err)
 <span class="keyword">end</span>)</pre>
 
 
@@ -130,7 +122,7 @@ getChannels(channelIds):<span class="global">next</span>(<span class="keyword">f
 </div> <!-- id="main" -->
 <div id="about">
 <i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
-<i style="float:right;">Last updated 2021-09-14 13:08:16 </i>
+<i style="float:right;">Last updated 2021-09-14 15:28:31 </i>
 </div> <!-- id="about" -->
 </div> <!-- id="container" -->
 </body>
