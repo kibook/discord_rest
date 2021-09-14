@@ -26,7 +26,7 @@ local function respondToMessagesInChannel(channel)
                         print(("#%s: %s: %s"):format(channel.name, message.author.username, message.content))
 
                         if message.content == "!players" then
-                                table.insert(promise, respondToMessage(channel, message, "Players on server: " .. #GetPlayers()))
+                                table.insert(promises, respondToMessage(channel, message, "Players on server: " .. #GetPlayers()))
                         end
                 end
 
