@@ -20,6 +20,10 @@ local function respondToMessagesInChannel(channel)
 			return
 		end
 
+		table.sort(messages, function(a, b)
+			return a.id < b.id
+		end)
+
 		local promises = {}
 
 		for _, message in ipairs(messages) do
