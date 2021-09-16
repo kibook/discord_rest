@@ -34,8 +34,8 @@
 
 <h2>Examples</h2>
 <ul class="nowrap">
-  <li><a href="../examples/ban.lua.html">ban.lua</a></li>
-  <li><strong>check-player.lua</strong></li>
+  <li><strong>ban.lua</strong></li>
+  <li><a href="../examples/check-player.lua.html">check-player.lua</a></li>
   <li><a href="../examples/class.lua.html">class.lua</a></li>
   <li><a href="../examples/exports.lua.html">exports.lua</a></li>
   <li><a href="../examples/respond-to-message.lua.html">respond-to-message.lua</a></li>
@@ -54,12 +54,12 @@
 
 <div id="content">
 
-    <h2>check-player.lua</h2>
+    <h2>ban.lua</h2>
 <pre>
-<span class="comment">-- Check if a player is in a Discord guild before letting them in the server
+<span class="comment">-- Check if a player is banned from a guild before letting them in the server
 </span>
-<span class="keyword">local</span> botToken = <span class="string">""</span> <span class="comment">-- Discord bot token for API access
-</span><span class="keyword">local</span> guildId = <span class="string">""</span> <span class="comment">-- Discord guild that players must be in
+<span class="keyword">local</span> botToken = <span class="string">""</span> <span class="comment">-- Bot token for API access
+</span><span class="keyword">local</span> guildId = <span class="string">""</span> <span class="comment">-- ID of the guild to check bans for
 </span>
 AddEventHandler(<span class="string">"playerConnecting"</span>, <span class="keyword">function</span>(name, setKickReason, deferrals)
         <span class="keyword">local</span> source = source
@@ -68,19 +68,17 @@ AddEventHandler(<span class="string">"playerConnecting"</span>, <span class="key
 
         Citizen.Wait(<span class="number">0</span>)
 
-        deferrals.update(<span class="string">"Checking Discord status..."</span>)
+        deferrals.update(<span class="string">"Checking Discord bans..."</span>)
 
         Citizen.Wait(<span class="number">0</span>)
 
-        exports.discord_rest:getGuildMemberForPlayer(guildId, source, botToken):<span class="global">next</span>(<span class="keyword">function</span>(member)
-                deferrals.update(<span class="string">"Welcome to the server, "</span> .. member.user.username .. <span class="string">"#"</span> .. member.user.discriminator .. <span class="string">"!"</span>)
-                Citizen.Wait(<span class="number">2000</span>)
-                deferrals.done()
+        exports.discord_rest:getGuildBanForPlayer(guildId, source, botToken):<span class="global">next</span>(<span class="keyword">function</span>(ban)
+                deferrals.done((<span class="string">"You (%s#%s) are banned: %s"</span>):format(ban.user.username, ban.user.discriminator, ban.reason))
         <span class="keyword">end</span>, <span class="keyword">function</span>(err)
-                <span class="keyword">if</span> err == <span class="number">404</span> <span class="keyword">then</span>
-                        deferrals.done(<span class="string">"You must join the Discord guild to play on this server"</span>)
+                <span class="keyword">if</span> err == <span class="number">404</span> <span class="keyword">then</span> <span class="comment">-- No ban exists for this player
+</span>                        deferrals.done()
                 <span class="keyword">else</span>
-                        deferrals.done(<span class="string">"Failed to check guild status: "</span> .. err)
+                        deferrals.done(<span class="string">"Failed to check guild ban status: "</span> .. err)
                 <span class="keyword">end</span>
         <span class="keyword">end</span>)
 <span class="keyword">end</span>)</pre>
