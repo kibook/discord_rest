@@ -14,7 +14,7 @@ Discord REST API utility for FiveM and RedM.
 
 ```lua
 -- Print "Hello, world!" in a Discord channel via a webhook
-exports.discord_rest:executeWebhook("https://discord.com/api/webhook/.../...", {content = "Hello, world!"})
+exports.discord_rest:executeWebhookUrl("https://discord.com/api/webhook/.../...", {content = "Hello, world!"})
 ```
 
 ## Get messages from a channel
