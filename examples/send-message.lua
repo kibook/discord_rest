@@ -1,7 +1,7 @@
 local botToken = ""
 local guildId = ""
 
-local function getChannelByName(channelName)
+local function getChannelByName(guildId,channelName)
         local p = promise.new()
 
         exports.discord_rest:getGuildChannels(guildId, botToken):next(function(channels)
