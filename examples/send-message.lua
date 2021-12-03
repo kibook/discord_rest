@@ -19,7 +19,7 @@ local function getChannelByName(channelName)
 end
 
 local function sendMessage(channelName, message)
-        return getChannelByName(guildId, channelName):next(function(channelId)
+        return getChannelByName(channelName):next(function(channelId)
                 return exports.discord_rest:createMessage(channelId, {content = message}, botToken)
         end)
 end
