@@ -88,10 +88,12 @@ end
 function createSimplePromiseCallback(p)
 	return function(status, data, headers)
 		if isResponseSuccess(status) then
-			if headers["Content-Type"] == "application/json" then
-				p:resolve(json.decode(data))
+			object = json.decode(data)
+
+			if object == nil then
+				p:reject(data)
 			else
-				p:resolve(status)
+				p:resolve(object)
 			end
 		else
 			p:reject(status)
